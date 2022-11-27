@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 import life4fun.exception.VGBDataInvalidException;
 
 public class Member {
-	private String id; //必要, not null, PKey, ROC Id
+	private String id; //必要, not null, PKey
 	private String password; //必要, not null, 6~20個字元
 	private String name; //必要, not null, 2~20個字元
 	private char gender; //必要, 'M':男, 'F':女, 'U':Unknown	
@@ -16,7 +16,7 @@ public class Member {
 	private String city="";//必要, not null, 縣/市
 	private String district="";//必要, not null, 行政區
 	private String address="";//必要, not null, 詳細地址, 0~50字元
-	private String phoneNumber=""; //必要, not null, 0~30個字元
+	private String phoneNumber=new String(""); //必要, not null, 0~30個字元
 
 	
 	public Member() {}
@@ -27,72 +27,18 @@ public class Member {
 		this.setName(name);
 	}
 	
-	public Member(String id, String password, String name, 
+	public Member(String phoneNumber, String password, String name, 
 		char gender, String email, String birthday) {
-		this(id, password, name);		
+		this(phoneNumber, password, name);		
 		this.setGender(gender);
 		this.setEmail(email);
 		this.setBirthday(birthday);
 	}
 
-	private static final String idFirstCharSequence="ABCDEFGHJKLMNPQRSTUVXYWZIO";
-	private static final String idPattern = "[A-Za-z][1289]\\d{8}";
-	public static boolean checkPhoneNumber(String id) { //A123456789				
-		if(id!=null && id.matches(idPattern)) {//用regular expression來檢查id的格式
-			id = id.toUpperCase();			
-			//加上第一碼A-Z轉換為數字			
-			final char c1 = id.charAt(0);			
-//			int n1 = idFirstCharSequence.indexOf(c1) + 10; //0;	//可以替代29-53
-//			if(n1==9) return false; 
-			
-			int n1=0;
-			if(c1>='A' && c1<='H') { //10-17
-				n1=c1-'A'+10;
-			}else if(c1>='J' && c1<='N') {//18-22
-				n1=c1-'J' + 18;
-			}else if(c1>='P' && c1<='V') {//23-29
-				n1=c1-'P' + 23;
-			}else{ //XYWZIO->30,31,32,33,34,35
-				switch(c1) {
-					case 'X':
-						n1 = 30;break;
-					case 'Y':
-						n1 = 31;break;
-					case 'W':
-						n1 = 32;break;
-					case 'Z':
-						n1 = 33;break;
-					case 'I':
-						n1 = 34;break;
-					case 'O':
-						n1 = 35;break;	
-					default:
-						return false;
-				}
-			}
-			
-			//System.out.println("n1:" + n1); //for test			
-			
-			int sum = n1/10 + n1%10*9;			
-			// 依公式加總  sum + n2*8 + + n3*7
-			for(int i=8,j=1;i>0;i--,j++) {
-				int n = id.charAt(j)-'0';
-				//System.out.print(sum + "+" + n +"*" + i + "=" + sum+"+"+(n * i) + ":"); //for test
-				sum += n*i; //sum = sum + n*i;
-				//System.out.println(sum); //for test				
-			}
-			
-//			sum = sum + (id.charAt(2)-'0') * 7;
-//			sum = sum + (id.charAt(3)-'0') * 6;
-//			sum = sum + (id.charAt(4)-'0') * 5;
-//			sum = sum + (id.charAt(5)-'0') * 4;
-//			sum = sum + (id.charAt(6)-'0') * 3;
-//			sum = sum + (id.charAt(7)-'0') * 2;
-//			sum = sum + (id.charAt(8)-'0') * 1;
-//			System.out.print(sum + "+" + (id.charAt(9)-'0') + "=" ); //for test
-			sum += (id.charAt(9)-'0') * 1; //sum = sum + (id.charAt(9)-'0') * 1;
-//			System.out.println(sum); //for test
-			return sum%10 == 0;
+	private static final String phoneNumberPattern = "[0-9]*";
+	public static boolean checkPhoneNumber(String phoneNumber) { //0123456789
+		if(phoneNumber!=null && phoneNumber.matches(phoneNumberPattern)) {//用regular expression來檢查phoneNumber的格式		
+			return true;
 		}		
 		return false;		
 	}
@@ -101,8 +47,15 @@ public class Member {
 	public String getId() {
 		return this.id;
 	}	
+	public void setId(String id) {
+		this.id = id;
+	}
 	
-	public void setId(String phoneNumber){		
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
 		if(checkPhoneNumber(phoneNumber)) {
 			this.phoneNumber = phoneNumber;
 		}else {
@@ -233,7 +186,27 @@ public class Member {
 	public String getAddress() {
 		return address;
 	}
+	public void setAddress(String address) {
+		if(address==null) address="";		
+		this.address = address.trim();
+	}
 	
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -247,30 +220,8 @@ public class Member {
 		}
 	}
 
-	public void setAddress(String address) {
-		if(address==null) address="";		
-		this.address = address.trim();
-	}
 
 
-	public String getPhone() {		
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		if(phone==null) phone="";		
-		this.phone = phone;
-	}	
-
-
-	public boolean isSubscribed() {
-		return subscribed;
-	}
-
-	public void setSubscribed(boolean subscribed) {
-		this.subscribed = subscribed;
-	}
-	
 	/**
 	 * 從客戶birthday屬性計算客戶年齡
 	 * @return int型態的客戶年齡
@@ -309,7 +260,7 @@ public class Member {
 			+ "\n, 性別=" + gender + ",email=" + email 
 			+ "\n, 生日=" + birthday + ", 年齡=" + (birthday!=null?getAge() + "歲":"無法計算年齡") 
 			+ "\n, 地址=" + address 
-			+ "\n, 電話=" + phone + ", 訂閱電子報=" + subscribed;
+			+ "\n, 電話=" + phoneNumber;
 	}	
 	Integer i ;
 	@Override
