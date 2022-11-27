@@ -3,7 +3,7 @@ package life4fun.entity;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeParseException;
-
+import life4fun.utils.ValidateUtils;
 import life4fun.exception.VGBDataInvalidException;
 
 public class Member {
@@ -34,15 +34,6 @@ public class Member {
 		this.setEmail(email);
 		this.setBirthday(birthday);
 	}
-
-	private static final String phoneNumberPattern = "[0-9]*";
-	public static boolean checkPhoneNumber(String phoneNumber) { //0123456789
-		if(phoneNumber!=null && phoneNumber.matches(phoneNumberPattern)) {//用regular expression來檢查phoneNumber的格式		
-			return true;
-		}		
-		return false;		
-	}
-	
 	
 	public String getId() {
 		return this.id;
@@ -56,7 +47,7 @@ public class Member {
 	}
 
 	public void setPhoneNumber(String phoneNumber) {
-		if(checkPhoneNumber(phoneNumber)) {
+		if(ValidateUtils.checkPhoneNumber(phoneNumber)) {
 			this.phoneNumber = phoneNumber;
 		}else {
 			throw new VGBDataInvalidException("電話號碼不正確: " + phoneNumber);
