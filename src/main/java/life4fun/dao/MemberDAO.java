@@ -1,16 +1,17 @@
-package life4fun.service;
+package life4fun.dao;
 import java.sql.*;
 
 import life4fun.entity.Member;
 import life4fun.exception.VGBDataInvalidException;
 import life4fun.exception.VGBException;
+import life4fun.service.MySQLConnection;
 
 public class MemberDAO {
 	private final static String SELECT_MEMBER_BY_PHONENUMBER_OR_EMAIL = 
 			"SELECT id,password,name,gender,email,birthday,"
 			+ "city,district,address,phone_number"
 			+ "FROM member WHERE (phone_number=? OR email=?)";	
-	Member selectCustomerByPhoneNumberOrEmail(String phoneNumberOrEmail) throws VGBException{
+	public Member selectCustomerByPhoneNumberOrEmail(String phoneNumberOrEmail) throws VGBException{
 		Member c = null;
 		
 		try(
@@ -53,7 +54,7 @@ public class MemberDAO {
 			+ "(id, name, password, gender, email, birthday,"
 			+ "		city, district, address, phone_number)"
 			+ "	VALUES(?,?,?,?,?,?,?,?,?)";
-	void insert(Member c) throws VGBException{	
+	public void insert(Member c) throws VGBException{	
 		try (
 				Connection connection = MySQLConnection.getConnection(); //1,2 取得連線
 				PreparedStatement pstmt = connection.prepareStatement(INSERT_Member); //3.準備指令
@@ -91,7 +92,7 @@ public class MemberDAO {
 			+ " SET name=?, password=?, gender=?, email=?, birthday=?,"
 			+ "	    city=?, district=?, address=?, phone_number=?"
 			+ "    WHERE id=?";
-	void update(Member c) throws VGBException{
+	public void update(Member c) throws VGBException{
 		try (
 				Connection connection = MySQLConnection.getConnection(); //1,2 取得連線
 				PreparedStatement pstmt = connection.prepareStatement(UPDATE_MEMBER); //3.準備指令

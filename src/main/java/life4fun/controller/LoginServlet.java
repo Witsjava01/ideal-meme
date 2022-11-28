@@ -16,14 +16,14 @@ import life4fun.entity.Member;
 import life4fun.exception.LoginFailedException;
 import life4fun.exception.VGBException;
 import life4fun.service.IMemberService;
-import life4fun.service.MemberService;
+import life4fun.service.impl.MemberServiceImpl;
 /**
  * Servlet implementation class LoginServlet
  */
 @WebServlet(urlPatterns="/login.do")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	IMemberService service = new MemberService();
+	IMemberService service = new MemberServiceImpl();
     /**
      * @see HttpServlet#HttpServlet()
      */

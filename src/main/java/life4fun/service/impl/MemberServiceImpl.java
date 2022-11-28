@@ -1,10 +1,12 @@
-package life4fun.service;
+package life4fun.service.impl;
 
+import life4fun.dao.MemberDAO;
 import life4fun.entity.Member;
 import life4fun.exception.LoginFailedException;
 import life4fun.exception.VGBException;
+import life4fun.service.IMemberService;
 
-public class MemberService implements IMemberService {
+public class MemberServiceImpl implements IMemberService {
 	private MemberDAO  dao = new MemberDAO();
 	@Override
 	public Member login(String phoneNumberOrEmail, String password) 
@@ -27,6 +29,7 @@ public class MemberService implements IMemberService {
 			throw new LoginFailedException("登入失敗，帳號或密碼不正確");
 		}
 	}
+
 	@Override
 	public void register(Member c) throws VGBException{
 		if(c==null) {
@@ -34,6 +37,7 @@ public class MemberService implements IMemberService {
 		}		
 		dao.insert(c);
 	}
+
 	@Override
 	public void update(Member c) throws VGBException{
 		if(c==null) {
@@ -41,4 +45,5 @@ public class MemberService implements IMemberService {
 		}		
 		dao.update(c);
 	}
+
 }
