@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,6 @@ import life4fun.exception.LoginFailedException;
 import life4fun.exception.VGBException;
 import life4fun.service.IMemberService;
 import life4fun.service.MemberService;
-import uuu.vgb.controller.RequestDispatcher;
 /**
  * Servlet implementation class LoginServlet
  */
@@ -88,7 +88,6 @@ public class LoginServlet extends HttpServlet {
 		request.setAttribute("error", errorsList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 		dispatcher.forward(request, response);	
-		//doGet(request, response);
 	}
 
 }
