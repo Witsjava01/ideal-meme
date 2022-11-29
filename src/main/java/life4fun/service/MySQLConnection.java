@@ -6,7 +6,7 @@ import life4fun.exception.VGBException;
 
 public class MySQLConnection {
 	private static final String driver = System.getProperty("driver", "com.mysql.cj.jdbc.Driver");
-	private static final String url = System.getProperty("url", "jdbc:mysql://localhost:3306/vgb");
+	private static final String url = System.getProperty("url", "jdbc:mysql://localhost:3306/life4fun");
 	private static final String userid = System.getProperty("userid", "root");
 	private static final String pwd = System.getProperty("pwd", "1234");
 	public static Connection getConnection() throws VGBException{
