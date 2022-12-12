@@ -243,7 +243,7 @@ public class Member {
 			//return -1;
 		}
 	}
-
+	//測試用
 	@Override
 	public String toString() {
 		return this.getClass().getName() 
