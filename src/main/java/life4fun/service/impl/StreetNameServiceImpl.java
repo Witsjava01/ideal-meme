@@ -20,8 +20,11 @@ public class StreetNameServiceImpl implements StreetNameService {
 		String msg = "";
 		// 獲取資料庫連接對象
 		var conn = JdbcUtils.getConnection();
+		
 		List<StreetName> streetNameList = new ArrayList<>();
 		try {
+			
+			
 			// 事務開始
 			JdbcUtils.beginTransaction(conn);
 			streetNameList = streetName.findAddress(conn);

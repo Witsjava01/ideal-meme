@@ -96,7 +96,7 @@ public class LoginServlet extends HttpServlet {
 
 			String phoneNumber = request.getParameter("account");
 			String password = request.getParameter("password");
-			// 要家參數驗證
+			// 要加參數驗證
 
 			ServiceResult<Member> queryResult = loginService.findMember(phoneNumber, password);
 
