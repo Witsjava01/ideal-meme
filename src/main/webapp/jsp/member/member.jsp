@@ -473,25 +473,36 @@
 									<div class="col-lg-7">
 										<div class="row row-12">
 											<div class="col-md-12">
-												<p class="">姓名</p>
+												<div class="row row-12">
+													<p style="color:red;margin-left:15px">*</p>
+													<p>姓名</p>
+												</div>
+												
 												<input type="text" class="input-text inputData" value="" maxlength="5"
 													placeholder="name" name="name" id="name"
 													oninput="if(value.length>5)value=value.slice(0,5)"
-													onkeyup="this.value=this.value.replace(/\s+/g,'')">
+													onkeyup="this.value=this.value.replace(/\s+/g,'')" required="required">
 											</div>
 											<div class="col-md-12">
-												<p class="">電話號碼</p>
+												<div class="row row-12">
+													<p style="color:red;margin-left:15px">*</p>
+													<p>電話號碼</p>
+												</div>
+												
 												<input type="text" class="input-text inputData" value=""
 													placeholder="phoneNumber" name="phoneNumber" id="phoneNumber" maxlength="15"
 													oninput="if(value.length>15)value=value.slice(0,15)"
                   									onkeypress="return event.charCode>=48 && event.charCode<=57" disabled>
 											</div>
 											<div class="col-md-12" id="passwordDiv">
-												<p class="">密碼</p>
+												<div class="row row-12">
+													<p style="color:red;margin-left:15px">*</p>
+													<p>密碼</p>
+												</div>
 												<input type="password" class="input-text inputData" value="" maxlength="12"
 													placeholder="password" name="password" id="password"
 													oninput="if(value.length>12)value=value.slice(0,12)"
-													onkeyup="this.value=this.value.replace(/\s+/g,'')">
+													onKeyUp="value=value.replace(/[\W]/g,'')" required="required">
 											</div>
 											<div class="col-md-4">
 												<p class="form-row form-row-wide">性別</p>
@@ -507,16 +518,21 @@
 													placeholder="age" disabled>
 											</div>
 											<div class="col-md-12">
-												<p class="">生日</p>
+												<div class="row row-12">
+													<p style="color:red;margin-left:15px">*</p>
+													<p>生日</p>
+												</div>
+												<p style="color:red;" id="age_p" hidden="hidden">年齡不可小於12歲!</p>
 												<input type="date" class="input-text inputData" value=""
 													placeholder="YYYY-MM-DD" name="birthday" id="birthday"
-													oninput="calculateAge(this)">
+													oninput="calculateAge(this)" required="required">
 											</div>
 											<div class="col-md-12">
-												<p class="">E-mail</p>
+												<p>E-mail</p>
+												<p style="color:red;" id="eamil_p" hidden="hidden">E-mail格式不正確!</p>
 												<input type="text" class="input-text inputData" value=""
 													placeholder="E-mail" name="email" id="email" maxlength="30"
-													oninput="if(value.length>30)value=value.slice(0,30)">
+													oninput="IsEmail(this.value)">
 											</div>
 											<div class="col-md-12">
 												<p class="form-row form-row-wide">郵遞區號</p>
@@ -709,6 +725,7 @@
 </body>
 <script>
 $(document).ready(function() {
+	
 	var streetName = new Map();
 	var cityList = new Set();
 	<c:forEach var="streetName" items="${streetNameList}">
@@ -772,6 +789,82 @@ $(document).ready(function() {
 		}
 		
 	});
+	if (isUpdate) {
+		$('#memberList').css('display', '');
+		$('#signOut').css('display', '');
+		$('#phoneNumber').attr("disabled", "disabled");
+		$('#phoneNumber').removeAttr("required");
+		$('#revise').css('display', '');
+		$('#register').css('display', 'none');
+		$("#passwordDiv").css('display', 'none');
+		$("#SignIn_A").text("會員中心");
+		if('${memberList}' != null )
+		//取登入者資料 自動填入
+		$('#name').val('${memberList.name}');
+		$('#email').val('${memberList.email}');
+		$('#address').val('${memberList.address}');
+		$('#phoneNumber').val('${memberList.phoneNumber}');
+		$('#birthday').val('${memberList.birthday}');
+		$('#age').val('${memberList.age}');
+		var password = '${memberList.password}';
+		if('${memberList.gender}' === 'F'){
+			$('#gender').val('女');
+		}else{
+			$('#gender').val('男');
+		}
+		$('#city').val('${memberList.city}');
+		for (let key of streetName.keys()) {
+			if(key[1]===$("select[id=city]").val()){
+				districtList.add(key[2]);
+			}
+		}
+		districtList.forEach(function (value) {
+			  $("select[id=district]")
+				.append($("<option class='districtList'></option>")
+				.attr("value",value)
+				.text(value));
+		});
+		$("option[class='districtList']").each(function(){
+			if($(this).val()=== '${memberList.district}'){
+				$(this).attr('selected', 'selected')
+			}
+		});
+		for (let key of streetName.keys()) {
+			if(key[2]===$("select[id=district]").val()){
+				roadList.add(key[3]);
+				$("input[id='postalCode']").val(key[0]);
+			}
+		}
+		roadList.forEach(function (value) {
+			  $("select[id=road]")
+				.append($("<option class='roadList'></option>")
+				.attr("value",value)
+				.text(value));
+		});
+		if(roadList.size === 1){
+			$("option[id='roadDefault']").prop("selected",'');
+			$("option[class='roadList']").prop("selected",'selected');
+			$("select[id=road]").prop('disabled', 'disabled');
+		}else{
+			$("option[id='roadDefault']").prop("selected",'selected');
+			$("select[id=road]").prop('disabled', false);
+		}
+		$("option[class='roadList']").each(function(){
+			if($(this).val()=== '${memberList.road}'){
+				$(this).attr('selected', 'selected')
+			}
+		});
+		$('#postalCode').val('${memberList.postalCode}');
+	} else {
+		$("#passwordDiv").css('display', '');
+		$('#memberList').css('display', 'none');
+		$('#signOut').css('display', 'none');
+		$('#phoneNumber').removeAttr("disabled");
+		$('#phoneNumber').attr("required", "required");
+		$('#revise').css('display', 'none');
+		$('#register').css('display', '');
+	}
+	
 });
 </script>
 </html>

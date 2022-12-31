@@ -21,7 +21,7 @@ $(document).ready(function() {
 				success: function(response) {
 					if (response.result) {
 						console.log(response);
-						alert("完成");
+						alert("登入成功");
 						$("#SignIn_A").text("會員中心");
 						window.location.assign(webApplicationPath + "/LoginServlet?method=member");
 					} else {

@@ -1,5 +1,7 @@
 package life4fun.service.impl;
 
+import java.sql.SQLException;
+
 import life4fun.dao.LoginDao;
 import life4fun.dao.impl.LoginDaoImpl;
 import life4fun.dto.ServiceResult;
@@ -48,5 +50,87 @@ public class LoginServiceImpl implements LoginService {
 			// 釋放資源<
 			JdbcUtils.release(conn);
 		}
+	}
+	
+	@Override
+	public String addMember(Member member) {
+		String msg = "";
+		// 獲取資料庫連接對象
+		var conn = JdbcUtils.getConnection();
+		try {
+			// 事務開始
+			JdbcUtils.beginTransaction(conn);
+			// 執行insert DB的方法
+			loginDao.addMember(conn, member);
+			// 事務結束，提交事務
+			JdbcUtils.commitTransaction(conn);
+		} catch (SQLException e) { // SQL例外處理
+			e.printStackTrace();
+			// 取得錯誤訊息
+			msg = e.getMessage();
+			// 回滾事務
+			JdbcUtils.rollbackTransaction(conn);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			msg = e.getMessage();
+			JdbcUtils.rollbackTransaction(conn);
+		} finally {
+			// 釋放資源
+			JdbcUtils.release(conn);
+		}
+		return msg;
+	}
+	@Override
+	public boolean checkMember(String phoneNumber) {
+		// 獲取資料庫連接對象
+		var conn = JdbcUtils.getConnection();
+		Member member = null;
+		try {
+			// 事務開始
+			member = loginDao.findMember(conn, phoneNumber);
+			// 如果查不到代表無重父資料
+			if (member == null) {
+				return true;
+			// 如果查到這筆資料代表已存在
+			} else {
+				return false;
+			}
+		} catch (Exception e) { // SQL例外處理
+			// 取得錯誤訊息
+			e.printStackTrace();
+			// 回滾事務
+			throw new ServiceException(e);
+		} finally {
+			// 釋放資源
+			JdbcUtils.release(conn);
+		}
+	}
+	@Override
+	public String updateMember(Member member) {
+		String msg = "";
+		// 獲取資料庫連接對象
+		var conn = JdbcUtils.getConnection();
+		try {
+			// 事務開始
+			JdbcUtils.beginTransaction(conn);
+			// 執行insert DB的方法
+			loginDao.updateMember(conn, member);
+			// 事務結束，提交事務
+			JdbcUtils.commitTransaction(conn);
+		} catch (SQLException e) { // SQL例外處理
+			e.printStackTrace();
+			// 取得錯誤訊息
+			msg = e.getMessage();
+			// 回滾事務
+			JdbcUtils.rollbackTransaction(conn);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			msg = e.getMessage();
+			JdbcUtils.rollbackTransaction(conn);
+		} finally {
+			// 釋放資源
+			JdbcUtils.release(conn);
+		}
+		return msg;
 	}
 }

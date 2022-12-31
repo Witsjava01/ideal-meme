@@ -7,6 +7,12 @@ import life4fun.entity.Member;
 public interface LoginService {
 	public ServiceResult<Member> findMember(String phoneNumber, String password);
 
+	public String addMember(Member member);
+
+	public boolean checkMember(String phoneNumber);
+
+	public String updateMember(Member member);
+
 }
 
 

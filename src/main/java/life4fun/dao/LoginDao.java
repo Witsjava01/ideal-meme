@@ -11,4 +11,6 @@ public interface LoginDao<T> {
 
 	public void addMember(Connection conn, Member member) throws SQLException;
 
+	public void updateMember(Connection conn, Member member) throws SQLException;
+
 }
