@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mysql.cj.Session;
 import com.mysql.cj.util.StringUtils;
 
 import life4fun.dto.RequestResult;
@@ -93,6 +94,7 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getSession().removeAttribute("memberList");
 		request.getRequestDispatcher(JSP_SOURCE + "login.jsp").forward(request, response);
 	}
 	
@@ -117,6 +119,8 @@ public class LoginServlet extends HttpServlet {
 			}else {
 				System.out.println("phoneNumber:"+memberList.getPhoneNumber()+", newPassword:"+newPassword);
 				loginService.updatePassword(memberList.getPhoneNumber(), newPassword);
+				memberList.setPassword(newPassword);
+				request.getSession().setAttribute("memberList", memberList);
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
 			}
 		}else {

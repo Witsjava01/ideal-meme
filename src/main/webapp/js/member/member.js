@@ -46,7 +46,7 @@ $(document).ready(function() {
 	$('#registerButton').on("click", function() {
 		if ($('#name').val() === "" || $('#phoneNumber').val() === "" || $('#password').val() === ""
 			|| $('#age').val() < 12 || $('#birthday').val() === "") {
-			alert("請確認必填欄位是否為空!");
+			alert("請確認必填欄位是否為空或輸入有誤!");
 		} else if($('#phoneNumber').val() === $('#password').val()){
 			alert("電話號碼與密碼不可相同!");
 		} else if($('#password').val().length < 6){

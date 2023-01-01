@@ -477,18 +477,16 @@
 													<p style="color:red;margin-left:15px">*</p>
 													<p>姓名</p>
 												</div>
-												
 												<input type="text" class="input-text inputData" value="" maxlength="5"
-													placeholder="name" name="name" id="name"
-													oninput="if(value.length>5)value=value.slice(0,5)"
-													onkeyup="this.value=this.value.replace(/\s+/g,'')" required="required">
+													placeholder="name" name="name" id="name"onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" 
+													onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" 
+													required="required">
 											</div>
 											<div class="col-md-12">
 												<div class="row row-12">
 													<p style="color:red;margin-left:15px">*</p>
 													<p>電話號碼</p>
 												</div>
-												
 												<input type="text" class="input-text inputData" value=""
 													placeholder="phoneNumber" name="phoneNumber" id="phoneNumber" maxlength="15"
 													oninput="if(value.length>15)value=value.slice(0,15)"

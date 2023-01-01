@@ -1,4 +1,7 @@
 $(document).ready(function() {
+	$('#signOutButton').on("click", function() {
+		window.location.assign(webApplicationPath + "/LoginServlet");
+	});
 	$('#reviseButton').on("click",function(){
 		
 		if($('#password').val()==="" || $('#newPassword').val() ===""){
