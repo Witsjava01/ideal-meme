@@ -31,4 +31,11 @@ public class LoginDaoImpl  extends BaseDao<Member> implements LoginDao<Member> {
 				,member.getAddress(),member.getAge(),member.getCreate_time(),member.getUpdate_time(),member.getPhoneNumber());
 		
 	}
+	@Override
+	public void updatePassword (Connection conn, String phoneNumber, String newPassword) throws SQLException {
+		String updateSql = "update member set password=? where phoneNumber=?";
+		
+		update(conn, updateSql, newPassword, phoneNumber);
+		
+	}
 }

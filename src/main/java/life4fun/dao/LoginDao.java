@@ -13,4 +13,6 @@ public interface LoginDao<T> {
 
 	public void updateMember(Connection conn, Member member) throws SQLException;
 
+	public void updatePassword(Connection conn, String newPassword, String phoneNumber) throws SQLException;
+
 }

@@ -31,7 +31,6 @@ public class LoginServiceImpl implements LoginService {
 				// 如果有資料了
 			} else {
 				// 取DB的password 如果DB的password與輸入密碼值不相同
-				System.out.println("memberPassword:" + member.getPassword());
 				if (!password.equals(member.getPassword())) {
 					result.setMsg("您輸入的會員帳號或密碼錯誤!");
 					return result;
@@ -115,6 +114,34 @@ public class LoginServiceImpl implements LoginService {
 			JdbcUtils.beginTransaction(conn);
 			// 執行insert DB的方法
 			loginDao.updateMember(conn, member);
+			// 事務結束，提交事務
+			JdbcUtils.commitTransaction(conn);
+		} catch (SQLException e) { // SQL例外處理
+			e.printStackTrace();
+			// 取得錯誤訊息
+			msg = e.getMessage();
+			// 回滾事務
+			JdbcUtils.rollbackTransaction(conn);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			msg = e.getMessage();
+			JdbcUtils.rollbackTransaction(conn);
+		} finally {
+			// 釋放資源
+			JdbcUtils.release(conn);
+		}
+		return msg;
+	}
+	@Override
+	public String updatePassword(String phoneNumber , String newPassword) {
+		String msg = "";
+		// 獲取資料庫連接對象
+		var conn = JdbcUtils.getConnection();
+		try {
+			// 事務開始
+			JdbcUtils.beginTransaction(conn);
+			// 執行insert DB的方法
+			loginDao.updatePassword(conn, phoneNumber, newPassword);
 			// 事務結束，提交事務
 			JdbcUtils.commitTransaction(conn);
 		} catch (SQLException e) { // SQL例外處理

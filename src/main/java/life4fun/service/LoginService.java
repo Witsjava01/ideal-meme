@@ -13,6 +13,8 @@ public interface LoginService {
 
 	public String updateMember(Member member);
 
+	public String updatePassword(String newPassword, String phoneNumber);
+
 }
 
 

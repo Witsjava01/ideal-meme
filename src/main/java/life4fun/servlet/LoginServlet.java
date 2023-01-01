@@ -69,11 +69,17 @@ public class LoginServlet extends HttpServlet {
 		case "register":
 			register(request, response);
 			break;
+		case "password":
+			password(request, response);
+			break;
 		case "addMember":
 			addMember(request, response);
 			break;
 		case "updateMember":
 			updateMember(request, response);
+			break;
+		case "updatePassword":
+			updatePassword(request, response);
 			break;
 		case "login":
 		default:
@@ -88,6 +94,35 @@ public class LoginServlet extends HttpServlet {
 
 	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher(JSP_SOURCE + "login.jsp").forward(request, response);
+	}
+	
+	public void password(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Member memberList = (Member) request.getSession().getAttribute("memberList");
+		request.setAttribute("password", memberList.getPassword());
+		request.setAttribute("phoneNumber", memberList.getPhoneNumber());
+		request.getRequestDispatcher(JSP_SOURCE + "password.jsp").forward(request, response);
+	}
+	
+	public void updatePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Member memberList = (Member) request.getSession().getAttribute("memberList");
+		String sessionPassword = memberList.getPassword();
+		String password = request.getParameter("password");
+		System.out.println("sessionPassword:"+sessionPassword);
+		if(sessionPassword.equals(password)) {
+			String newPassword = request.getParameter("newPassword");
+			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+			if(newPassword.equals(password)) {
+				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("新密碼與舊密碼不可相同!")));
+				return;
+			}else {
+				System.out.println("phoneNumber:"+memberList.getPhoneNumber()+", newPassword:"+newPassword);
+				loginService.updatePassword(memberList.getPhoneNumber(), newPassword);
+				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
+			}
+		}else {
+			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("舊密碼錯誤，請確認後重新輸入!")));
+		}
 	}
 
 	public void member(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -112,8 +147,12 @@ public class LoginServlet extends HttpServlet {
 	public void addMember(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Member member;
-		member = getMember(request);
-		System.out.println(member);
+		try {
+			member = getMember(request);
+		}catch(RuntimeException e) {
+			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail(e.getMessage())));
+			return;
+		}
 		Boolean checkMember = loginService.checkMember(member.getPhoneNumber());
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		System.out.println(checkMember);
@@ -142,9 +181,11 @@ public class LoginServlet extends HttpServlet {
 			return;
 		}
 		Boolean checkMember = loginService.checkMember(member.getPhoneNumber());
-		if (checkMember) {
+		if (checkMember == false) {
 			try {
 				loginService.updateMember(member);
+				ServiceResult<Member> queryResult = loginService.findMember(member.getPhoneNumber(), member.getPassword());
+				request.getSession().setAttribute("memberList", queryResult.getData());
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
 			} catch (RuntimeException e) {
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail(e.getMessage())));
