@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$('#register').on("click", function() {
-		window.location.assign(webApplicationPath + "/LoginServlet?method=register");
+		window.location.assign(webApplicationPath + "/MemberServlet?method=register");
 	});
 	$('#loginButton').on("click", function() {
 		var inputData = {};
@@ -13,7 +13,7 @@ $(document).ready(function() {
 				inputData[$(this).attr('id')] = $(this).val();
 			});
 			$.ajax({
-				url: webApplicationPath + "/LoginServlet?method=findMember",
+				url: webApplicationPath + "/MemberServlet?method=findMember",
 				type: "POST",
 				data: inputData,
 				dataType: "json",
@@ -23,7 +23,7 @@ $(document).ready(function() {
 						console.log(response);
 						alert("登入成功");
 						$("#SignIn_A").text("會員中心");
-						window.location.assign(webApplicationPath + "/LoginServlet?method=member");
+						window.location.assign(webApplicationPath + "/MemberServlet?method=member");
 					} else {
 						alert(response.msg);
 					}

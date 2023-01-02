@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import life4fun.entity.Member;
 
 
-public interface LoginDao<T> {
+public interface MemberDao<T> {
 	public Member findMember(Connection conn, String phoneNumber) throws SQLException;
 
 	public void addMember(Connection conn, Member member) throws SQLException;

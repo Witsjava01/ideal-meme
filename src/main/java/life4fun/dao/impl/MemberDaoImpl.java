@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import life4fun.dao.BaseDao;
-import life4fun.dao.LoginDao;
+import life4fun.dao.MemberDao;
 import life4fun.entity.Member;
 
-public class LoginDaoImpl  extends BaseDao<Member> implements LoginDao<Member> {
+public class MemberDaoImpl  extends BaseDao<Member> implements MemberDao<Member> {
 	@Override
 	public Member findMember(Connection conn, String phoneNumber) throws SQLException {
 		String selectSql = "SELECT * from member WHERE phoneNumber = '"+phoneNumber+"'";

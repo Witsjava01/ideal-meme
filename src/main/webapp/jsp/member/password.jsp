@@ -531,7 +531,7 @@
 						<div class="widget widget_categories widget--bottom-line" id="memberList">
 							<h4 class="widget-title">會員中心</h4>
 							<ul>
-								<li><a href="${webApplicationPath}/LoginServlet?method=member">個人資料</a></li>
+								<li><a href="${webApplicationPath}/MemberServlet?method=member">個人資料</a></li>
 								<li style="color:orange">修改密碼</li>
 								<li><a href="#">訂單查詢</a></li>
 							</ul>

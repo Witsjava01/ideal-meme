@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$('#signOutButton').on("click", function() {
-		window.location.assign(webApplicationPath + "/LoginServlet");
+		window.location.assign(webApplicationPath + "/MemberServlet");
 	});
 	$('#reviseButton').on("click",function(){
 		
@@ -16,7 +16,7 @@ $(document).ready(function() {
 				passwordData[$(this).attr('id')] = $(this).val();
 			})
 			$.ajax({
-				url: webApplicationPath + "/LoginServlet?method=updatePassword",
+				url: webApplicationPath + "/MemberServlet?method=updatePassword",
 				type: "POST",
 				data: passwordData,
 				dataType: "json",

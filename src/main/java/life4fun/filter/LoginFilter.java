@@ -14,9 +14,8 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import life4fun.dto.KeyValue;
 import life4fun.enumerate.LoginFilterValidate;
-import life4fun.servlet.LoginServlet;
+import life4fun.servlet.MemberServlet;
 import life4fun.utils.ApplicationUtils;
 import life4fun.utils.ConstantUtils;
 
@@ -42,9 +41,9 @@ public class LoginFilter extends HttpFilter implements Filter {
 					&& request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER) == null) {
 				//給前端JS_SOURCE跟STATIC_SOURCE的值 再導到login.jsp 
 				request.setCharacterEncoding("UTF-8");
-				request.setAttribute(ApplicationUtils.JS_SOURCE_KEY, LoginServlet.JS_SOURCE);
-				request.setAttribute(ApplicationUtils.STATIC_SOURCE_KEY, LoginServlet.STATIC_SOURCE);
-				request.getRequestDispatcher(LoginServlet.JSP_SOURCE + "login.jsp").forward(request, response);
+				request.setAttribute(ApplicationUtils.JS_SOURCE_KEY, MemberServlet.JS_SOURCE);
+				request.setAttribute(ApplicationUtils.STATIC_SOURCE_KEY, MemberServlet.STATIC_SOURCE);
+				request.getRequestDispatcher(MemberServlet.JSP_SOURCE + "login.jsp").forward(request, response);
 				return;
 			}
 		}

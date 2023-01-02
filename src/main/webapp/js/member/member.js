@@ -38,10 +38,10 @@ Date.prototype.format = function(format) {
 $(document).ready(function() {
 	
 	$('#signOutButton').on("click", function() {
-		window.location.assign(webApplicationPath + "/LoginServlet");
+		window.location.assign(webApplicationPath + "/MemberServlet");
 	});
 	$('#loginButton').on("click", function() {
-		window.location.assign(webApplicationPath + "/LoginServlet");
+		window.location.assign(webApplicationPath + "/MemberServlet");
 	});
 	$('#registerButton').on("click", function() {
 		if ($('#name').val() === "" || $('#phoneNumber').val() === "" || $('#password').val() === ""
@@ -73,7 +73,7 @@ $(document).ready(function() {
 			inputData["update_time"] = (new Date().format("yyyy-MM-dd hh:mm:ss"));
 			console.log(inputData);
 			$.ajax({
-				url: webApplicationPath + "/LoginServlet?method=addMember",
+				url: webApplicationPath + "/MemberServlet?method=addMember",
 				type: "POST",
 				data: inputData,
 				dataType: "json",
@@ -82,7 +82,7 @@ $(document).ready(function() {
 					console.log(response)
 					if (response.result) {
 						alert("註冊成功!");
-						window.location.assign(webApplicationPath + "/LoginServlet?method=login");
+						window.location.assign(webApplicationPath + "/MemberServlet?method=login");
 					} else {
 						alert(response.msg);
 					}

@@ -2,17 +2,17 @@ package life4fun.service.impl;
 
 import java.sql.SQLException;
 
-import life4fun.dao.LoginDao;
-import life4fun.dao.impl.LoginDaoImpl;
+import life4fun.dao.MemberDao;
+import life4fun.dao.impl.MemberDaoImpl;
 import life4fun.dto.ServiceResult;
 import life4fun.entity.Member;
 import life4fun.exception.ServiceException;
-import life4fun.service.LoginService;
+import life4fun.service.MemberService;
 import life4fun.utils.JdbcUtils;
 import lombok.var;
 
-public class LoginServiceImpl implements LoginService {
-	public LoginDao loginDao = new LoginDaoImpl();
+public class MemberServiceImpl implements MemberService {
+	public MemberDao memberDao = new MemberDaoImpl();
 
 	@Override
 	public ServiceResult<Member> findMember(String phoneNumber, String password) {
@@ -23,7 +23,7 @@ public class LoginServiceImpl implements LoginService {
 		ServiceResult<Member> result = new ServiceResult<>();
 		try {
 			// 事務開始
-			member = loginDao.findMember(conn, phoneNumber);
+			member = memberDao.findMember(conn, phoneNumber);
 			// 如果用電話號碼甚麼都沒查到就回傳null>代表沒有這筆資料
 			if (member == null) {
 				result.setMsg("您輸入的會員帳號或密碼錯誤!");
@@ -60,7 +60,7 @@ public class LoginServiceImpl implements LoginService {
 			// 事務開始
 			JdbcUtils.beginTransaction(conn);
 			// 執行insert DB的方法
-			loginDao.addMember(conn, member);
+			memberDao.addMember(conn, member);
 			// 事務結束，提交事務
 			JdbcUtils.commitTransaction(conn);
 		} catch (SQLException e) { // SQL例外處理
@@ -86,7 +86,7 @@ public class LoginServiceImpl implements LoginService {
 		Member member = null;
 		try {
 			// 事務開始
-			member = loginDao.findMember(conn, phoneNumber);
+			member = memberDao.findMember(conn, phoneNumber);
 			// 如果查不到代表無重父資料
 			if (member == null) {
 				return true;
@@ -113,7 +113,7 @@ public class LoginServiceImpl implements LoginService {
 			// 事務開始
 			JdbcUtils.beginTransaction(conn);
 			// 執行insert DB的方法
-			loginDao.updateMember(conn, member);
+			memberDao.updateMember(conn, member);
 			// 事務結束，提交事務
 			JdbcUtils.commitTransaction(conn);
 		} catch (SQLException e) { // SQL例外處理
@@ -141,7 +141,7 @@ public class LoginServiceImpl implements LoginService {
 			// 事務開始
 			JdbcUtils.beginTransaction(conn);
 			// 執行insert DB的方法
-			loginDao.updatePassword(conn, phoneNumber, newPassword);
+			memberDao.updatePassword(conn, phoneNumber, newPassword);
 			// 事務結束，提交事務
 			JdbcUtils.commitTransaction(conn);
 		} catch (SQLException e) { // SQL例外處理

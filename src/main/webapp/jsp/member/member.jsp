@@ -599,7 +599,7 @@
 							<h4 class="widget-title">會員中心</h4>
 							<ul>
 								<li style="color:orange">個人資料</li>
-								<li><a href="${webApplicationPath}/LoginServlet?method=password">修改密碼</a></li>
+								<li><a href="${webApplicationPath}/MemberServlet?method=password">修改密碼</a></li>
 								<li><a href="#">訂單查詢</a></li>
 							</ul>
 						</div>
@@ -797,24 +797,24 @@ $(document).ready(function() {
 		$('#register').css('display', 'none');
 		$("#passwordDiv").css('display', 'none');
 		$("#SignIn_A").text("會員中心");
-		if('${memberList}' != null )
+		if('${member}' != null )
 		//取登入者資料 自動填入
-		$('#name').val('${memberList.name}');
-		$('#email').val('${memberList.email}');
-		$('#address').val('${memberList.address}');
-		$('#phoneNumber').val('${memberList.phoneNumber}');
-		$('#birthday').val('${memberList.birthday}');
-		$('#age').val('${memberList.age}');
-		var password = '${memberList.password}';
-		if('${memberList.gender}' === 'F'){
+		$('#name').val('${member.name}');
+		$('#email').val('${member.email}');
+		$('#address').val('${member.address}');
+		$('#phoneNumber').val('${member.phoneNumber}');
+		$('#birthday').val('${member.birthday}');
+		$('#age').val('${member.age}');
+		var password = '${member.password}';
+		if('${member.gender}' === 'F'){
 			$('#gender').val('女');
 		}else{
 			$('#gender').val('男');
 		}
-		if('${memberList.city}' === ""){
+		if('${member.city}' === ""){
 			$('option[value="cityDefault"]').attr('selected', 'selected')
 		}else{
-			$('#city').val('${memberList.city}');
+			$('#city').val('${member.city}');
 		}
 		
 		for (let key of streetName.keys()) {
@@ -829,7 +829,7 @@ $(document).ready(function() {
 				.text(value));
 		});
 		$("option[class='districtList']").each(function(){
-			if($(this).val()=== '${memberList.district}'){
+			if($(this).val()=== '${member.district}'){
 				$(this).attr('selected', 'selected')
 			}
 		});
@@ -854,11 +854,11 @@ $(document).ready(function() {
 			$("select[id=road]").prop('disabled', false);
 		}
 		$("option[class='roadList']").each(function(){
-			if($(this).val()=== '${memberList.road}'){
+			if($(this).val()=== '${member.road}'){
 				$(this).attr('selected', 'selected')
 			}
 		});
-		$('#postalCode').val('${memberList.postalCode}');
+		$('#postalCode').val('${member.postalCode}');
 		
 		
 	} else {
@@ -894,10 +894,10 @@ $(document).ready(function() {
 			})
 			updateData[$('#birthday').attr('id')] = $('#birthday').val();
 			updateData["update_time"] = (new Date().format("yyyy-MM-dd hh:mm:ss"));
-			updateData["create_time"] = '${memberList.create_time}';
-			updateData["password"] = '${memberList.password}';
+			updateData["create_time"] = '${member.create_time}';
+			updateData["password"] = '${member.password}';
 			$.ajax({
-				url: webApplicationPath + "/LoginServlet?method=updateMember",
+				url: webApplicationPath + "/MemberServlet?method=updateMember",
 				type: "POST",
 				data: updateData,
 				dataType: "json",

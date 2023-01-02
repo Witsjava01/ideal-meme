@@ -16,9 +16,9 @@ import com.mysql.cj.util.StringUtils;
 import life4fun.dto.RequestResult;
 import life4fun.dto.ServiceResult;
 import life4fun.entity.Member;
-import life4fun.service.LoginService;
+import life4fun.service.MemberService;
 import life4fun.service.StreetNameService;
-import life4fun.service.impl.LoginServiceImpl;
+import life4fun.service.impl.MemberServiceImpl;
 import life4fun.service.impl.StreetNameServiceImpl;
 import life4fun.utils.ApplicationUtils;
 import life4fun.utils.ConstantUtils;
@@ -27,20 +27,20 @@ import life4fun.utils.JsonUtils;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/MemberServlet")
+public class MemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String JSP_SOURCE = "/jsp/member/";
 	public static final String JS_SOURCE = "/js/member/";
 	public static final String STATIC_SOURCE = "static";
 
-	private LoginService loginService = new LoginServiceImpl();
+	private MemberService memberService = new MemberServiceImpl();
 	private StreetNameService streetNameService = new StreetNameServiceImpl();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginServlet() {
+	public MemberServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -114,7 +114,7 @@ public class LoginServlet extends HttpServlet {
 				return;
 			}else {
 				System.out.println("phoneNumber:"+member.getPhoneNumber()+", newPassword:"+newPassword);
-				loginService.updatePassword(member.getPhoneNumber(), newPassword);
+				memberService.updatePassword(member.getPhoneNumber(), newPassword);
 				member.setPassword(newPassword);
 				request.getSession().setAttribute(ConstantUtils.LOGIN_MEMBER, member);
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
@@ -153,12 +153,12 @@ public class LoginServlet extends HttpServlet {
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail(e.getMessage())));
 			return;
 		}
-		Boolean checkMember = loginService.checkMember(member.getPhoneNumber());
+		Boolean checkMember = memberService.checkMember(member.getPhoneNumber());
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		System.out.println(checkMember);
 		if (checkMember) {
 			try {
-				loginService.addMember(member);
+				memberService.addMember(member);
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
 			} catch (RuntimeException e) {
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail(e.getMessage())));
@@ -185,11 +185,11 @@ public class LoginServlet extends HttpServlet {
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail(e.getMessage())));
 			return;
 		}
-		Boolean checkMember = loginService.checkMember(sessionMember.getPhoneNumber());
+		Boolean checkMember = memberService.checkMember(sessionMember.getPhoneNumber());
 		if (checkMember == false) {
 			try {
-				loginService.updateMember(member);
-				ServiceResult<Member> queryResult = loginService.findMember(sessionMember.getPhoneNumber(), sessionMember.getPassword());
+				memberService.updateMember(member);
+				ServiceResult<Member> queryResult = memberService.findMember(sessionMember.getPhoneNumber(), sessionMember.getPassword());
 				request.getSession().setAttribute(ConstantUtils.LOGIN_MEMBER, queryResult.getData());
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
 			} catch (RuntimeException e) {
@@ -212,7 +212,7 @@ public class LoginServlet extends HttpServlet {
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("輸入帳號或密碼不可為空")));
 				return;
 			}
-			ServiceResult<Member> queryResult = loginService.findMember(phoneNumber, password);
+			ServiceResult<Member> queryResult = memberService.findMember(phoneNumber, password);
 
 			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 			if (queryResult.getMsg() != null) {
