@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mysql.cj.Session;
 import com.mysql.cj.util.StringUtils;
 
 import life4fun.dto.RequestResult;
@@ -94,20 +90,20 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().removeAttribute("memberList");
+		request.getSession().removeAttribute("member");
 		request.getRequestDispatcher(JSP_SOURCE + "login.jsp").forward(request, response);
 	}
 	
 	public void password(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Member memberList = (Member) request.getSession().getAttribute("memberList");
-		request.setAttribute("password", memberList.getPassword());
-		request.setAttribute("phoneNumber", memberList.getPhoneNumber());
+		Member member = (Member) request.getSession().getAttribute("member");
+		request.setAttribute("password", member.getPassword());
+		request.setAttribute("phoneNumber", member.getPhoneNumber());
 		request.getRequestDispatcher(JSP_SOURCE + "password.jsp").forward(request, response);
 	}
 	
 	public void updatePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Member memberList = (Member) request.getSession().getAttribute("memberList");
-		String sessionPassword = memberList.getPassword();
+		Member member = (Member) request.getSession().getAttribute("member");
+		String sessionPassword = member.getPassword();
 		String password = request.getParameter("password");
 		System.out.println("sessionPassword:"+sessionPassword);
 		if(sessionPassword.equals(password)) {
@@ -117,10 +113,10 @@ public class LoginServlet extends HttpServlet {
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("新密碼與舊密碼不可相同!")));
 				return;
 			}else {
-				System.out.println("phoneNumber:"+memberList.getPhoneNumber()+", newPassword:"+newPassword);
-				loginService.updatePassword(memberList.getPhoneNumber(), newPassword);
-				memberList.setPassword(newPassword);
-				request.getSession().setAttribute("memberList", memberList);
+				System.out.println("phoneNumber:"+member.getPhoneNumber()+", newPassword:"+newPassword);
+				loginService.updatePassword(member.getPhoneNumber(), newPassword);
+				member.setPassword(newPassword);
+				request.getSession().setAttribute("member", member);
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
 			}
 		}else {
@@ -133,9 +129,9 @@ public class LoginServlet extends HttpServlet {
 		request.setAttribute("isUpdate", true);
 		request.setAttribute("streetNameList", streetNameService.findAllStreetName().getData());
 		
-		Member memberList = (Member) request.getSession().getAttribute("memberList");
-		System.out.println(memberList);
-		request.setAttribute("memberList", memberList);
+		Member member = (Member) request.getSession().getAttribute("member");
+		System.out.println(member);
+		request.setAttribute("memberList", member);
 		
 		request.setAttribute("account", streetNameService.findAllStreetName().getData());
 		request.getRequestDispatcher(JSP_SOURCE + "member.jsp").forward(request, response);
@@ -144,7 +140,7 @@ public class LoginServlet extends HttpServlet {
 	public void register(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setAttribute("isUpdate", false);
-		request.setAttribute("streetNameList", streetNameService.findAllStreetName().getData());
+		request.setAttribute("streetName", streetNameService.findAllStreetName().getData());
 		request.getRequestDispatcher(JSP_SOURCE + "member.jsp").forward(request, response);
 	}
 
@@ -175,7 +171,12 @@ public class LoginServlet extends HttpServlet {
 	
 	protected void updateMember(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Member sessionMember = (Member) request.getSession().getAttribute("member");
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		if(sessionMember == null) {
+			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
+			return;
+		}
 		Member member;
 		
 		try {
@@ -184,12 +185,12 @@ public class LoginServlet extends HttpServlet {
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail(e.getMessage())));
 			return;
 		}
-		Boolean checkMember = loginService.checkMember(member.getPhoneNumber());
+		Boolean checkMember = loginService.checkMember(sessionMember.getPhoneNumber());
 		if (checkMember == false) {
 			try {
 				loginService.updateMember(member);
-				ServiceResult<Member> queryResult = loginService.findMember(member.getPhoneNumber(), member.getPassword());
-				request.getSession().setAttribute("memberList", queryResult.getData());
+				ServiceResult<Member> queryResult = loginService.findMember(sessionMember.getPhoneNumber(), sessionMember.getPassword());
+				request.getSession().setAttribute("member", queryResult.getData());
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
 			} catch (RuntimeException e) {
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail(e.getMessage())));
@@ -222,14 +223,13 @@ public class LoginServlet extends HttpServlet {
 				return;
 			} else {
 				System.out.println("findMember_resultList:" + JsonUtils.getGson().toJson(queryResult));
-				request.getSession().setAttribute("memberList", queryResult.getData());
+				request.getSession().setAttribute("member", queryResult.getData());
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success(queryResult.getData())));
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage()); // 這行在正式代碼要用logger
+			System.out.println(e.getMessage());
 			// 這邊response要return 500給client
-			// TODO: handle exception
 		}
 	}
 

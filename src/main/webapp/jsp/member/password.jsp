@@ -492,6 +492,16 @@
 													oninput="if(value.length>12)value=value.slice(0,12)"
 													onKeyUp="value=value.replace(/[\W]/g,'')" required="required">
 											</div>
+											<div class="col-md-12" id="newPasswordDiv2">
+												<div class="row row-12">
+													<p style="color:red;margin-left:15px">*</p>
+													<p>再次輸入新密碼</p>
+												</div>
+												<input type="password" class="input-text" value="" maxlength="12"
+													placeholder="newPasswordTwo" name="newPasswordTwo" id="newPasswordTwo"
+													oninput="if(value.length>12)value=value.slice(0,12)"
+													onKeyUp="value=value.replace(/[\W]/g,'')" required="required">
+											</div>
 										</div>
 									</div>
 									<!-- end col shipping calculator -->

@@ -4,10 +4,12 @@ $(document).ready(function() {
 	});
 	$('#reviseButton').on("click",function(){
 		
-		if($('#password').val()==="" || $('#newPassword').val() ===""){
+		if($('#password').val()==="" || $('#newPassword').val() === "" || $('#newPasswordTwo').val() === ""){
 			alert("新密碼與舊密碼不能為空!")
 		}else if($('#password').val() === $('#newPassword').val()){
 			alert("新密碼與舊密碼不可相同!")
+		}else if($('#newPassword').val() != $('#newPasswordTwo').val()){
+			alert("兩次密碼輸入不同!")
 		}else{
 			var passwordData = {};
 			$('.inputData').each(function(){
