@@ -21,6 +21,7 @@ import life4fun.service.StreetNameService;
 import life4fun.service.impl.LoginServiceImpl;
 import life4fun.service.impl.StreetNameServiceImpl;
 import life4fun.utils.ApplicationUtils;
+import life4fun.utils.ConstantUtils;
 import life4fun.utils.JsonUtils;
 
 /**
@@ -29,9 +30,9 @@ import life4fun.utils.JsonUtils;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String JSP_SOURCE = "/jsp/member/";
-	private static final String JS_SOURCE = "/js/member/";
-	private static final String STATIC_SOURCE = "static";
+	public static final String JSP_SOURCE = "/jsp/member/";
+	public static final String JS_SOURCE = "/js/member/";
+	public static final String STATIC_SOURCE = "static";
 
 	private LoginService loginService = new LoginServiceImpl();
 	private StreetNameService streetNameService = new StreetNameServiceImpl();
@@ -50,7 +51,6 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setAttribute(ApplicationUtils.JSP_SOURCE_KEY, JSP_SOURCE);
 		request.setAttribute(ApplicationUtils.JS_SOURCE_KEY, JS_SOURCE);
 		request.setAttribute(ApplicationUtils.STATIC_SOURCE_KEY, STATIC_SOURCE);
 		request.setCharacterEncoding("UTF-8");
@@ -90,19 +90,19 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().removeAttribute("member");
+		request.getSession().removeAttribute(ConstantUtils.LOGIN_MEMBER);
 		request.getRequestDispatcher(JSP_SOURCE + "login.jsp").forward(request, response);
 	}
 	
 	public void password(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Member member = (Member) request.getSession().getAttribute("member");
+		Member member = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
 		request.setAttribute("password", member.getPassword());
 		request.setAttribute("phoneNumber", member.getPhoneNumber());
 		request.getRequestDispatcher(JSP_SOURCE + "password.jsp").forward(request, response);
 	}
 	
 	public void updatePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Member member = (Member) request.getSession().getAttribute("member");
+		Member member = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
 		String sessionPassword = member.getPassword();
 		String password = request.getParameter("password");
 		System.out.println("sessionPassword:"+sessionPassword);
@@ -116,7 +116,7 @@ public class LoginServlet extends HttpServlet {
 				System.out.println("phoneNumber:"+member.getPhoneNumber()+", newPassword:"+newPassword);
 				loginService.updatePassword(member.getPhoneNumber(), newPassword);
 				member.setPassword(newPassword);
-				request.getSession().setAttribute("member", member);
+				request.getSession().setAttribute(ConstantUtils.LOGIN_MEMBER, member);
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
 			}
 		}else {
@@ -129,9 +129,9 @@ public class LoginServlet extends HttpServlet {
 		request.setAttribute("isUpdate", true);
 		request.setAttribute("streetNameList", streetNameService.findAllStreetName().getData());
 		
-		Member member = (Member) request.getSession().getAttribute("member");
+		Member member = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
 		System.out.println(member);
-		request.setAttribute("memberList", member);
+		request.setAttribute("member", member);
 		
 		request.setAttribute("account", streetNameService.findAllStreetName().getData());
 		request.getRequestDispatcher(JSP_SOURCE + "member.jsp").forward(request, response);
@@ -171,7 +171,7 @@ public class LoginServlet extends HttpServlet {
 	
 	protected void updateMember(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Member sessionMember = (Member) request.getSession().getAttribute("member");
+		Member sessionMember = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		if(sessionMember == null) {
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
@@ -190,7 +190,7 @@ public class LoginServlet extends HttpServlet {
 			try {
 				loginService.updateMember(member);
 				ServiceResult<Member> queryResult = loginService.findMember(sessionMember.getPhoneNumber(), sessionMember.getPassword());
-				request.getSession().setAttribute("member", queryResult.getData());
+				request.getSession().setAttribute(ConstantUtils.LOGIN_MEMBER, queryResult.getData());
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
 			} catch (RuntimeException e) {
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail(e.getMessage())));
@@ -223,7 +223,7 @@ public class LoginServlet extends HttpServlet {
 				return;
 			} else {
 				System.out.println("findMember_resultList:" + JsonUtils.getGson().toJson(queryResult));
-				request.getSession().setAttribute("member", queryResult.getData());
+				request.getSession().setAttribute(ConstantUtils.LOGIN_MEMBER, queryResult.getData());
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success(queryResult.getData())));
 			}
 

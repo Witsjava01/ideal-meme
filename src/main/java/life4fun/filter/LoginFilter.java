@@ -3,40 +3,58 @@ package life4fun.filter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import life4fun.enumerate.LoginFilterVaildate;
+import life4fun.dto.KeyValue;
+import life4fun.enumerate.LoginFilterValidate;
+import life4fun.servlet.LoginServlet;
+import life4fun.utils.ApplicationUtils;
+import life4fun.utils.ConstantUtils;
 
 @WebFilter("/*")
 public class LoginFilter extends HttpFilter implements Filter {
-       
+
 	private static final long serialVersionUID = 2165570948201553851L;
-	
-	private List<LoginFilterVaildate> needLogin = Arrays.asList(LoginFilterVaildate.values());
-	
-	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+	//建立一個List是LoginFiltervalidate型別
+	private List<LoginFilterValidate> needLogin = Arrays.asList(LoginFilterValidate.values());
+
+	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+		//servlet=/TestServlet
+		String servlet = request.getRequestURI().replaceAll(request.getContextPath(), "");
+		//list=TEST_TEST("/TestServlet", new KeyValue<String, String>("method1", "test"))
+		List<LoginFilterValidate> list = needLogin.stream().filter(v -> v.getPath().equals(servlet))
+				.collect(Collectors.toList());
 		
-		//List<LoginFilterVaildate> list = needLogin.stream().filter(v -> request.getPathInfo().startsWith(v.getPath())).collect(Collectors.toList());
-		
+		for (LoginFilterValidate validate : list) {
+			//validate的"test" equals 請求參數(method1)的值
+			if (validate.getParam().getValue().equals(request.getParameter(validate.getParam().getKey()))
+					//請求時的Session裡的Attribute叫做LOGIN_MEMBER的不能是null
+					&& request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER) == null) {
+				//給前端JS_SOURCE跟STATIC_SOURCE的值 再導到login.jsp 
+				request.setCharacterEncoding("UTF-8");
+				request.setAttribute(ApplicationUtils.JS_SOURCE_KEY, LoginServlet.JS_SOURCE);
+				request.setAttribute(ApplicationUtils.STATIC_SOURCE_KEY, LoginServlet.STATIC_SOURCE);
+				request.getRequestDispatcher(LoginServlet.JSP_SOURCE + "login.jsp").forward(request, response);
+				return;
+			}
+		}
+
 		chain.doFilter(request, response);
 	}
-	
-	
-    public LoginFilter() {
-        super();
-    }
+
+	public LoginFilter() {
+		super();
+	}
 
 	public void destroy() {
 	}
