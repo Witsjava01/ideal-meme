@@ -27,20 +27,22 @@ class ProductsDAO {
 				while (rs.next()) {
 					Product p = new Product();
 
-					p.setProduct_id(rs.getInt("product_id"));
-					p.setPhoto_url_1(rs.getString("photo_url_1"));
-					p.setProduct_name(rs.getString("product_name"));
+
+					p.setProductId(rs.getInt("product_id"));
+					p.setPhotoUrl1(rs.getString("photo_url_1"));
+					p.setProductName(rs.getString("product_name"));
 					p.setBrand(rs.getString("brand"));
 					p.setPrice(rs.getDouble("price"));
 					p.setSize(rs.getString("size"));
 					p.setColor(rs.getString("color"));
 					p.setStock(rs.getString("stock"));
 					p.setDescription(rs.getString("description"));
-					p.setPhoto_url_2(rs.getString("photo_url_2"));
-					p.setPhoto_url_3(rs.getString("photo_url_3"));
-					p.setPhoto_url_4(rs.getString("photo_url_4"));
+					p.setPhotoUrl2(rs.getString("photo_url_2"));
+					p.setPhotoUrl3(rs.getString("photo_url_3"));
+					p.setPhotoUrl4(rs.getString("photo_url_4"));
 					p.setOnshelf(rs.getString("Onshelf"));
-					p.setProduct_catalog(rs.getString("product_catalog"));
+					p.setProductCatalog(rs.getString("product_catalog"));
+
 
 					System.out.println("product_name="+rs.getString("product_name")+" price= "+rs.getDouble("price"));
 					
@@ -68,20 +70,20 @@ class ProductsDAO {
 				while (rs.next()) {
 					Product p = new Product();
 
-					p.setProduct_id(rs.getInt("product_id"));
-					p.setPhoto_url_1(rs.getString("photo_url_1"));
-					p.setProduct_name(rs.getString("product_name"));
+					p.setProductId(rs.getInt("product_id"));
+					p.setPhotoUrl1(rs.getString("photo_url_1"));
+					p.setProductName(rs.getString("product_name"));
 					p.setBrand(rs.getString("brand"));
 					p.setPrice(rs.getDouble("price"));
 					p.setSize(rs.getString("size"));
 					p.setColor(rs.getString("color"));
 					p.setStock(rs.getString("stock"));
 					p.setDescription(rs.getString("description"));
-					p.setPhoto_url_2(rs.getString("photo_url_2"));
-					p.setPhoto_url_3(rs.getString("photo_url_3"));
-					p.setPhoto_url_4(rs.getString("photo_url_4"));
+					p.setPhotoUrl2(rs.getString("photo_url_2"));
+					p.setPhotoUrl3(rs.getString("photo_url_3"));
+					p.setPhotoUrl4(rs.getString("photo_url_4"));
 					p.setOnshelf(rs.getString("Onshelf"));
-					p.setProduct_catalog(rs.getString("product_catalog"));
+					p.setProductCatalog(rs.getString("product_catalog"));
 
 					list.add(p);
 				}
@@ -111,20 +113,22 @@ class ProductsDAO {
 				while (rs.next()) {
 					Product p = new Product();
 
-					p.setProduct_id(rs.getInt("product_id"));
-					p.setPhoto_url_1(rs.getString("photo_url_1"));
-					p.setProduct_name(rs.getString("product_name"));
+
+					p.setProductId(rs.getInt("product_id"));
+					p.setPhotoUrl1(rs.getString("photo_url_1"));
+					p.setProductName(rs.getString("product_name"));
 					p.setBrand(rs.getString("brand"));
 					p.setPrice(rs.getDouble("price"));
 					p.setSize(rs.getString("size"));
 					p.setColor(rs.getString("color"));
 					p.setStock(rs.getString("stock"));
 					p.setDescription(rs.getString("description"));
-					p.setPhoto_url_2(rs.getString("photo_url_2"));
-					p.setPhoto_url_3(rs.getString("photo_url_3"));
-					p.setPhoto_url_4(rs.getString("photo_url_4"));
+					p.setPhotoUrl2(rs.getString("photo_url_2"));
+					p.setPhotoUrl3(rs.getString("photo_url_3"));
+					p.setPhotoUrl4(rs.getString("photo_url_4"));
 					p.setOnshelf(rs.getString("Onshelf"));
-					p.setProduct_catalog(rs.getString("product_catalog"));
+					p.setProductCatalog(rs.getString("product_catalog"));
+
 
 					list.add(p);
 				}
