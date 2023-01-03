@@ -78,6 +78,12 @@ public class MemberServlet extends HttpServlet {
 		case "updatePassword":
 			updatePassword(request, response);
 			break;
+		case "order":
+			order(request, response);
+			break;
+		case "orderDetails":
+			orderDetails(request, response);
+			break;
 		case "login":
 		default:
 			login(request, response);
@@ -142,6 +148,24 @@ public class MemberServlet extends HttpServlet {
 		request.setAttribute("isUpdate", false);
 		request.setAttribute("streetName", streetNameService.findAllStreetName().getData());
 		request.getRequestDispatcher(JSP_SOURCE + "member.jsp").forward(request, response);
+	}
+	
+	public void order(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Member sessionMember = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
+		if(StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
+			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
+			return;
+		}else {
+			request.setAttribute("orderList", memberService.findOrder(sessionMember.getPhoneNumber()).getData());
+			request.getRequestDispatcher(JSP_SOURCE + "order.jsp").forward(request, response);
+		}
+		
+	}
+	
+	public void orderDetails(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getRequestDispatcher(JSP_SOURCE + "orderDetails.jsp").forward(request, response);
 	}
 
 	public void addMember(HttpServletRequest request, HttpServletResponse response)

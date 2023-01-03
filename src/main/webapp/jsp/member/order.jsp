@@ -14,7 +14,6 @@
 
 <script>
 	var webApplicationPath = "${webApplicationPath}";
-	var isUpdate = ${isUpdate};
 </script>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -460,7 +459,7 @@
 		<!-- Catalog -->
 		<section class="section-wrap pt-60 pb-30 catalog">
 			<div class="container">
-
+				
 				<!-- Breadcrumbs -->
 
 				<div class="row">
@@ -469,100 +468,58 @@
 						<!-- Filter -->
 						<section class="">
 							<div class="container">
-								<div class="row justify-content-content">
-									<div class="col-lg-7">
-										<div class="row row-12">
-											<div class="col-md-12">
-												<div class="row row-12">
-													<p style="color:red;margin-left:15px">*</p>
-													<p>姓名</p>
-												</div>
-												<input type="text" class="input-text inputData" value="" maxlength="5"
-													placeholder="name" name="name" id="name"onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" 
-													onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" 
-													required="required">
+								<h1 class=" heading page-title__title" style="margin-bottom:30px">訂單查詢</h1>
+								
+								<div class="container relative">
+									<div class="container text-center">
+										<div class="row align-items-start">
+											<div class="col col-5">
+												<input type="text" size="10" maxlength="10">
 											</div>
-											<div class="col-md-12">
-												<div class="row row-12">
-													<p style="color:red;margin-left:15px">*</p>
-													<p>電話號碼</p>
-												</div>
-												<input type="text" class="input-text inputData" value=""
-													placeholder="phoneNumber" name="phoneNumber" id="phoneNumber" maxlength="15"
-													oninput="if(value.length>15)value=value.slice(0,15)"
-                  									onkeypress="return event.charCode>=48 && event.charCode<=57" disabled>
-											</div>
-											<div class="col-md-12" id="passwordDiv">
-												<div class="row row-12">
-													<p style="color:red;margin-left:15px">*</p>
-													<p>密碼</p>
-												</div>
-												<input type="password" class="input-text inputData" value="" maxlength="12"
-													placeholder="password" name="password" id="password"
-													oninput="if(value.length>12)value=value.slice(0,12)"
-													onKeyUp="value=value.replace(/[\W]/g,'')" required="required">
-											</div>
-											<div class="col-md-4">
-												<p class="form-row form-row-wide">性別</p>
-												<select id="gender" class="form-select">
-													<option name="Female" id="Female">女</option>
-													<option name="male" id="male">男</option>
-												</select>
-											</div>
-											<div class="col-md-4">
-												<p class="form-row form-row-wide">年齡</p>
-												<input
-													type="text" class="form-control inputData" id="age"
-													placeholder="age" disabled>
-											</div>
-											<div class="col-md-12">
-												<div class="row row-12">
-													<p style="color:red;margin-left:15px">*</p>
-													<p>生日</p>
-												</div>
-												<p style="color:red;" id="age_p" hidden="hidden">年齡不可小於12歲!</p>
-												<input type="date" class="input-text inputData" value=""
-													placeholder="YYYY-MM-DD" name="birthday" id="birthday"
-													oninput="calculateAge(this)" required="required">
-											</div>
-											<div class="col-md-12">
-												<p>E-mail</p>
-												<p style="color:red;" id="eamil_p" hidden="hidden">E-mail格式不正確!</p>
-												<input type="text" class="input-text inputData" value=""
-													placeholder="E-mail" name="email" id="email" maxlength="30"
-													oninput="IsEmail(this.value)">
-											</div>
-											<div class="col-md-12">
-												<p class="form-row form-row-wide">郵遞區號</p>
-												<input
-													type="text" class="form-control inputData" id="postalCode"
-													placeholder="郵遞區號" value="" disabled>
-											</div>
-											<div class="col-md-4">
-												<p class="form-row form-row-wide">縣/市</p>
-												<select id="city" class="form-select">
-													<option id="cityOption" value="cityDefault" selected>請選擇縣/市</option>
-												</select>
-											</div>
-											<div class="col-md-4">
-												<p class="form-row form-row-wide">區域</p>
-												<select id="district" class="form-select">
-													<option id="districtOption" value="districtDefault" selected>請選擇區域</option>
-												</select>
-											</div>
-											<div class="col-md-4">
-												<p class="form-row form-row-wide">路/街</p>
-												<select id="road" class="form-select">
-													<option id="roadOption" value="roadDefault" selected>請選擇路/街</option>
-												</select>
-											</div>
-											<div class="col-md-12">
-												<label for="" class="form-label">地址</label> 
-												<input type="text" class="form-control inputData" id="address" placeholder="地址" maxlength="30"
-												onkeyup="this.value=this.value.replace(/\s+/g,'')">
+											<div class="col col-3">
+												<input type="submit" id="signOutButton" name="signOutButton"
+													value="查詢" class="btn btn-md btn-dark btn-button">
 											</div>
 										</div>
 									</div>
+							        <div class="table-wrap ">
+							          <table class="table">
+							            <thead>
+							              <tr>
+							                <th class="">訂單編號</th>
+							                <th class="">訂購日期及時間</th>
+							                <th class="">訂單狀態</th>
+							                <th class="">訂單總金額</th>
+							                <th class="">取貨方式</th>
+							                <th class="">付款方式</th>
+							              </tr>
+							            </thead>
+							            <tbody>
+							              <tr class="cart_item">
+							                <td class="product-thumbnail">
+							                  <a href="#">
+							                    <p>111111111</p>
+							                  </a>
+							                </td>
+							                <td class="">
+							                  <p>2023-01-01 19:50:09</p>
+							                </td>
+							                <td class="">
+							                   <p>訂單成立</p>
+							                </td>
+							                <td class="">
+							                  <p>$1500</p>
+							                </td>
+							                <td class="">
+							                  <p>到店取貨</p>
+							                </td>
+							                <td class="">
+							                  <p>貨到付款</p>
+							                </td>
+							              </tr>
+							            </tbody>
+							          </table>
+							        </div>
 									<!-- end col shipping calculator -->
 								</div>
 								<!-- end container -->
@@ -571,19 +528,6 @@
 						<div class="row row-6">
 
 							<div class="col-md col-sm-6">
-								<div class="" id="revise">
-									<p>
-						              <input type="submit" id="reviseButton" name="reviseButton" value="修改" class="btn btn-md btn-dark btn-button" style="margin-left :15px;">
-						            </p>    
-								</div>
-								<div class="row justify-content" id="register">
-								    <div class="col-4">
-								      <input type="submit" id="registerButton" name="registerButton" value="註冊" class="btn btn-md btn-dark btn-button" style="margin-left :15px;">
-						             </div>
-								    <div class="col-4" align="center">
-								      <input type="submit" id="loginButton" name="loginButton" value="上一頁" class="btn btn-md btn-color btn-button" style="margin-right :15px;">
-						            </div>
-								 </div>
 							</div>
 						</div>
 						<!-- end row -->
@@ -598,9 +542,9 @@
 						<div class="widget widget_categories widget--bottom-line" id="memberList">
 							<h4 class="widget-title">會員中心</h4>
 							<ul>
-								<li style="color:orange">個人資料</li>
+								<li><a href="${webApplicationPath}/MemberServlet?method=member">個人資料</a></li>
 								<li><a href="${webApplicationPath}/MemberServlet?method=password">修改密碼</a></li>
-								<li><a href="${webApplicationPath}/MemberServlet?method=order">訂單查詢</a></li>
+								<li style="color:orange">訂單查詢</li>
 							</ul>
 						</div>
 						<div id="signOut">
@@ -722,211 +666,6 @@
 	<!-- end main-wrapper -->
 </body>
 <script>
-$(document).ready(function() {
-	
-	var streetName = new Map();
-	var cityList = new Set();
-	<c:forEach var="streetName" items="${streetNameList}">
-		streetName.set(['${streetName.postalCode}',
-				'${streetName.city}', '${streetName.district}',
-				'${streetName.road}' ]);
-		cityList.add('${streetName.city}');
-	</c:forEach>
-	
-	cityList.forEach(function (value) {
-		  $("select[id=city]")
-			.append($("<option></option>")
-			.attr("value",value)
-			.text(value));
-	});
-	var districtList = new Set();
-	var roadList = new Set();
-	$("select[id=city]").change(function() {
-		$("input[id='postalCode']").val("");
-		districtList.clear();
-		roadList.clear();
-		$("option[class='districtList']").remove();
-		$("option[class='roadList']").remove();
-		for (let key of streetName.keys()) {
-			if(key[1]===$("select[id=city]").val()){
-				districtList.add(key[2]);
-			}
-		}
-		districtList.forEach(function (value) {
-			  $("select[id=district]")
-				.append($("<option class='districtList'></option>")
-				.attr("value",value)
-				.text(value));
-		});
-	});
-	
-	
-	$("select[id=district]").change(function() {
-		$("input[id='postalCode']").val("");
-		roadList.clear();
-		$("option[class='roadList']").remove();
-		for (let key of streetName.keys()) {
-			if(key[2]===$("select[id=district]").val()){
-				roadList.add(key[3]);
-				$("input[id='postalCode']").val(key[0]);
-			}
-		}
-		roadList.forEach(function (value) {
-			  $("select[id=road]")
-				.append($("<option class='roadList'></option>")
-				.attr("value",value)
-				.text(value));
-		});
-		if(roadList.size === 1){
-			$("option[id='roadDefault']").prop("selected",'');
-			$("option[class='roadList']").prop("selected",'selected');
-			$("select[id=road]").prop('disabled', 'disabled');
-		}else{
-			$("option[id='roadDefault']").prop("selected",'selected');
-			$("select[id=road]").prop('disabled', false);
-		}
-		
-	});
-	
-	if (isUpdate) {
-		$('#memberList').css('display', '');
-		$('#signOut').css('display', '');
-		$('#phoneNumber').attr("disabled", "disabled");
-		$('#phoneNumber').removeAttr("required");
-		$('#revise').css('display', '');
-		$('#register').css('display', 'none');
-		$("#passwordDiv").css('display', 'none');
-		$("#SignIn_A").text("會員中心");
-		if('${member}' != null )
-		//取登入者資料 自動填入
-		$('#name').val('${member.name}');
-		$('#email').val('${member.email}');
-		$('#address').val('${member.address}');
-		$('#phoneNumber').val('${member.phoneNumber}');
-		$('#birthday').val('${member.birthday}');
-		$('#age').val('${member.age}');
-		var password = '${member.password}';
-		if('${member.gender}' === 'F'){
-			$('#gender').val('女');
-		}else{
-			$('#gender').val('男');
-		}
-		if('${member.city}' === ""){
-			$('option[value="cityDefault"]').attr('selected', 'selected')
-		}else{
-			$('#city').val('${member.city}');
-		}
-		
-		for (let key of streetName.keys()) {
-			if(key[1]===$("select[id=city]").val()){
-				districtList.add(key[2]);
-			}
-		}
-		districtList.forEach(function (value) {
-			  $("select[id=district]")
-				.append($("<option class='districtList'></option>")
-				.attr("value",value)
-				.text(value));
-		});
-		$("option[class='districtList']").each(function(){
-			if($(this).val()=== '${member.district}'){
-				$(this).attr('selected', 'selected')
-			}
-		});
-		for (let key of streetName.keys()) {
-			if(key[2]===$("select[id=district]").val()){
-				roadList.add(key[3]);
-				$("input[id='postalCode']").val(key[0]);
-			}
-		}
-		roadList.forEach(function (value) {
-			  $("select[id=road]")
-				.append($("<option class='roadList'></option>")
-				.attr("value",value)
-				.text(value));
-		});
-		if(roadList.size === 1){
-			$("option[id='roadDefault']").prop("selected",'');
-			$("option[class='roadList']").prop("selected",'selected');
-			$("select[id=road]").prop('disabled', 'disabled');
-		}else{
-			$("option[id='roadDefault']").prop("selected",'selected');
-			$("select[id=road]").prop('disabled', false);
-		}
-		$("option[class='roadList']").each(function(){
-			if($(this).val()=== '${member.road}'){
-				$(this).attr('selected', 'selected')
-			}
-		});
-		$('#postalCode').val('${member.postalCode}');
-		
-		
-	} else {
-		$("#passwordDiv").css('display', '');
-		$('#memberList').css('display', 'none');
-		$('#signOut').css('display', 'none');
-		$('#phoneNumber').removeAttr("disabled");
-		$('#phoneNumber').attr("required", "required");
-		$('#revise').css('display', 'none');
-		$('#register').css('display', '');
-	}
-	$('#reviseButton').on("click",function(){
-		var updateData = {};
-		if ($('#name').val() === "" || $('#phoneNumber').val() === "" || $('#age').val() < 12 || $('#birthday').val() === "") {
-			alert("請確認必填欄位是否為空!");
-		} else if($('#phoneNumber').val() === $('#password').val()){
-			alert("電話號碼與密碼不可相同!");
-		} else {
-			$('.inputData').each(function() {
-				updateData[$(this).attr('id')] = $(this).val();
-			});
-			$(".form-select option:selected").each(function() {
-				if ($(this).val() === "cityDefault" || $(this).val() === "districtDefault"
-					|| $(this).val() === "roadDefault") {
-					updateData[$(this).parent().attr('id')] = "";
-				} else if ($(this).val() === "女") {
-					updateData[$(this).parent().attr('id')] = "F";
-				} else if ($(this).val() === "男") {
-					updateData[$(this).parent().attr('id')] = "M";
-				} else {
-					updateData[$(this).parent().attr('id')] = $(this).val();
-				}
-			})
-			updateData[$('#birthday').attr('id')] = $('#birthday').val();
-			updateData["update_time"] = (new Date().format("yyyy-MM-dd hh:mm:ss"));
-			updateData["create_time"] = '${member.create_time}';
-			updateData["password"] = '${member.password}';
-			$.ajax({
-				url: webApplicationPath + "/MemberServlet?method=updateMember",
-				type: "POST",
-				data: updateData,
-				dataType: "json",
-				contentType: "application/x-www-form-urlencoded;charset=utf-8",
-				success: function(response) {
-					console.log(response)
-					if (response.result) {
-						alert("更新成功!");
-						window.location.reload();
-					} else {
-						alert(response.msg);
-					}
-				},
-				error: function(jqXHR, textStatus, errorThrown) {
-					alert("失敗");
-					/*弹出jqXHR对象的信息*/
-					console.log(jqXHR.responseText);
-					console.log(jqXHR.status);
-					console.log(jqXHR.readyState);
-					console.log(jqXHR.statusText);
-					/*弹出其他两个参数的信息*/
-					console.log(textStatus);
-					console.log(errorThrown);
-				}
-			});
 
-			
-		}
-	})
-});
 </script>
 </html>

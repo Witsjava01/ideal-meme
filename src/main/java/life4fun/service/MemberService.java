@@ -1,7 +1,10 @@
 package life4fun.service;
 
+import java.util.List;
+
 import life4fun.dto.ServiceResult;
 import life4fun.entity.Member;
+import life4fun.entity.Order;
 
 
 public interface MemberService {
@@ -14,6 +17,8 @@ public interface MemberService {
 	public String updateMember(Member member);
 
 	public String updatePassword(String newPassword, String phoneNumber);
+
+	public ServiceResult<List<Order>> findOrder(String phoneNumber);
 
 }
 

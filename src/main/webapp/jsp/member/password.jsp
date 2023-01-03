@@ -533,7 +533,7 @@
 							<ul>
 								<li><a href="${webApplicationPath}/MemberServlet?method=member">個人資料</a></li>
 								<li style="color:orange">修改密碼</li>
-								<li><a href="#">訂單查詢</a></li>
+								<li><a href="${webApplicationPath}/MemberServlet?method=order">訂單查詢</a></li>
 							</ul>
 						</div>
 						<div id="signOut">
