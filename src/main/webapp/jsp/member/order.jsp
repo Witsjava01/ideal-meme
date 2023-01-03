@@ -17,7 +17,7 @@
 </script>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<script src="${webApplicationPath}/${JS_SOURCE}/member.js"></script>
+<script src="${webApplicationPath}/${JS_SOURCE}/order.js"></script>
 <link rel="stylesheet" href="${STATIC_SOURCE}/css/css.css">
 
 <link rel="stylesheet"
@@ -474,11 +474,12 @@
 									<div class="container text-center">
 										<div class="row align-items-start">
 											<div class="col col-5">
-												<input type="text" size="10" maxlength="10">
+												<input type="number" id="order_id" name="order_id" size="10" maxlength="10" placeholder="請輸入訂單編號"
+												onkeypress="return event.charCode>=48 && event.charCode<=57">
 											</div>
 											<div class="col col-3">
-												<input type="submit" id="signOutButton" name="signOutButton"
-													value="查詢" class="btn btn-md btn-dark btn-button">
+												<input type="submit" id="searchButton" name="searchButton"
+													value="查詢" class="btn btn-md btn-dark btn-button" >
 											</div>
 										</div>
 									</div>
@@ -495,28 +496,30 @@
 							              </tr>
 							            </thead>
 							            <tbody>
+							            <c:forEach var="order" items="${orderList}">
 							              <tr class="cart_item">
 							                <td class="product-thumbnail">
 							                  <a href="#">
-							                    <p>111111111</p>
+							                    <p>${order.orderId}</p>
 							                  </a>
 							                </td>
 							                <td class="">
-							                  <p>2023-01-01 19:50:09</p>
+							                  <p>${order.createdTime}</p>
 							                </td>
 							                <td class="">
-							                   <p>訂單成立</p>
+							                   <p>${order.orderStatus}</p>
 							                </td>
 							                <td class="">
-							                  <p>$1500</p>
+							                  <p>$${order.orderAmount}</p>
 							                </td>
 							                <td class="">
-							                  <p>到店取貨</p>
+							                  <p>${order.shippingType}</p>
 							                </td>
 							                <td class="">
-							                  <p>貨到付款</p>
+							                  <p>${order.paymentType}</p>
 							                </td>
 							              </tr>
+							              </c:forEach>
 							            </tbody>
 							          </table>
 							        </div>

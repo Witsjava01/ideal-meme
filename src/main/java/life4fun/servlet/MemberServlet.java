@@ -153,14 +153,31 @@ public class MemberServlet extends HttpServlet {
 	public void order(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Member sessionMember = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
+		String phoneNumber = sessionMember.getPhoneNumber();
 		if(StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
 			return;
 		}else {
-			request.setAttribute("orderList", memberService.findOrder(sessionMember.getPhoneNumber()).getData());
+			System.out.println("findOrder: "+memberService.findOrder(phoneNumber).getData());
+			request.setAttribute("orderList", memberService.findOrder(phoneNumber).getData());
 			request.getRequestDispatcher(JSP_SOURCE + "order.jsp").forward(request, response);
 		}
-		
+	}
+	
+	public void orderSearch(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Member sessionMember = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
+		String phoneNumber = sessionMember.getPhoneNumber();
+		Integer orderId = Integer.valueOf(request.getParameter("order_id"));
+				
+		if(StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
+			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
+			return;
+		}else {
+			System.out.println("searchOrder: "+memberService.findOrder(phoneNumber,orderId).getData());
+			request.setAttribute("orderList", memberService.findOrder(phoneNumber,orderId).getData());
+			request.getRequestDispatcher(JSP_SOURCE + "order.jsp").forward(request, response);
+		}
 	}
 	
 	public void orderDetails(HttpServletRequest request, HttpServletResponse response)

@@ -20,6 +20,8 @@ public interface MemberService {
 
 	public ServiceResult<List<Order>> findOrder(String phoneNumber);
 
+	public ServiceResult<List<Order>> findOrder(String phoneNumber, Integer OrderId);
+
 }
 
 
