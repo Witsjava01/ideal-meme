@@ -35,7 +35,7 @@ class ProductsDAO {
 					p.setPrice(rs.getDouble("price"));
 					p.setSize(rs.getString("size"));
 					p.setColor(rs.getString("color"));
-					p.setStock(rs.getString("stock"));
+					p.setStock(rs.getInt("stock"));
 					p.setDescription(rs.getString("description"));
 					p.setPhotoUrl2(rs.getString("photo_url_2"));
 					p.setPhotoUrl3(rs.getString("photo_url_3"));
@@ -77,7 +77,7 @@ class ProductsDAO {
 					p.setPrice(rs.getDouble("price"));
 					p.setSize(rs.getString("size"));
 					p.setColor(rs.getString("color"));
-					p.setStock(rs.getString("stock"));
+					p.setStock(rs.getInt("stock"));
 					p.setDescription(rs.getString("description"));
 					p.setPhotoUrl2(rs.getString("photo_url_2"));
 					p.setPhotoUrl3(rs.getString("photo_url_3"));
@@ -121,7 +121,7 @@ class ProductsDAO {
 					p.setPrice(rs.getDouble("price"));
 					p.setSize(rs.getString("size"));
 					p.setColor(rs.getString("color"));
-					p.setStock(rs.getString("stock"));
+					p.setStock(rs.getInt("stock"));
 					p.setDescription(rs.getString("description"));
 					p.setPhotoUrl2(rs.getString("photo_url_2"));
 					p.setPhotoUrl3(rs.getString("photo_url_3"));

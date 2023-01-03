@@ -1,13 +1,14 @@
 package life4fun.entity;
 
 public class Product {
+	private int productId;
 	private String photoUrl1;
 	private String productName;	
 	private String brand;
 	private double price;
 	private String size;
 	private String color;
-	private String stock;
+	private int stock;
 	private String description;
 	private String photoUrl2;
 	private String photoUrl3;
@@ -15,9 +16,6 @@ public class Product {
 	private String onshelf;
 	private String productCatalog;
 
-	
-	
-	private int productId;
 	public int getProductId() {
 		return productId;
 	}
@@ -60,10 +58,10 @@ public class Product {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	public String getStock() {
+	public int getStock() {
 		return stock;
 	}
-	public void setStock(String stock) {
+	public void setStock(int stock) {
 		this.stock = stock;
 	}
 	public String getDescription() {
