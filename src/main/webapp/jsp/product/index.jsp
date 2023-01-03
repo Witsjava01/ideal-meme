@@ -4,6 +4,10 @@
 <html>
 <head>
   <title>Namira | Home</title>
+  
+<script>
+	var webApplicationPath = "${webApplicationPath}";
+</script>
 
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
@@ -11,17 +15,32 @@
   <meta name="description" content="">
 
   <!-- Google Fonts -->
-  <link href='${STATIC_SOURCE}/css/css.css' rel='stylesheet'>
+  <link href='${webApplicationPath}/static/css/css.css' rel='stylesheet'>
 
   <!-- Css -->
-  <link rel="stylesheet" href="${webApplicationPath}/${STATIC_SOURCE}/css/bootstrap.min.css">
-  <link rel="stylesheet" href="${webApplicationPath}/${STATIC_SOURCE}/css/font-icons.css">
-  <link rel="stylesheet" href="${webApplicationPath}/${STATIC_SOURCE}/css/style.css">
-  <link rel="stylesheet" href="${webApplicationPath}/${STATIC_SOURCE}/css/color.css">
+  <link rel="stylesheet" href="${webApplicationPath}/static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${webApplicationPath}/static/css/font-icons.css">
+  <link rel="stylesheet" href="${webApplicationPath}/static/css/style.css">
+  <link rel="stylesheet" href="${webApplicationPath}/static/css/color.css">
 
   <!-- Favicons -->
   
- 
+<script type="text/javascript"
+	src="${webApplicationPath}/static/js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="${webApplicationPath}/static/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="${webApplicationPath}/static/js/easing.min.js"></script>
+<script type="text/javascript"
+	src="${webApplicationPath}/static/js/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript"
+	src="${webApplicationPath}/static/js/owl-carousel.min.js"></script>
+<script type="text/javascript"
+	src="${webApplicationPath}/static/js/flickity.pkgd.min.js"></script>
+<script type="text/javascript"
+	src="${webApplicationPath}/static/js/modernizr.min.js"></script>
+<script type="text/javascript"
+	src="${webApplicationPath}/static/js/scripts.js"></script>
   
   
 
@@ -228,7 +247,7 @@
                     <div class="nav-cart__item clearfix">
                       <div class="nav-cart__img">
                         <a href="#">
-                          <img src="static/picture/cart_small_1.jpg" alt="">
+                          <img src="${webApplicationPath}/static/picture/cart_small_1.jpg" alt="">
                         </a>
                       </div>
                       <div class="nav-cart__title">
@@ -248,7 +267,7 @@
                     <div class="nav-cart__item clearfix">
                       <div class="nav-cart__img">
                         <a href="#">
-                          <img src="static/picture/cart_small_2.jpg" alt="">
+                          <img src="${webApplicationPath}/static/picture/cart_small_2.jpg" alt="">
                         </a>
                       </div>
                       <div class="nav-cart__title">
@@ -293,7 +312,7 @@
 
             <!-- Logo -->
             <a href="" class="logo">
-              <img class="logo__img" src="static/picture/logo_life4fun.png" alt="logo" width="100" height="300">
+              <img class="logo__img" src="${webApplicationPath}/static/picture/logo_life4fun.png" alt="logo" width="100" height="300">
               
             </a>
             
@@ -372,7 +391,7 @@
                           </div>
 
                           <div class="col nav__megamenu-item">
-                            <a href="#"><img src="static/picture/megamenu_banner.png" alt=""></a>
+                            <a href="#"><img src="${webApplicationPath}/static/picture/megamenu_banner.png" alt=""></a>
                           </div>
 
                         </div>
@@ -459,7 +478,7 @@
           </div>
         </div>
 
-        <div class="hero__slide" style="background-image: url(static/image/3.jpg)">
+        <div class="hero__slide" style="background-image: url(life4fun/static/image/3.jpg)">
           <div class="container text-center">
             <div class="hero__holder-1">
               <h1 class="hero__title-2">第二組的專題 主畫面</h1>
@@ -492,8 +511,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="static/picture/product_11.jpg" alt="" class="product__img">
-                <img src="static/picture/product_back_11.jpg" alt="" class="product__img-back">
+                <img src="${webApplicationPath}/static/picture/product_11.jpg" alt="" class="product__img">
+                <img src="${webApplicationPath}/static/picture/product_back_11.jpg" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -526,8 +545,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="static/picture/product_12.jpg" alt="" class="product__img">
-                <img src="static/picture/product_back_12.jpg" alt="" class="product__img-back">
+                <img src="${webApplicationPath}/static/picture/product_12.jpg" alt="" class="product__img">
+                <img src="${webApplicationPath}/static/picture/product_back_12.jpg" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -557,8 +576,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="static/picture/product_5.jpg" alt="" class="product__img">
-                <img src="static/picture/product_back_5.jpg" alt="" class="product__img-back">
+                <img src="${webApplicationPath}/static/picture/product_5.jpg" alt="" class="product__img">
+                <img src="${webApplicationPath}/static/picture/product_back_5.jpg" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -588,8 +607,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="static/picture/product_6.jpg" alt="" class="product__img">
-                <img src="static/picture/product_back_6.jpg" alt="" class="product__img-back">
+                <img src="${webApplicationPath}/static/picture/product_6.jpg" alt="" class="product__img">
+                <img src="${webApplicationPath}/static/picture/product_back_6.jpg" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -622,8 +641,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="static/picture/product_7.jpg" alt="" class="product__img">
-                <img src="static/picture/product_back_7.jpg" alt="" class="product__img-back">
+                <img src="${webApplicationPath}/static/picture/product_7.jpg" alt="" class="product__img">
+                <img src="${webApplicationPath}/static/picture/product_back_7.jpg" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -656,8 +675,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="static/picture/product_8.jpg" alt="" class="product__img">
-                <img src="static/picture/product_back_8.jpg" alt="" class="product__img-back">
+                <img src="${webApplicationPath}/static/picture/product_8.jpg" alt="" class="product__img">
+                <img src="${webApplicationPath}/static/picture/product_back_8.jpg" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -708,8 +727,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="static/picture/product_1.jpg" alt="" class="product__img">
-                <img src="static/picture/product_back_1.jpg" alt="" class="product__img-back">
+                <img src="${webApplicationPath}/static/picture/product_1.jpg" alt="" class="product__img">
+                <img src="${webApplicationPath}/static/picture/product_back_1.jpg" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -739,8 +758,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="static/picture/product_9.jpg" alt="" class="product__img">
-                <img src="static/picture/product_back_9.jpg" alt="" class="product__img-back">
+                <img src="${webApplicationPath}/static/picture/product_9.jpg" alt="" class="product__img">
+                <img src="${webApplicationPath}/static/picture/product_back_9.jpg" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -770,8 +789,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="static/picture/product_10.jpg" alt="" class="product__img">
-                <img src="static/picture/product_back_10.jpg" alt="" class="product__img-back">
+                <img src="${webApplicationPath}/static/picture/product_10.jpg" alt="" class="product__img">
+                <img src="${webApplicationPath}/static/picture/product_back_10.jpg" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -801,8 +820,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="static/picture/product_2.jpg" alt="" class="product__img">
-                <img src="static/picture/product_back_2.jpg" alt="" class="product__img-back">
+                <img src="${webApplicationPath}/static/picture/product_2.jpg" alt="" class="product__img">
+                <img src="${webApplicationPath}/static/picture/product_back_2.jpg" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -832,8 +851,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="static/picture/product_3.jpg" alt="" class="product__img">
-                <img src="static/picture/product_back_3.jpg" alt="" class="product__img-back">
+                <img src="${webApplicationPath}/static/picture/product_3.jpg" alt="" class="product__img">
+                <img src="${webApplicationPath}/static/picture/product_back_3.jpg" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -866,8 +885,8 @@
           <div class="col-lg-2 col-sm-4 product">
             <div class="product__img-holder">
               <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="static/picture/product_4.jpg" alt="" class="product__img">
-                <img src="static/picture/product_back_4.jpg" alt="" class="product__img-back">
+                <img src="${webApplicationPath}/static/picture/product_4.jpg" alt="" class="product__img">
+                <img src="${webApplicationPath}/static/picture/product_back_4.jpg" alt="" class="product__img-back">
               </a>
               <div class="product__actions">
                 <a href="quickview.html" class="product__quickview">
@@ -998,15 +1017,7 @@
 
 
   
-  <!-- jQuery Scripts -->
-  <script type="text/javascript" src="static/js/jquery.min.js"></script>
-  <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="static/js/easing.min.js"></script>
-  <script type="text/javascript" src="static/js/jquery.magnific-popup.min.js"></script>
-  <script type="text/javascript" src="static/js/owl-carousel.min.js"></script>  
-  <script type="text/javascript" src="static/js/flickity.pkgd.min.js"></script>
-  <script type="text/javascript" src="static/js/modernizr.min.js"></script>
-  <script type="text/javascript" src="static/js/scripts.js"></script>
+ 
 
 </body>
 </html>
