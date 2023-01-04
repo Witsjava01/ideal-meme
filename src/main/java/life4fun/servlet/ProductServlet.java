@@ -1,6 +1,7 @@
 package life4fun.servlet;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import life4fun.dto.RequestResult;
 import life4fun.entity.Product;
 import life4fun.exception.VGBException;
 import life4fun.service.MemberService;
@@ -18,6 +20,7 @@ import life4fun.service.impl.MemberServiceImpl;
 import life4fun.service.impl.StreetNameServiceImpl;
 import life4fun.utils.ApplicationUtils;
 import life4fun.utils.ConstantUtils;
+import life4fun.utils.JsonUtils;
 
 /**
  * Servlet implementation class ProductServlet
@@ -57,15 +60,16 @@ public class ProductServlet extends HttpServlet {
 	}
 
 	public void getAllProducts(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, VGBException {
-		
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		ProductService service = new ProductService();
 		List<Product> list = null;
 		
 			list = service.getAllProducts();
 
 		request.setAttribute("product",list);
-		System.out.println("JSP_SOURCE"+JSP_SOURCE);
-		request.getRequestDispatcher(JSP_SOURCE+"Product.jsp").forward(request, response);
+		response.getWriter().append(JsonUtils.getGson().toJson(list));
+//		System.out.println("JSP_SOURCE"+JSP_SOURCE);
+//		request.getRequestDispatcher(JSP_SOURCE+"index.jsp").forward(request, response);
 }
 	
 

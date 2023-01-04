@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="${webApplicationPath}/static/css/color.css">
 
   <!-- Favicons -->
+  <script src="${webApplicationPath}/js/product/product.js"></script> 
   
 <script type="text/javascript"
 	src="${webApplicationPath}/static/js/jquery.min.js"></script>
@@ -506,207 +507,9 @@
           </div>
         </div>
 
-        <div class="row row-8">
-
-          <div class="col-lg-2 col-sm-4 product">
-            <div class="product__img-holder">
-              <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="${webApplicationPath}/static/picture/product_11.jpg" alt="" class="product__img">
-                <img src="${webApplicationPath}/static/picture/product_back_11.jpg" alt="" class="product__img-back">
-              </a>
-              <div class="product__actions">
-                <a href="quickview.html" class="product__quickview">
-                  <i class="ui-eye"></i>
-                  <span>Quick View</span>
-                </a>
-                <a href="#" class="product__add-to-wishlist">
-                  <i class="ui-heart"></i>
-                  <span>Wishlist</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="product__details">
-              <h3 class="product__title">
-                <a href="single-product.html">測試商品</a>
-              </h3>
-            </div>
-
-            <span class="product__price">
-              <ins>
-                <span class="amount">NT100</span>
-              </ins>
-              <del>
-                <span>NT200</span>
-              </del>
-            </span>
-          </div> <!-- end product -->
-
-          <div class="col-lg-2 col-sm-4 product">
-            <div class="product__img-holder">
-              <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="${webApplicationPath}/static/picture/product_12.jpg" alt="" class="product__img">
-                <img src="${webApplicationPath}/static/picture/product_back_12.jpg" alt="" class="product__img-back">
-              </a>
-              <div class="product__actions">
-                <a href="quickview.html" class="product__quickview">
-                  <i class="ui-eye"></i>
-                  <span>Quick View</span>
-                </a>
-                <a href="#" class="product__add-to-wishlist">
-                  <i class="ui-heart"></i>
-                  <span>Wishlist</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="product__details">
-              <h3 class="product__title">
-                <a href="single-product.html">測試商品t</a>
-              </h3>
-            </div>
-
-            <span class="product__price">
-              <ins>
-                <span class="amount">NT300</span>
-              </ins>
-            </span>
-          </div> <!-- end product -->
-
-          <div class="col-lg-2 col-sm-4 product">
-            <div class="product__img-holder">
-              <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="${webApplicationPath}/static/picture/product_5.jpg" alt="" class="product__img">
-                <img src="${webApplicationPath}/static/picture/product_back_5.jpg" alt="" class="product__img-back">
-              </a>
-              <div class="product__actions">
-                <a href="quickview.html" class="product__quickview">
-                  <i class="ui-eye"></i>
-                  <span>Quick View</span>
-                </a>
-                <a href="#" class="product__add-to-wishlist">
-                  <i class="ui-heart"></i>
-                  <span>Wishlist</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="product__details">
-              <h3 class="product__title">
-                <a href="single-product.html">測試商品</a>
-              </h3>
-            </div>
-
-            <span class="product__price">
-              <ins>
-                <span class="amount">NT200</span>
-              </ins>
-            </span>
-          </div> <!-- end product -->
-
-          <div class="col-lg-2 col-sm-4 product">
-            <div class="product__img-holder">
-              <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="${webApplicationPath}/static/picture/product_6.jpg" alt="" class="product__img">
-                <img src="${webApplicationPath}/static/picture/product_back_6.jpg" alt="" class="product__img-back">
-              </a>
-              <div class="product__actions">
-                <a href="quickview.html" class="product__quickview">
-                  <i class="ui-eye"></i>
-                  <span>Quick View</span>
-                </a>
-                <a href="#" class="product__add-to-wishlist">
-                  <i class="ui-heart"></i>
-                  <span>Wishlist</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="product__details">
-              <h3 class="product__title">
-                <a href="single-product.html">測試商品</a>
-              </h3>
-            </div>
-
-            <span class="product__price">
-              <ins>
-                <span class="amount">NT200</span>
-              </ins>
-              <del>
-                <span>NT300</span>
-              </del>
-            </span>
-          </div> <!-- end product -->
-
-          <div class="col-lg-2 col-sm-4 product">
-            <div class="product__img-holder">
-              <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="${webApplicationPath}/static/picture/product_7.jpg" alt="" class="product__img">
-                <img src="${webApplicationPath}/static/picture/product_back_7.jpg" alt="" class="product__img-back">
-              </a>
-              <div class="product__actions">
-                <a href="quickview.html" class="product__quickview">
-                  <i class="ui-eye"></i>
-                  <span>Quick View</span>
-                </a>
-                <a href="#" class="product__add-to-wishlist">
-                  <i class="ui-heart"></i>
-                  <span>Wishlist</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="product__details">
-              <h3 class="product__title">
-                <a href="single-product.html">測試商品</a>
-              </h3>
-            </div>
-
-            <span class="product__price">
-              <ins>
-                <span class="amount">NT150</span>
-              </ins>
-              <del>
-                <span>NT900</span>
-              </del>
-            </span>
-          </div> <!-- end product -->
-
-          <div class="col-lg-2 col-sm-4 product">
-            <div class="product__img-holder">
-              <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="${webApplicationPath}/static/picture/product_8.jpg" alt="" class="product__img">
-                <img src="${webApplicationPath}/static/picture/product_back_8.jpg" alt="" class="product__img-back">
-              </a>
-              <div class="product__actions">
-                <a href="quickview.html" class="product__quickview">
-                  <i class="ui-eye"></i>
-                  <span>Quick View</span>
-                </a>
-                <a href="#" class="product__add-to-wishlist">
-                  <i class="ui-heart"></i>
-                  <span>Wishlist</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="product__details">
-              <h3 class="product__title">
-                <a href="single-product.html">測試商品</a>
-              </h3>
-            </div>
-
-            <span class="product__price">
-              <ins>
-                <span class="amount">NT200</span>
-              </ins>
-              <del>
-                <span>NT700</span>
-              </del>
-            </span>
-          </div> <!-- end product -->
-  
-        </div> <!-- end row -->
+		
+        <div class="row row-8" id="productView">  
+       
       </div> <!-- end container -->
     </section> <!-- end best seller -->
 
@@ -1015,9 +818,10 @@
 
   </main> <!-- end main-wrapper -->
 
+<script >
 
-  
- 
+</script>
 
-</body>
+
+
 </html>
