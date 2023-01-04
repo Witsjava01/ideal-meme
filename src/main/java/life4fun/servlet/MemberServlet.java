@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,7 @@ import com.mysql.cj.util.StringUtils;
 import life4fun.dto.RequestResult;
 import life4fun.dto.ServiceResult;
 import life4fun.entity.Member;
+import life4fun.entity.Order;
 import life4fun.service.MemberService;
 import life4fun.service.StreetNameService;
 import life4fun.service.impl.MemberServiceImpl;
@@ -81,6 +84,9 @@ public class MemberServlet extends HttpServlet {
 		case "order":
 			order(request, response);
 			break;
+		case "orderSearch":
+			orderSearch(request, response);
+			break;
 		case "orderDetails":
 			orderDetails(request, response);
 			break;
@@ -99,33 +105,35 @@ public class MemberServlet extends HttpServlet {
 		request.getSession().removeAttribute(ConstantUtils.LOGIN_MEMBER);
 		request.getRequestDispatcher(JSP_SOURCE + "login.jsp").forward(request, response);
 	}
-	
-	public void password(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	public void password(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Member member = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
 		request.setAttribute("password", member.getPassword());
 		request.setAttribute("phoneNumber", member.getPhoneNumber());
 		request.getRequestDispatcher(JSP_SOURCE + "password.jsp").forward(request, response);
 	}
-	
-	public void updatePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	public void updatePassword(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Member member = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
 		String sessionPassword = member.getPassword();
 		String password = request.getParameter("password");
-		System.out.println("sessionPassword:"+sessionPassword);
-		if(sessionPassword.equals(password)) {
+		System.out.println("sessionPassword:" + sessionPassword);
+		if (sessionPassword.equals(password)) {
 			String newPassword = request.getParameter("newPassword");
 			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-			if(newPassword.equals(password)) {
+			if (newPassword.equals(password)) {
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("新密碼與舊密碼不可相同!")));
 				return;
-			}else {
-				System.out.println("phoneNumber:"+member.getPhoneNumber()+", newPassword:"+newPassword);
+			} else {
+				System.out.println("phoneNumber:" + member.getPhoneNumber() + ", newPassword:" + newPassword);
 				memberService.updatePassword(member.getPhoneNumber(), newPassword);
 				member.setPassword(newPassword);
 				request.getSession().setAttribute(ConstantUtils.LOGIN_MEMBER, member);
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
 			}
-		}else {
+		} else {
 			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("舊密碼錯誤，請確認後重新輸入!")));
 		}
@@ -134,11 +142,11 @@ public class MemberServlet extends HttpServlet {
 	public void member(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("isUpdate", true);
 		request.setAttribute("streetNameList", streetNameService.findAllStreetName().getData());
-		
+
 		Member member = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
 		System.out.println(member);
 		request.setAttribute("member", member);
-		
+
 		request.setAttribute("account", streetNameService.findAllStreetName().getData());
 		request.getRequestDispatcher(JSP_SOURCE + "member.jsp").forward(request, response);
 	}
@@ -149,37 +157,43 @@ public class MemberServlet extends HttpServlet {
 		request.setAttribute("streetName", streetNameService.findAllStreetName().getData());
 		request.getRequestDispatcher(JSP_SOURCE + "member.jsp").forward(request, response);
 	}
-	
-	public void order(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+
+	public void order(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		Member sessionMember = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
 		String phoneNumber = sessionMember.getPhoneNumber();
-		if(StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
+		if (StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
 			return;
-		}else {
-			System.out.println("findOrder: "+memberService.findOrder(phoneNumber).getData());
+		} else {
+			System.out.println("findOrder: " + memberService.findOrder(phoneNumber).getData());
 			request.setAttribute("orderList", memberService.findOrder(phoneNumber).getData());
 			request.getRequestDispatcher(JSP_SOURCE + "order.jsp").forward(request, response);
 		}
 	}
-	
+
 	public void orderSearch(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		Member sessionMember = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
 		String phoneNumber = sessionMember.getPhoneNumber();
-		Integer orderId = Integer.valueOf(request.getParameter("order_id"));
-				
-		if(StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
+		if (StringUtils.isNullOrEmpty(phoneNumber)) {
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
 			return;
+		}
+		//判斷orderId是否為空 為空=查全部 有值=+條件查詢
+		String orderId = request.getParameter("order_id");
+		if(orderId == "") {
+			List<Order> orderList = memberService.findOrder(phoneNumber).getData();
+			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success(orderList)));
 		}else {
-			System.out.println("searchOrder: "+memberService.findOrder(phoneNumber,orderId).getData());
-			request.setAttribute("orderList", memberService.findOrder(phoneNumber,orderId).getData());
-			request.getRequestDispatcher(JSP_SOURCE + "order.jsp").forward(request, response);
+			System.out.println("searchOrderList: " + memberService.findOrder(phoneNumber, Integer.valueOf(orderId)).getData());
+			List<Order> orderList = memberService.findOrder(phoneNumber, Integer.valueOf(orderId)).getData();
+			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success(orderList)));
 		}
 	}
-	
+
 	public void orderDetails(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.getRequestDispatcher(JSP_SOURCE + "orderDetails.jsp").forward(request, response);
@@ -190,7 +204,7 @@ public class MemberServlet extends HttpServlet {
 		Member member;
 		try {
 			member = getMember(request);
-		}catch(RuntimeException e) {
+		} catch (RuntimeException e) {
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail(e.getMessage())));
 			return;
 		}
@@ -209,20 +223,20 @@ public class MemberServlet extends HttpServlet {
 		}
 
 	}
-	
+
 	protected void updateMember(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Member sessionMember = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-		if(sessionMember == null) {
+		if (sessionMember == null) {
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
 			return;
 		}
 		Member member;
-		
+
 		try {
 			member = getMember(request);
-		}catch(RuntimeException e) {
+		} catch (RuntimeException e) {
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail(e.getMessage())));
 			return;
 		}
@@ -230,7 +244,8 @@ public class MemberServlet extends HttpServlet {
 		if (checkMember == false) {
 			try {
 				memberService.updateMember(member);
-				ServiceResult<Member> queryResult = memberService.findMember(sessionMember.getPhoneNumber(), sessionMember.getPassword());
+				ServiceResult<Member> queryResult = memberService.findMember(sessionMember.getPhoneNumber(),
+						sessionMember.getPassword());
 				request.getSession().setAttribute(ConstantUtils.LOGIN_MEMBER, queryResult.getData());
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
 			} catch (RuntimeException e) {
@@ -283,7 +298,7 @@ public class MemberServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		if (StringUtils.isNullOrEmpty(password)) {
 			throw new RuntimeException("password不得為空!");
-		}else if(password.length() < 6) {
+		} else if (password.length() < 6) {
 			throw new RuntimeException("password長度必須為6~12位!");
 		}
 		String gender = request.getParameter("gender");
@@ -310,11 +325,11 @@ public class MemberServlet extends HttpServlet {
 			throw new RuntimeException("age不得為空!");
 		}
 		Integer age = Integer.valueOf(request.getParameter("age"));
-		
+
 		if (phoneNumber.equals(password)) {
 			throw new RuntimeException("電話號碼與密碼不可相同!");
 		}
-		
+
 		Member member = new Member();
 		member.setName(name);
 		member.setPassword(password);

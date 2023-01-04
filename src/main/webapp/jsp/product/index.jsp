@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Namira | Home</title>
+  <title>life4fun | 首頁</title>
   
 <script>
 	var webApplicationPath = "${webApplicationPath}";
@@ -462,14 +462,14 @@
     <section class="hero">
       <div id="owl-hero" class="owl-carousel owl-theme owl-carousel--dots-inside">        
 
-        <div class="hero__slide" style="background-image: url(img/hero/1.jpg)">
+        <div class="hero__slide" style="background-image: url(life4fun/img/hero/1.jpg)">
           <div class="container text-center">
             <h1 class="hero__title">第二組的專題 主畫面</h1>
             <a href="#" class="hero__link">開始購物</a>
           </div>          
         </div>
 
-        <div class="hero__slide" style="background-image: url(img/hero/2.jpg)">
+        <div class="hero__slide" style="background-image: url(life4fun/img/hero/2.jpg)">
           <div class="container relative">
             <div class="hero__holder">
               <h1 class="hero__title-1">dope<br>street<br>wear</h1>

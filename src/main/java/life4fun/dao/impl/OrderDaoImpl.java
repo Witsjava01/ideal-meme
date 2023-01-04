@@ -20,4 +20,16 @@ public class OrderDaoImpl extends BaseDao<Order> implements OrderDao<Order> {
 		return findAll(conn,selectSql,phoneNumber);
 		
 	}
+	@Override
+	public List<Order> findOrderFromSearch(Connection conn,String phoneNumber,Integer orderId) throws SQLException {
+		String selectSql = 
+				"SELECT od.order_id as orderId , od.created_time as createdTime, os.order_status_details as orderStatus, od.order_amount as orderAmount, od.shipping_type as shippingType, od.payment_type as paymentType "
+				+ "FROM life4fun.order as od "
+				+ "left join life4fun.order_status as os "
+				+ "ON od.order_status = os.order_status "
+				+ "WHERE od.phoneNumber=? "
+				+ "AND od.order_id=? ";
+		return getBeanList(conn,selectSql,phoneNumber,orderId);
+		
+	}
 }
