@@ -495,7 +495,7 @@
 							                <th class="">付款方式</th>
 							              </tr>
 							            </thead>
-							            <tbody>
+							            <tbody id="order_tbody">
 							            <c:forEach var="order" items="${orderList}">
 							              <tr class="cart_item">
 							                <td class="product-thumbnail">

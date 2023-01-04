@@ -196,7 +196,7 @@ public class MemberServiceImpl implements MemberService {
 		List<Order> orderList = null;
 		try {
 			// 事務開始
-			orderList = orderDao.findOrder(conn, phoneNumber);
+			orderList = orderDao.findOrderFromSearch(conn, phoneNumber,OrderId);
 			// 事務結束，提交事務
 		} catch (Exception e) { // SQL例外處理
 			// 取得錯誤訊息
