@@ -36,12 +36,12 @@ $(document).ready(function() {
 					resData.forEach(data => {
 						let temp = `
 										<tr class="cart_item">
-											<td class="product-thumbnail"><a href="#"><p class="orderId">${data.orderId}</p></a></td>
+											<td class="product-thumbnail orderId"><a href="#"><p>${data.orderId}</p></a></td>
 											<td ><p class="createdTime" name="${data.createdTime}">${data.createdTime}</p></td>
-											<td><p class="orderStatus">${data.orderStatus}</p></td>
-											<td><p class="orderAmount">$${data.orderAmount}</p></td>
-											<td><p class="shippingType">${data.shippingType}</p></td>
-											<td><p class="paymentType">${data.paymentType}</p></td>
+											<td class="orderStatus"><p>${data.orderStatus}</p></td>
+											<td class="orderAmount"><p>$${data.orderAmount}</p></td>
+											<td class="shippingType"><p>${data.shippingType}</p></td>
+											<td class="paymentType"><p>${data.paymentType}</p></td>
 										</tr>
 									`;
 						
