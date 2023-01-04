@@ -1,6 +1,7 @@
 package life4fun.entity;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -61,4 +62,5 @@ public class Order {
 	
 	@Column(name="recipient_address")
 	private String recipientAddress;
+	
 }

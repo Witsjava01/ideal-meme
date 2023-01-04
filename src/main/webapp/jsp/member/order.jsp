@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@page isELIgnored="false"%>
 <!--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>-->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -498,24 +499,25 @@
 							            <tbody id="order_tbody">
 							            <c:forEach var="order" items="${orderList}">
 							              <tr class="cart_item">
-							                <td class="product-thumbnail">
+							                <td class="product-thumbnail orderId">
 							                  <a href="#">
 							                    <p>${order.orderId}</p>
 							                  </a>
 							                </td>
-							                <td class="">
-							                  <p>${order.createdTime}</p>
+							                <td class="createdTime">
+							                <p><fmt:formatDate value="${order.createdTime}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
+							                  
 							                </td>
-							                <td class="">
+							                <td class="orderStatus">
 							                   <p>${order.orderStatus}</p>
 							                </td>
-							                <td class="">
+							                <td class="orderAmount">
 							                  <p>$${order.orderAmount}</p>
 							                </td>
-							                <td class="">
+							                <td class="shippingType">
 							                  <p>${order.shippingType}</p>
 							                </td>
-							                <td class="">
+							                <td class="paymentType">
 							                  <p>${order.paymentType}</p>
 							                </td>
 							              </tr>

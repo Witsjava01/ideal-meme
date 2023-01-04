@@ -186,10 +186,11 @@ public class MemberServlet extends HttpServlet {
 		String orderId = request.getParameter("order_id");
 		if(orderId == "") {
 			List<Order> orderList = memberService.findOrder(phoneNumber).getData();
+			System.out.println("findOrder: " + orderList);
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success(orderList)));
 		}else {
-			System.out.println("searchOrderList: " + memberService.findOrder(phoneNumber, Integer.valueOf(orderId)).getData());
 			List<Order> orderList = memberService.findOrder(phoneNumber, Integer.valueOf(orderId)).getData();
+			System.out.println("searchOrderList: " + orderList);
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success(orderList)));
 		}
 	}
