@@ -18,6 +18,7 @@ import life4fun.dto.RequestResult;
 import life4fun.dto.ServiceResult;
 import life4fun.entity.Member;
 import life4fun.entity.Order;
+import life4fun.entity.OrderDetails;
 import life4fun.service.MemberService;
 import life4fun.service.StreetNameService;
 import life4fun.service.impl.MemberServiceImpl;
@@ -199,10 +200,18 @@ public class MemberServlet extends HttpServlet {
 	
 	public void showOrderDetails (HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Order> order = (List<Order>) request.getSession().getAttribute("orderItem");
-		request.setAttribute("orderItem", order);
-		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-		request.getRequestDispatcher(JSP_SOURCE + "orderDetails.jsp").forward(request, response);
+		Member sessionMember = (Member)request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
+		if(StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
+			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
+			return;
+		}else {
+			List<Order> order = (List<Order>) request.getSession().getAttribute("orderItem");
+			List<OrderDetails> orderDetails = (List<OrderDetails>) request.getSession().getAttribute("orderDetailsItem");
+			request.setAttribute("orderItem", order);
+			request.setAttribute("orderDetailsItem", orderDetails);
+			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+			request.getRequestDispatcher(JSP_SOURCE + "orderDetails.jsp").forward(request, response);
+		}
 	}
 	
 	public void findOrderDetails(HttpServletRequest request, HttpServletResponse response)
@@ -221,8 +230,11 @@ public class MemberServlet extends HttpServlet {
 			return;
 		}else {
 			List<Order> order = memberService.findOrderToDetails(phoneNumber, Integer.valueOf(orderId)).getData();
-			System.out.println(order);
+			List<OrderDetails> orderDetails = memberService.findOrderetails(Integer.valueOf(orderId)).getData();
+			System.out.println("order:"+order);
+			System.out.println("orderDetails:"+orderDetails);
 			request.getSession().setAttribute("orderItem", order);
+			request.getSession().setAttribute("orderDetailsItem", orderDetails);
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
 		}
 		

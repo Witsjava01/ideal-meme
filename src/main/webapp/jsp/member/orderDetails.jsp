@@ -515,6 +515,45 @@
 								</div>
 							</div>
 							<div class="container">
+								<h1 class=" heading page-title__title" style="margin-bottom: 30px">產品資訊</h1>
+								<div class="container relative">
+									<div class="table-wrap ">
+										<table class="table">
+											<thead>
+												<tr>
+													<th class="">產品名稱</th>
+													<th class="">顏色</th>
+													<th class="">尺寸</th>
+													<th class="">單價</th>
+													<th class="">數量</th>
+												</tr>
+											</thead>
+											<tbody id="order_tbody">
+												<c:forEach var="orderDetails" items="${orderDetailsItem}">
+													<tr class="orderItem">
+														<td>
+															<p class="productName">${orderDetails.productName}</p>
+														</td>
+														<td>
+															<p class="productColor">${orderDetails.productColor}</p>
+														</td>
+														<td>
+															<p class="productSize">${orderDetails.productSize}</p>
+														</td>
+														<td>
+															<p class="price">${orderDetails.price}</p>
+														</td>
+														<td>
+															<p class="quantity">${orderDetails.quantity}</p>
+														</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="container">
 								<h1 class=" heading page-title__title" style="margin-bottom: 30px">收件人資訊</h1>
 								<div class="container relative">
 									<div class="table-wrap ">
@@ -584,7 +623,8 @@
 									href="${webApplicationPath}/MemberServlet?method=member">個人資料</a></li>
 								<li><a
 									href="${webApplicationPath}/MemberServlet?method=password">修改密碼</a></li>
-								<li style="color: orange">訂單查詢</li>
+								<li style="color: orange"><a
+									href="${webApplicationPath}/MemberServlet?method=order">訂單查詢</li>
 							</ul>
 						</div>
 						<div id="signOut">

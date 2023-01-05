@@ -84,7 +84,7 @@ $(document).ready(function() {
 				})
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				alert("失敗" + searchData);
+				alert("失敗");
 				/*弹出jqXHR对象的信息*/
 				console.log(jqXHR.responseText);
 				console.log(jqXHR.status);

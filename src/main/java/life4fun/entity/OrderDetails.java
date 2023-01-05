@@ -28,7 +28,7 @@ public class OrderDetails {
 	@Column(name="product_color")
 	private String productColor;
 	@Column(name="product_size")
-	private Integer productSize;
+	private String productSize;
 	@Column(name="price")
 	private Double price;
 	@Column(name="quantity")

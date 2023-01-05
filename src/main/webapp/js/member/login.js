@@ -30,7 +30,6 @@ $(document).ready(function() {
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
 					alert("失敗");
-					console.log("response:" + response);
 					/*弹出jqXHR对象的信息*/
 					console.log(jqXHR.responseText);
 					console.log(jqXHR.status);
