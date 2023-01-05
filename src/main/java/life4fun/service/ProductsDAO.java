@@ -15,7 +15,7 @@ import life4fun.exception.VGBException;
 
 class ProductsDAO {
 
-	private static final String SELECT_ALL_PRODUCTS = "SELECT * FROM product order by product_id desc";
+	private static final String SELECT_ALL_PRODUCTS = "SELECT * FROM product ";
 
 	List<Product> selectAllProducts() throws VGBException {
 		List<Product> list = new ArrayList<Product>();

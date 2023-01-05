@@ -49,6 +49,15 @@ public class ProductServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
+		case "getNewArrProducts":
+			try {
+				getNewArrProducts(request, response);
+			} catch (ServletException | IOException | VGBException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			
 		
 		
 		}
