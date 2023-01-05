@@ -19,16 +19,16 @@ import lombok.ToString;
 public class OrderDetails {
 	@Id
 	@Column(name="order_id")
-	private Integer order_id;
+	private Integer orderId;
 	@Id
 	@Column(name="product_id")
-	private Integer product_id;
+	private Integer productId;
 	@Column(name="product_name")
-	private String product_name;
+	private String productName;
 	@Column(name="product_color")
-	private String product_color;
+	private String productColor;
 	@Column(name="product_size")
-	private Integer product_size;
+	private Integer productSize;
 	@Column(name="price")
 	private Double price;
 	@Column(name="quantity")
