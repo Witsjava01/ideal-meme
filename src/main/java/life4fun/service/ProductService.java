@@ -15,6 +15,14 @@ public class ProductService {
 		return list;
 	}
 	
+	public List<Product> getNewArrProducts() throws VGBException{
+		List<Product> list = dao.selectNewArrProducts();
+		System.out.println("service->getNewArrProducts");
+		return list;
+	}
+	
+	
+	
 	public List<Product> getProductsByName(String keyword) throws VGBException{
 		if(keyword==null) {
 			throw new IllegalArgumentException("用關鍵字查詢產品時必須輸入一個字以上的條件");

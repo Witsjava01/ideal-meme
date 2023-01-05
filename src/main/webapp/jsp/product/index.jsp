@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="${webApplicationPath}/static/css/color.css">
 
   <!-- Favicons -->
-  <script src="${webApplicationPath}/js/product/product.js"></script> 
+  <script src="${webApplicationPath}/js/product/index.js"></script> 
   
 <script type="text/javascript"
 	src="${webApplicationPath}/static/js/jquery.min.js"></script>
@@ -525,201 +525,9 @@
           </div>
         </div>
 
-        <div class="row row-8">
+        <div class="row row-8" id="newArrivalsProduct">
 
-          <div class="col-lg-2 col-sm-4 product">
-            <div class="product__img-holder">
-              <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="${webApplicationPath}/static/picture/product_1.jpg" alt="" class="product__img">
-                <img src="${webApplicationPath}/static/picture/product_back_1.jpg" alt="" class="product__img-back">
-              </a>
-              <div class="product__actions">
-                <a href="quickview.html" class="product__quickview">
-                  <i class="ui-eye"></i>
-                  <span>Quick View</span>
-                </a>
-                <a href="#" class="product__add-to-wishlist">
-                  <i class="ui-heart"></i>
-                  <span>Wishlist</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="product__details">
-              <h3 class="product__title">
-                <a href="single-product.html">Joeby Tailored Trouser</a>
-              </h3>
-            </div>
-
-            <span class="product__price">
-              <ins>
-                <span class="amount">$17.99</span>
-              </ins>
-            </span>
-          </div> <!-- end product -->
-
-          <div class="col-lg-2 col-sm-4 product">
-            <div class="product__img-holder">
-              <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="${webApplicationPath}/static/picture/product_9.jpg" alt="" class="product__img">
-                <img src="${webApplicationPath}/static/picture/product_back_9.jpg" alt="" class="product__img-back">
-              </a>
-              <div class="product__actions">
-                <a href="quickview.html" class="product__quickview">
-                  <i class="ui-eye"></i>
-                  <span>Quick View</span>
-                </a>
-                <a href="#" class="product__add-to-wishlist">
-                  <i class="ui-heart"></i>
-                  <span>Wishlist</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="product__details">
-              <h3 class="product__title">
-                <a href="single-product.html">Men’s Belt</a>
-              </h3>
-            </div>
-
-            <span class="product__price">
-              <ins>
-                <span class="amount">$9.90</span>
-              </ins>
-            </span>
-          </div> <!-- end product -->
-
-          <div class="col-lg-2 col-sm-4 product">
-            <div class="product__img-holder">
-              <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="${webApplicationPath}/static/picture/product_10.jpg" alt="" class="product__img">
-                <img src="${webApplicationPath}/static/picture/product_back_10.jpg" alt="" class="product__img-back">
-              </a>
-              <div class="product__actions">
-                <a href="quickview.html" class="product__quickview">
-                  <i class="ui-eye"></i>
-                  <span>Quick View</span>
-                </a>
-                <a href="#" class="product__add-to-wishlist">
-                  <i class="ui-heart"></i>
-                  <span>Wishlist</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="product__details">
-              <h3 class="product__title">
-                <a href="single-product.html">Sport Hi Adidas</a>
-              </h3>
-            </div>
-
-            <span class="product__price">
-              <ins>
-                <span class="amount">$29.00</span>
-              </ins>
-            </span>
-          </div> <!-- end product -->
-
-          <div class="col-lg-2 col-sm-4 product">
-            <div class="product__img-holder">
-              <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="${webApplicationPath}/static/picture/product_2.jpg" alt="" class="product__img">
-                <img src="${webApplicationPath}/static/picture/product_back_2.jpg" alt="" class="product__img-back">
-              </a>
-              <div class="product__actions">
-                <a href="quickview.html" class="product__quickview">
-                  <i class="ui-eye"></i>
-                  <span>Quick View</span>
-                </a>
-                <a href="#" class="product__add-to-wishlist">
-                  <i class="ui-heart"></i>
-                  <span>Wishlist</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="product__details">
-              <h3 class="product__title">
-                <a href="single-product.html">Denim Hooded</a>
-              </h3>
-            </div>
-
-            <span class="product__price">
-              <ins>
-                <span class="amount">$30.00</span>
-              </ins>
-            </span>
-          </div> <!-- end product -->
-
-          <div class="col-lg-2 col-sm-4 product">
-            <div class="product__img-holder">
-              <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="${webApplicationPath}/static/picture/product_3.jpg" alt="" class="product__img">
-                <img src="${webApplicationPath}/static/picture/product_back_3.jpg" alt="" class="product__img-back">
-              </a>
-              <div class="product__actions">
-                <a href="quickview.html" class="product__quickview">
-                  <i class="ui-eye"></i>
-                  <span>Quick View</span>
-                </a>
-                <a href="#" class="product__add-to-wishlist">
-                  <i class="ui-heart"></i>
-                  <span>Wishlist</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="product__details">
-              <h3 class="product__title">
-                <a href="single-product.html">Mint Maxi Dress</a>
-              </h3>
-            </div>
-
-            <span class="product__price">
-              <ins>
-                <span class="amount">$17.99</span>
-              </ins>
-              <del>
-                <span>$30.00</span>
-              </del>
-            </span>
-          </div> <!-- end product -->
-
-          <div class="col-lg-2 col-sm-4 product">
-            <div class="product__img-holder">
-              <a href="single-product.html" class="product__link" aria-label="Product">
-                <img src="${webApplicationPath}/static/picture/product_4.jpg" alt="" class="product__img">
-                <img src="${webApplicationPath}/static/picture/product_back_4.jpg" alt="" class="product__img-back">
-              </a>
-              <div class="product__actions">
-                <a href="quickview.html" class="product__quickview">
-                  <i class="ui-eye"></i>
-                  <span>Quick View</span>
-                </a>
-                <a href="#" class="product__add-to-wishlist">
-                  <i class="ui-heart"></i>
-                  <span>Wishlist</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="product__details">
-              <h3 class="product__title">
-                <a href="single-product.html">White Flounce Dress</a>
-              </h3>
-            </div>
-
-            <span class="product__price">
-              <ins>
-                <span class="amount">$15.99</span>
-              </ins>
-              <del>
-                <span>$27.00</span>
-              </del>
-            </span>
-          </div> <!-- end product -->
-    
-        </div> <!-- end row -->
+        
       </div> <!-- end container -->
     </section> <!-- end new arrivals -->
 
@@ -819,7 +627,6 @@
   </main> <!-- end main-wrapper -->
 
 <script >
-
 </script>
 
 

@@ -68,8 +68,20 @@ public class ProductServlet extends HttpServlet {
 
 		request.setAttribute("product",list);
 		response.getWriter().append(JsonUtils.getGson().toJson(list));
-//		System.out.println("JSP_SOURCE"+JSP_SOURCE);
-//		request.getRequestDispatcher(JSP_SOURCE+"index.jsp").forward(request, response);
+
+}
+	public void getNewArrProducts(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, VGBException {
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		System.out.println("servlet->getNewArrProducts");
+
+		ProductService service = new ProductService();
+		List<Product> listArr = null;
+		
+			listArr = service.getNewArrProducts();
+
+		request.setAttribute("product",listArr);
+		response.getWriter().append(JsonUtils.getGson().toJson(listArr));
+
 }
 	
 

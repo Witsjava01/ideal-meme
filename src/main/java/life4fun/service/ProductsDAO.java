@@ -15,7 +15,7 @@ import life4fun.exception.VGBException;
 
 class ProductsDAO {
 
-	private static final String SELECT_ALL_PRODUCTS = "SELECT * FROM product";
+	private static final String SELECT_ALL_PRODUCTS = "SELECT * FROM product order by product_id desc";
 
 	List<Product> selectAllProducts() throws VGBException {
 		List<Product> list = new ArrayList<Product>();
@@ -177,6 +177,50 @@ class ProductsDAO {
 		return list;
 	}
 
+	
+	private static final String SELECTNEWARRIVLSPRODUCTS = "SELECT * FROM life4fun.product order by product_id desc limit 6";
+
+	
+	List<Product> selectNewArrProducts() throws VGBException {
+		List<Product> list = new ArrayList<Product>();
+		System.out.println("查詢最新六件商品 index.js");
+		try (Connection connection = MySQLConnection.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SELECTNEWARRIVLSPRODUCTS);) {
+			try (ResultSet rs = pstmt.executeQuery();) {
+
+				while (rs.next()) {
+					Product p = new Product();
+
+
+					p.setProductId(rs.getInt("product_id"));
+					p.setPhotoUrl1(rs.getString("photo_url_1"));
+					p.setProductName(rs.getString("product_name"));
+					p.setBrand(rs.getString("brand"));
+					p.setPrice(rs.getDouble("price"));
+					p.setSize(rs.getString("size"));
+					p.setColor(rs.getString("color"));
+					p.setStock(rs.getInt("stock"));
+					p.setDescription(rs.getString("description"));
+					p.setPhotoUrl2(rs.getString("photo_url_2"));
+					p.setPhotoUrl3(rs.getString("photo_url_3"));
+					p.setPhotoUrl4(rs.getString("photo_url_4"));
+					p.setOnshelf(rs.getString("Onshelf"));
+					p.setProductCatalog(rs.getString("product_catalog"));
+
+					System.out.println("product_id="+rs.getString("product_id")+"product_name="+rs.getString("product_name"));
+
+					list.add(p);
+				}
+			}
+		} catch (SQLException e) {
+			throw new VGBException("資料庫查詢有誤", e);
+		}
+		return list;
+	}
+
+	
+	
+	
 //	private static final String select_Product_By_Id = "SELECT id, name, unit_price, stock, photo_url,"
 //			+ "		description, launch_date, category, discount"
 //			+ " FROM products" 
