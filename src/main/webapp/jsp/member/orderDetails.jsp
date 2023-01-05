@@ -11,14 +11,14 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 
-<title>Live4Fun | 會員中心</title>
+<title>Live4Fun | 會員訂單明細</title>
 
 <script>
 	var webApplicationPath = "${webApplicationPath}";
 </script>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<script src="${webApplicationPath}/${JS_SOURCE}/order.js"></script>
+<script src="${webApplicationPath}/${JS_SOURCE}/orderDetails.js"></script>
 <link rel="stylesheet" href="${STATIC_SOURCE}/css/css.css">
 
 <link rel="stylesheet"
@@ -238,8 +238,9 @@
 						<div class="top-bar__right">
 
 							<!-- Sign In -->
-							<a href="login.html" class="top-bar__item top-bar__sign-in" id="top-bar__sign-in">
-							<i class="ui-user"></i><a href="login.html" id="SignIn_A">Sign In</a></a>
+							<a href="login.html" class="top-bar__item top-bar__sign-in"
+								id="top-bar__sign-in"> <i class="ui-user"></i><a
+								href="login.html" id="SignIn_A">Sign In</a></a>
 
 							<!-- Wishlist -->
 							<a href="#" class="top-bar__item"><i class="ui-heart"></i></a>
@@ -460,7 +461,7 @@
 		<!-- Catalog -->
 		<section class="section-wrap pt-60 pb-30 catalog">
 			<div class="container">
-				
+
 				<!-- Breadcrumbs -->
 
 				<div class="row">
@@ -469,71 +470,102 @@
 						<!-- Filter -->
 						<section class="">
 							<div class="container">
-								<h1 class=" heading page-title__title" style="margin-bottom:30px">訂單查詢</h1>
-								
+								<h1 class=" heading page-title__title" style="margin-bottom: 30px">訂單明細</h1>
 								<div class="container relative">
-									<div class="container text-center">
-										<div class="row align-items-start">
-											<div class="col col-5">
-												<input type="number" id="order_id" name="order_id" size="10" maxlength="10" placeholder="請輸入訂單編號"
-												onkeypress="return event.charCode>=48 && event.charCode<=57">
-											</div>
-											<div class="col col-3">
-												<input type="submit" id="searchButton" name="searchButton"
-													value="查詢" class="btn btn-md btn-dark btn-button" >
-											</div>
-										</div>
+									<div class="table-wrap ">
+										<table class="table">
+											<thead>
+												<tr>
+													<th class="">訂單編號</th>
+													<th class="">訂購日期及時間</th>
+													<th class="">訂單狀態</th>
+													<th class="">訂單總金額</th>
+													<th class="">取貨方式</th>
+													<th class="">付款方式</th>
+												</tr>
+											</thead>
+											<tbody id="order_tbody">
+												<c:forEach var="order" items="${orderItem}">
+													<tr class="orderItem">
+														<td class="product-thumbnail">
+															<p class="orderId">${order.orderId}</p>
+														</td>
+														<td>
+															<p class="createdTime">
+																<fmt:formatDate value="${order.createdTime}" pattern="yyyy-MM-dd HH:mm:ss" />
+															</p>
+														</td>
+														<td class="orderStatus">
+															<p>${order.orderStatus}</p>
+														</td>
+														<td class="orderAmount">
+															<p>$${order.orderAmount}</p>
+														</td>
+														<td class="shippingType">
+															<p>${order.shippingType}</p>
+														</td>
+														<td class="paymentType">
+															<p>${order.paymentType}</p>
+														</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
 									</div>
-							        <div class="table-wrap ">
-							          <table class="table">
-							            <thead>
-							              <tr>
-							                <th class="">訂單編號</th>
-							                <th class="">訂購日期及時間</th>
-							                <th class="">訂單狀態</th>
-							                <th class="">訂單總金額</th>
-							                <th class="">取貨方式</th>
-							                <th class="">付款方式</th>
-							              </tr>
-							            </thead>
-							            <tbody id="order_tbody">
-							            <c:forEach var="order" items="${orderList}">
-							              <tr class="cart_item">
-							                <td class="product-thumbnail orderId">
-							                  <a href="#">
-							                    <p>${order.orderId}</p>
-							                  </a>
-							                </td>
-							                <td class="createdTime">
-							                <p><fmt:formatDate value="${order.createdTime}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
-							                  
-							                </td>
-							                <td class="orderStatus">
-							                   <p>${order.orderStatus}</p>
-							                </td>
-							                <td class="orderAmount">
-							                  <p>$${order.orderAmount}</p>
-							                </td>
-							                <td class="shippingType">
-							                  <p>${order.shippingType}</p>
-							                </td>
-							                <td class="paymentType">
-							                  <p>${order.paymentType}</p>
-							                </td>
-							              </tr>
-							              </c:forEach>
-							            </tbody>
-							          </table>
-							        </div>
-									<!-- end col shipping calculator -->
 								</div>
-								<!-- end container -->
+							</div>
+							<div class="container">
+								<h1 class=" heading page-title__title" style="margin-bottom: 30px">收件人資訊</h1>
+								<div class="container relative">
+									<div class="table-wrap ">
+										<table class="table">
+											<thead>
+												<tr>
+													<th class="">姓名</th>
+													<th class="">電話</th>
+													<th class="">郵遞區號</th>
+													<th class="">縣/市</th>
+													<th class="">區域</th>
+													<th class="">路/街</th>
+													<th class="">地址</th>
+												</tr>
+											</thead>
+											<tbody id="order_tbody">
+												<c:forEach var="order" items="${orderItem}">
+													<tr class="orderItem">
+														<td>
+															<p class="recipientName">${order.recipientName}</p>
+														</td>
+														<td>
+															<p class="recipientPhoneNumber">${order.recipientPhoneNumber}</p>
+														</td>
+														<td>
+															<p class="recipientPostalCode">${order.recipientPostalCode}</p>
+														</td>
+														<td>
+															<p class="recipientCity">${order.recipientCity}</p>
+														</td>
+														<td>
+															<p class="recipientDistrict">${order.recipientDistrict}</p>
+														</td>
+														<td>
+															<p class="recipientRoad">${order.recipientRoad}</p>
+														</td>
+														<td>
+															<p class="recipientAddress">${order.recipientAddress}</p>
+														</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
 						</section>
 
 						<div class="row row-6">
 
-							<div class="col-md col-sm-6">
-							</div>
+							<div class="col-md col-sm-6"></div>
 						</div>
 						<!-- end row -->
 					</div>
@@ -544,21 +576,25 @@
 					<aside class="col-lg-3 sidebar left-sidebar">
 
 						<!-- member -->
-						<div class="widget widget_categories widget--bottom-line" id="memberList">
+						<div class="widget widget_categories widget--bottom-line"
+							id="memberList">
 							<h4 class="widget-title">會員中心</h4>
 							<ul>
-								<li><a href="${webApplicationPath}/MemberServlet?method=member">個人資料</a></li>
-								<li><a href="${webApplicationPath}/MemberServlet?method=password">修改密碼</a></li>
-								<li style="color:orange">訂單查詢</li>
+								<li><a
+									href="${webApplicationPath}/MemberServlet?method=member">個人資料</a></li>
+								<li><a
+									href="${webApplicationPath}/MemberServlet?method=password">修改密碼</a></li>
+								<li style="color: orange">訂單查詢</li>
 							</ul>
 						</div>
 						<div id="signOut">
-						<input type="submit" id="signOutButton" name="signOutButton" value="登出" class="btn btn-md btn-dark btn-button">
+							<input type="submit" id="signOutButton" name="signOutButton"
+								value="登出" class="btn btn-md btn-dark btn-button">
 						</div>
-						
+
 					</aside>
 					<!-- end sidebar -->
-					
+
 				</div>
 				<!-- end row -->
 			</div>
@@ -671,6 +707,6 @@
 	<!-- end main-wrapper -->
 </body>
 <script>
-
+	
 </script>
 </html>

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -87,8 +86,11 @@ public class MemberServlet extends HttpServlet {
 		case "orderSearch":
 			orderSearch(request, response);
 			break;
-		case "orderDetails":
-			orderDetails(request, response);
+		case "findOrderDetails":
+			findOrderDetails(request, response);
+			break;
+		case "showOrderDetails":
+			showOrderDetails(request, response);
 			break;
 		case "login":
 		default:
@@ -194,10 +196,36 @@ public class MemberServlet extends HttpServlet {
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success(orderList)));
 		}
 	}
-
-	public void orderDetails(HttpServletRequest request, HttpServletResponse response)
+	
+	public void showOrderDetails (HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		List<Order> order = (List<Order>) request.getSession().getAttribute("orderItem");
+		request.setAttribute("orderItem", order);
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		request.getRequestDispatcher(JSP_SOURCE + "orderDetails.jsp").forward(request, response);
+	}
+	
+	public void findOrderDetails(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		Member sessionMember = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
+		String phoneNumber = sessionMember.getPhoneNumber();
+		if (StringUtils.isNullOrEmpty(phoneNumber)) {
+			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
+			return;
+		}
+		String orderId = request.getParameter("orderId");
+		System.out.println(orderId);
+		if(StringUtils.isNullOrEmpty(orderId)) {
+			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("訂單編號為空")));
+			return;
+		}else {
+			List<Order> order = memberService.findOrderToDetails(phoneNumber, Integer.valueOf(orderId)).getData();
+			System.out.println(order);
+			request.getSession().setAttribute("orderItem", order);
+			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
+		}
+		
 	}
 
 	public void addMember(HttpServletRequest request, HttpServletResponse response)

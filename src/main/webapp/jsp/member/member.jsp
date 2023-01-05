@@ -10,7 +10,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 
-<title>Live4Fun | 會員中心</title>
+<title>Live4Fun | 會員編輯個人資料</title>
 
 <script>
 	var webApplicationPath = "${webApplicationPath}";

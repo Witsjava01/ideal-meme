@@ -210,4 +210,27 @@ public class MemberServiceImpl implements MemberService {
 		ServiceResult<List<Order>> result = new ServiceResult<>(msg, orderList);
 		return result;
 	}
+	
+	@Override
+	public ServiceResult<List<Order>> findOrderToDetails(String phoneNumber,Integer OrderId) {
+		String msg ="";
+		// 獲取資料庫連接對象
+		var conn = JdbcUtils.getConnection();
+		List<Order> order = null;
+		try {
+			// 事務開始
+			order = orderDao.findOrderToDetails(conn, phoneNumber,OrderId);
+			// 事務結束，提交事務
+		} catch (Exception e) { // SQL例外處理
+			// 取得錯誤訊息
+			e.printStackTrace();
+			// 回滾事務
+			throw new ServiceException(e);
+		} finally {
+			// 釋放資源<
+			JdbcUtils.release(conn);
+		}
+		ServiceResult<List<Order>> result = new ServiceResult<>(msg, order);
+		return result;
+	}
 }

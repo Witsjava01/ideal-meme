@@ -13,4 +13,6 @@ public interface OrderDao<T> {
 
 	public List<Order> findOrderFromSearch(Connection conn, String phoneNumber, Integer orderId) throws SQLException;
 
+	public List<Order> findOrderToDetails(Connection conn, String phoneNumber, Integer orderId) throws SQLException;
+
 }

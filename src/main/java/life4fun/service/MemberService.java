@@ -22,6 +22,8 @@ public interface MemberService {
 
 	public ServiceResult<List<Order>> findOrder(String phoneNumber, Integer OrderId);
 
+	public ServiceResult<List<Order>> findOrderToDetails(String phoneNumber, Integer OrderId);
+
 }
 
 

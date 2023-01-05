@@ -4,14 +4,13 @@ import life4fun.dto.KeyValue;
 
 
 public enum LoginFilterValidate {
-	LOGIN_MEMBER("/LoginServlet", new KeyValue<String, String>("method", "member")),
-	LOGIN_PASSWORD("/LoginServlet", new KeyValue<String, String>("method", "password")),
-	LOGIN_UPDATEMEMBER("/LoginServlet", new KeyValue<String, String>("method", "updateMember")),
-	LOGIN_UPDATEPASSWORD("/LoginServlet", new KeyValue<String, String>("method", "updatePassword")),
-	LOGIN_ORDER("/LoginServlet", new KeyValue<String, String>("method", "order")),
-	LOGIN_ORDERDETAILS("/LoginServlet", new KeyValue<String, String>("method", "orderDetails")),
-	LOGIN_ORDERSEARCH("/LoginServlet", new KeyValue<String, String>("method", "orderSearch")),
-	TEST_TEST("/TestServlet", new KeyValue<String, String>("method1", "test"))
+	LOGIN_MEMBER("/MemberServlet", new KeyValue<String, String>("method", "member")),
+	LOGIN_PASSWORD("/MemberServlet", new KeyValue<String, String>("method", "password")),
+	LOGIN_UPDATEMEMBER("/MemberServlet", new KeyValue<String, String>("method", "updateMember")),
+	LOGIN_UPDATEPASSWORD("/MemberServlet", new KeyValue<String, String>("method", "updatePassword")),
+	LOGIN_ORDER("/MemberServlet", new KeyValue<String, String>("method", "order")),
+	LOGIN_ORDERDETAILS("/MemberServlet", new KeyValue<String, String>("method", "orderDetails")),
+	LOGIN_ORDERSEARCH("/MemberServlet", new KeyValue<String, String>("method", "orderSearch"))
 	;
 	
 	private String path;
