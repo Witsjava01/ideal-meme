@@ -8,10 +8,10 @@ public enum LoginFilterValidate {
 	LOGIN_PASSWORD("/MemberServlet", new KeyValue<String, String>("method", "password")),
 	LOGIN_UPDATEMEMBER("/MemberServlet", new KeyValue<String, String>("method", "updateMember")),
 	LOGIN_UPDATEPASSWORD("/MemberServlet", new KeyValue<String, String>("method", "updatePassword")),
-	LOGIN_ORDER("/MemberServlet", new KeyValue<String, String>("method", "order")),
-	LOGIN_FINDORDERDETAILS("/MemberServlet", new KeyValue<String, String>("method", "findOrderDetails")),
-	LOGIN_SHOWORDERDETAILS("/MemberServlet", new KeyValue<String, String>("method", "showOrderDetails")),
-	LOGIN_ORDERSEARCH("/MemberServlet", new KeyValue<String, String>("method", "orderSearch"))
+	LOGIN_ORDER("/OrderServlet", new KeyValue<String, String>("method", "order")),
+	LOGIN_FINDORDERDETAILS("/OrderServlet", new KeyValue<String, String>("method", "findOrderDetails")),
+	LOGIN_SHOWORDERDETAILS("/OrderServlet", new KeyValue<String, String>("method", "showOrderDetails")),
+	LOGIN_ORDERSEARCH("/OrderServlet", new KeyValue<String, String>("method", "orderSearch"))
 	;
 	
 	private String path;

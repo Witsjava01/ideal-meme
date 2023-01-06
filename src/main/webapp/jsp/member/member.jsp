@@ -600,7 +600,7 @@
 							<ul>
 								<li style="color:orange">個人資料</li>
 								<li><a href="${webApplicationPath}/MemberServlet?method=password">修改密碼</a></li>
-								<li><a href="${webApplicationPath}/MemberServlet?method=order">訂單查詢</a></li>
+								<li><a href="${webApplicationPath}/OrderServlet?method=order">訂單查詢</a></li>
 							</ul>
 						</div>
 						<div id="signOut">

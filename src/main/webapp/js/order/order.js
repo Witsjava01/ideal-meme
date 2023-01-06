@@ -27,7 +27,7 @@ $(document).ready(function() {
 		searchData[$("#order_id").attr('id')] = $("#order_id").val();
 		console.log(searchData);
 		$.ajax({
-			url: webApplicationPath + "/MemberServlet?method=orderSearch",
+			url: webApplicationPath + "/OrderServlet?method=orderSearch",
 			type: "POST",
 			data: searchData,
 			dataType: "json",
@@ -82,14 +82,14 @@ const bindOrderIdClick = function(){
 		orderIdData["orderId"] = $(this).text().replace(/\s+/g, '');
 		console.log(orderIdData)
 		$.ajax({
-			url: webApplicationPath + "/MemberServlet?method=findOrderDetails",
+			url: webApplicationPath + "/OrderServlet?method=findOrderDetails",
 			type: "POST",
 			data: orderIdData,
 			dataType: "json",
 			contentType: "application/x-www-form-urlencoded;charset=utf-8",
 			success: function() {
 				console.log("成功")
-				window.location.assign(webApplicationPath + "/MemberServlet?method=showOrderDetails");
+				window.location.assign(webApplicationPath + "/OrderServlet?method=showOrderDetails");
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
 				alert("失敗");
