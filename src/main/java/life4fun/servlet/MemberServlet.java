@@ -122,9 +122,6 @@ public class MemberServlet extends HttpServlet {
 			// 500
 			System.out.println(e.getMessage());
 		}
-		
-		
-		
 	}
 
 	public void updatePassword(HttpServletRequest request, HttpServletResponse response)

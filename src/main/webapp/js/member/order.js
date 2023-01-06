@@ -52,6 +52,7 @@ $(document).ready(function() {
 
 						rootTag.append(temp);
 					});
+					bindOrderIdClick();
 				} else {
 					alert(response.msg);
 				}
@@ -72,6 +73,10 @@ $(document).ready(function() {
 			}
 		});
 	})
+	bindOrderIdClick();
+});
+
+const bindOrderIdClick = function(){
 	$('.orderId').click(function() {
 		var orderIdData = {};
 		orderIdData["orderId"] = $(this).text().replace(/\s+/g, '');
@@ -98,6 +103,5 @@ $(document).ready(function() {
 				console.log(errorThrown);
 			}
 		});
-	
 	});
-});
+}
