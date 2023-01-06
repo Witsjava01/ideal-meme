@@ -105,53 +105,110 @@ public class MemberServlet extends HttpServlet {
 	}
 
 	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().removeAttribute(ConstantUtils.LOGIN_MEMBER);
+		
+		request.getSession().removeAttribute(ConstantUtils.LOGIN_MEMBER_ID);
 		request.getRequestDispatcher(JSP_SOURCE + "login.jsp").forward(request, response);
 	}
 
 	public void password(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Member member = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
-		request.setAttribute("password", member.getPassword());
-		request.setAttribute("phoneNumber", member.getPhoneNumber());
-		request.getRequestDispatcher(JSP_SOURCE + "password.jsp").forward(request, response);
+		Integer memberId = Integer.valueOf((String) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER_ID));
+		try {
+			Member member = memberService.findMemberById(memberId).getData();
+			request.setAttribute("password", member.getPassword());
+			request.setAttribute("phoneNumber", member.getPhoneNumber());
+			request.getRequestDispatcher(JSP_SOURCE + "password.jsp").forward(request, response);
+		} catch (Exception e) {
+			// 500
+			System.out.println(e.getMessage());
+		}
+		
+		
+		
 	}
 
 	public void updatePassword(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Member member = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
-		String sessionPassword = member.getPassword();
-		String password = request.getParameter("password");
-		System.out.println("sessionPassword:" + sessionPassword);
-		if (sessionPassword.equals(password)) {
-			String newPassword = request.getParameter("newPassword");
-			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-			if (newPassword.equals(password)) {
-				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("新密碼與舊密碼不可相同!")));
-				return;
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		Integer memberId = Integer.valueOf((String) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER_ID));
+		try {
+			Member member = memberService.findMemberById(memberId).getData();
+			
+			String sessionPassword = member.getPassword();
+			String password = request.getParameter("password");
+			if (sessionPassword.equals(password)) {
+				String newPassword = request.getParameter("newPassword");
+				if (newPassword.equals(password)) {
+					response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("新密碼與舊密碼不可相同!")));
+					return;
+				} else {
+					memberService.updatePassword(member.getPhoneNumber(), newPassword);
+					member.setPassword(newPassword);
+					response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
+				}
 			} else {
-				System.out.println("phoneNumber:" + member.getPhoneNumber() + ", newPassword:" + newPassword);
-				memberService.updatePassword(member.getPhoneNumber(), newPassword);
-				member.setPassword(newPassword);
-				request.getSession().setAttribute(ConstantUtils.LOGIN_MEMBER, member);
-				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
+				response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("舊密碼錯誤，請確認後重新輸入!")));
 			}
-		} else {
-			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("舊密碼錯誤，請確認後重新輸入!")));
+		} catch (Exception e) {
+			// 500
+			System.out.println(e.getMessage());
 		}
+		
 	}
 
 	public void member(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("isUpdate", true);
 		request.setAttribute("streetNameList", streetNameService.findAllStreetName().getData());
+		Integer memberId = Integer.valueOf((String) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER_ID));
+		try {
+			Member sessionMember = memberService.findMemberById(memberId).getData();
+			
+			request.setAttribute("member", sessionMember);
 
-		Member member = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
-		System.out.println(member);
-		request.setAttribute("member", member);
+			request.setAttribute("account", streetNameService.findAllStreetName().getData());
+			request.getRequestDispatcher(JSP_SOURCE + "member.jsp").forward(request, response);
+		} catch (Exception e) {
+			// 500
+			System.out.println(e.getMessage());
+		}
+		
+	}
 
-		request.setAttribute("account", streetNameService.findAllStreetName().getData());
-		request.getRequestDispatcher(JSP_SOURCE + "member.jsp").forward(request, response);
+	protected void updateMember(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		Integer memberId = Integer.valueOf((String) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER_ID));
+		if (memberId == null) {
+			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
+			return;
+		}
+		Member member;
+		try {
+			member = getMember(request);
+		} catch (RuntimeException e) {
+			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail(e.getMessage())));
+			return;
+		}
+		try {
+			Member sessionMember = memberService.findMemberById(memberId).getData();
+			Boolean checkMember = memberService.checkMember(sessionMember.getPhoneNumber());
+			if (checkMember == false) {
+				memberService.updateMember(member);
+				ServiceResult<Member> queryResult = memberService.findMember(sessionMember.getPhoneNumber(),
+						sessionMember.getPassword());
+				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
+			} else {
+				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("此電話號碼已存在!")));
+			}
+		} catch (Exception e) {
+			// 500
+			System.out.println(e.getMessage());
+		}
+		
+		
+		
+		
 	}
 
 	public void register(HttpServletRequest request, HttpServletResponse response)
@@ -164,79 +221,101 @@ public class MemberServlet extends HttpServlet {
 	public void order(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-		Member sessionMember = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
-		String phoneNumber = sessionMember.getPhoneNumber();
-		if (StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
-			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
-			return;
-		} else {
-			System.out.println("findOrder: " + memberService.findOrder(phoneNumber).getData());
-			request.setAttribute("orderList", memberService.findOrder(phoneNumber).getData());
-			request.getRequestDispatcher(JSP_SOURCE + "order.jsp").forward(request, response);
+		Integer memberId = Integer.valueOf((String) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER_ID));
+		try {
+			Member sessionMember = memberService.findMemberById(memberId).getData();
+			String phoneNumber = sessionMember.getPhoneNumber();
+			if (StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
+				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
+				return;
+			} else {
+				request.setAttribute("orderList", memberService.findOrder(phoneNumber).getData());
+				request.getRequestDispatcher(JSP_SOURCE + "order.jsp").forward(request, response);
+			}
+		} catch (Exception e) {
+			// 500
+			System.out.println(e.getMessage());
 		}
+		
 	}
 
 	public void orderSearch(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-		Member sessionMember = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
-		String phoneNumber = sessionMember.getPhoneNumber();
-		if (StringUtils.isNullOrEmpty(phoneNumber)) {
-			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
-			return;
+		Integer memberId = Integer.valueOf((String) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER_ID));
+		try {
+			Member sessionMember = memberService.findMemberById(memberId).getData();
+			String phoneNumber = sessionMember.getPhoneNumber();
+			if (StringUtils.isNullOrEmpty(phoneNumber)) {
+				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
+				return;
+			}
+			//判斷orderId是否為空 為空=查全部 有值=+條件查詢
+			String orderId = request.getParameter("order_id");
+			if(orderId == "") {
+				List<Order> orderList = memberService.findOrder(phoneNumber).getData();
+				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success(orderList)));
+			}else {
+				List<Order> orderList = memberService.findOrder(phoneNumber, Integer.valueOf(orderId)).getData();
+				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success(orderList)));
+			}
+		} catch (Exception e) {
+			// 500
+			System.out.println(e.getMessage());
 		}
-		//判斷orderId是否為空 為空=查全部 有值=+條件查詢
-		String orderId = request.getParameter("order_id");
-		if(orderId == "") {
-			List<Order> orderList = memberService.findOrder(phoneNumber).getData();
-			System.out.println("findOrder: " + orderList);
-			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success(orderList)));
-		}else {
-			List<Order> orderList = memberService.findOrder(phoneNumber, Integer.valueOf(orderId)).getData();
-			System.out.println("searchOrderList: " + orderList);
-			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success(orderList)));
-		}
+		
 	}
 	
 	public void showOrderDetails (HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Member sessionMember = (Member)request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
-		if(StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
-			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
-			return;
-		}else {
-			List<Order> order = (List<Order>) request.getSession().getAttribute("orderItem");
-			List<OrderDetails> orderDetails = (List<OrderDetails>) request.getSession().getAttribute("orderDetailsItem");
-			request.setAttribute("orderItem", order);
-			request.setAttribute("orderDetailsItem", orderDetails);
-			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-			request.getRequestDispatcher(JSP_SOURCE + "orderDetails.jsp").forward(request, response);
+		Integer memberId = Integer.valueOf((String) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER_ID));
+		try {
+			Member sessionMember = memberService.findMemberById(memberId).getData();
+			if(StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
+				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
+				return;
+			}else {
+				List<Order> order = (List<Order>) request.getSession().getAttribute("orderItem");
+				List<OrderDetails> orderDetails = (List<OrderDetails>) request.getSession().getAttribute("orderDetailsItem");
+				request.setAttribute("orderItem", order);
+				request.setAttribute("orderDetailsItem", orderDetails);
+				response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+				request.getRequestDispatcher(JSP_SOURCE + "orderDetails.jsp").forward(request, response);
+			}
+		} catch (Exception e) {
+			// 500
+			System.out.println(e.getMessage());
 		}
+		
 	}
 	
 	public void findOrderDetails(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-		Member sessionMember = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
-		String phoneNumber = sessionMember.getPhoneNumber();
-		if (StringUtils.isNullOrEmpty(phoneNumber)) {
-			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
-			return;
+		Integer memberId = Integer.valueOf((String) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER_ID));
+		try {
+			Member sessionMember = memberService.findMemberById(memberId).getData();
+			String phoneNumber = sessionMember.getPhoneNumber();
+			if (StringUtils.isNullOrEmpty(phoneNumber)) {
+				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
+				return;
+			}
+			String orderId = request.getParameter("orderId");
+			if(StringUtils.isNullOrEmpty(orderId)) {
+				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("訂單編號為空")));
+				return;
+			}else {
+				List<Order> order = memberService.findOrderToDetails(phoneNumber, Integer.valueOf(orderId)).getData();
+				List<OrderDetails> orderDetails = memberService.findOrderetails(Integer.valueOf(orderId)).getData();
+				request.getSession().setAttribute("orderItem", order);
+				request.getSession().setAttribute("orderDetailsItem", orderDetails);
+				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
+			}
+		} catch (Exception e) {
+			// 500
+			System.out.println(e.getMessage());
 		}
-		String orderId = request.getParameter("orderId");
-		System.out.println(orderId);
-		if(StringUtils.isNullOrEmpty(orderId)) {
-			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("訂單編號為空")));
-			return;
-		}else {
-			List<Order> order = memberService.findOrderToDetails(phoneNumber, Integer.valueOf(orderId)).getData();
-			List<OrderDetails> orderDetails = memberService.findOrderetails(Integer.valueOf(orderId)).getData();
-			System.out.println("order:"+order);
-			System.out.println("orderDetails:"+orderDetails);
-			request.getSession().setAttribute("orderItem", order);
-			request.getSession().setAttribute("orderDetailsItem", orderDetails);
-			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
-		}
+		
 		
 	}
 
@@ -245,13 +324,13 @@ public class MemberServlet extends HttpServlet {
 		Member member;
 		try {
 			member = getMember(request);
+			System.out.println("addMember > member: "+member);
 		} catch (RuntimeException e) {
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail(e.getMessage())));
 			return;
 		}
 		Boolean checkMember = memberService.checkMember(member.getPhoneNumber());
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-		System.out.println(checkMember);
 		if (checkMember) {
 			try {
 				memberService.addMember(member);
@@ -263,38 +342,6 @@ public class MemberServlet extends HttpServlet {
 			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("此電話號碼已存在!")));
 		}
 
-	}
-
-	protected void updateMember(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		Member sessionMember = (Member) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER);
-		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-		if (sessionMember == null) {
-			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
-			return;
-		}
-		Member member;
-
-		try {
-			member = getMember(request);
-		} catch (RuntimeException e) {
-			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail(e.getMessage())));
-			return;
-		}
-		Boolean checkMember = memberService.checkMember(sessionMember.getPhoneNumber());
-		if (checkMember == false) {
-			try {
-				memberService.updateMember(member);
-				ServiceResult<Member> queryResult = memberService.findMember(sessionMember.getPhoneNumber(),
-						sessionMember.getPassword());
-				request.getSession().setAttribute(ConstantUtils.LOGIN_MEMBER, queryResult.getData());
-				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success()));
-			} catch (RuntimeException e) {
-				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail(e.getMessage())));
-			}
-		} else {
-			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("此電話號碼已存在!")));
-		}
 	}
 
 	protected void findMember(HttpServletRequest request, HttpServletResponse response)
@@ -319,8 +366,8 @@ public class MemberServlet extends HttpServlet {
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("查無此用戶!")));
 				return;
 			} else {
-				System.out.println("findMember_resultList:" + JsonUtils.getGson().toJson(queryResult));
-				request.getSession().setAttribute(ConstantUtils.LOGIN_MEMBER, queryResult.getData());
+				request.getSession().setAttribute(ConstantUtils.LOGIN_MEMBER_ID, queryResult.getData().getId());
+				System.out.println(queryResult.getData().getId());
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.success(queryResult.getData())));
 			}
 
@@ -359,8 +406,7 @@ public class MemberServlet extends HttpServlet {
 		}
 		Timestamp create_time = Timestamp.valueOf(request.getParameter("create_time"));
 		Timestamp update_time = Timestamp.valueOf(request.getParameter("update_time"));
-		// Date birthday = (Date) new
-		// SimpleDateFormat("yyyy-MM-dd").parse(birthdayDate);
+		
 		Date birthday = Date.valueOf(birthdayDate);
 		if (StringUtils.isNullOrEmpty(request.getParameter("age"))) {
 			throw new RuntimeException("age不得為空!");

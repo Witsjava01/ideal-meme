@@ -37,8 +37,8 @@ public class LoginFilter extends HttpFilter implements Filter {
 		for (LoginFilterValidate validate : list) {
 			//validate的"test" equals 請求參數(method1)的值
 			if (validate.getParam().getValue().equals(request.getParameter(validate.getParam().getKey()))
-					//請求時的Session裡的Attribute叫做LOGIN_MEMBER的不能是null
-					&& request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER) == null) {
+					//請求時的Session裡的Attribute叫做LOGIN_MEMBER_ID的不能是null
+					&& request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER_ID) == null) {
 				//給前端JS_SOURCE跟STATIC_SOURCE的值 再導到login.jsp 
 				request.setCharacterEncoding("UTF-8");
 				request.setAttribute(ApplicationUtils.JS_SOURCE_KEY, MemberServlet.JS_SOURCE);

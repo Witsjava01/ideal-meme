@@ -250,7 +250,7 @@
 
               <!-- Sign In -->
               <a href="login.html" class="top-bar__item top-bar__sign-in" id="top-bar__sign-in">
-              <i class="ui-user"></i><a href="login.html" id="SignIn_A">Sign In</a></a>
+              <i class="ui-user"></i><a href="${webApplicationPath}/MemberServlet?method=login" id="SignIn_A">Sign In</a></a>
 
               <!-- Wishlist -->
               <a href="#" class="top-bar__item"><i class="ui-heart"></i></a>

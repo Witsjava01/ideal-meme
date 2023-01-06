@@ -27,6 +27,8 @@ public interface MemberService {
 
 	public ServiceResult<List<OrderDetails>> findOrderetails(Integer OrderId);
 
+	public ServiceResult<Member> findMemberById(Integer id);
+
 }
 
 

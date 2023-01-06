@@ -8,6 +8,14 @@ import life4fun.dao.MemberDao;
 import life4fun.entity.Member;
 
 public class MemberDaoImpl  extends BaseDao<Member> implements MemberDao<Member> {
+	
+	@Override
+	public Member findMemberById(Connection conn, Integer id) throws SQLException {
+		String selectSql = "SELECT * from member WHERE id=?";
+		return getBean(conn, selectSql, id);
+		
+	}
+	
 	@Override
 	public Member findMember(Connection conn, String phoneNumber) throws SQLException {
 		String selectSql = "SELECT * from member WHERE phoneNumber = '"+phoneNumber+"'";

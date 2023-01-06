@@ -7,6 +7,8 @@ import life4fun.entity.Member;
 
 
 public interface MemberDao<T> {
+	public Member findMemberById(Connection conn, Integer id) throws SQLException;
+	
 	public Member findMember(Connection conn, String phoneNumber) throws SQLException;
 
 	public void addMember(Connection conn, Member member) throws SQLException;

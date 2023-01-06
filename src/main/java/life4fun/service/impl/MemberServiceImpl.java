@@ -23,6 +23,30 @@ public class MemberServiceImpl implements MemberService {
 	public OrderDao orderDao = new OrderDaoImpl();
 	public OrderDetailsDao orderDetailsDao = new OrderDetailsDaoImpl();
 	@Override
+	public ServiceResult<Member> findMemberById(Integer id) {
+		// 獲取資料庫連接對象
+		var conn = JdbcUtils.getConnection();
+		Member member = null;
+		ServiceResult<Member> result = new ServiceResult<>();
+		try {
+			// 事務開始
+			member = memberDao.findMemberById(conn, id);
+			result.setData(member);
+			return result;
+			// 事務結束，提交事務
+		} catch (Exception e) { // SQL例外處理
+			// 取得錯誤訊息
+			e.printStackTrace();
+			// 回滾事務
+			throw new ServiceException(e);
+		} finally {
+			// 釋放資源<
+			JdbcUtils.release(conn);
+		}
+		
+	}
+	
+	@Override
 	public ServiceResult<Member> findMember(String phoneNumber, String password) {
 
 		// 獲取資料庫連接對象
@@ -175,9 +199,12 @@ public class MemberServiceImpl implements MemberService {
 		// 獲取資料庫連接對象
 		var conn = JdbcUtils.getConnection();
 		List<Order> orderList = null;
+		ServiceResult<List<Order>> result = new ServiceResult<>();
 		try {
 			// 事務開始
 			orderList = orderDao.findOrder(conn, phoneNumber);
+			result.setData(orderList);
+			return result;
 			// 事務結束，提交事務
 		} catch (Exception e) { // SQL例外處理
 			// 取得錯誤訊息
@@ -188,8 +215,6 @@ public class MemberServiceImpl implements MemberService {
 			// 釋放資源<
 			JdbcUtils.release(conn);
 		}
-		ServiceResult<List<Order>> result = new ServiceResult<>(msg, orderList);
-		return result;
 	}
 	
 	@Override
@@ -198,9 +223,12 @@ public class MemberServiceImpl implements MemberService {
 		// 獲取資料庫連接對象
 		var conn = JdbcUtils.getConnection();
 		List<Order> orderList = null;
+		ServiceResult<List<Order>> result = new ServiceResult<>();
 		try {
 			// 事務開始
 			orderList = orderDao.findOrderFromSearch(conn, phoneNumber,OrderId);
+			result.setData(orderList);
+			return result;
 			// 事務結束，提交事務
 		} catch (Exception e) { // SQL例外處理
 			// 取得錯誤訊息
@@ -211,8 +239,7 @@ public class MemberServiceImpl implements MemberService {
 			// 釋放資源<
 			JdbcUtils.release(conn);
 		}
-		ServiceResult<List<Order>> result = new ServiceResult<>(msg, orderList);
-		return result;
+		
 	}
 	
 	@Override
@@ -221,9 +248,12 @@ public class MemberServiceImpl implements MemberService {
 		// 獲取資料庫連接對象
 		var conn = JdbcUtils.getConnection();
 		List<Order> order = null;
+		ServiceResult<List<Order>> result = new ServiceResult<>();
 		try {
 			// 事務開始
 			order = orderDao.findOrderToDetails(conn, phoneNumber,OrderId);
+			result.setData(order);
+			return result;
 			// 事務結束，提交事務
 		} catch (Exception e) { // SQL例外處理
 			// 取得錯誤訊息
@@ -234,8 +264,7 @@ public class MemberServiceImpl implements MemberService {
 			// 釋放資源<
 			JdbcUtils.release(conn);
 		}
-		ServiceResult<List<Order>> result = new ServiceResult<>(msg, order);
-		return result;
+		
 	}
 	
 	@Override
@@ -244,9 +273,12 @@ public class MemberServiceImpl implements MemberService {
 		// 獲取資料庫連接對象
 		var conn = JdbcUtils.getConnection();
 		List<OrderDetails> order = null;
+		ServiceResult<List<OrderDetails>> result = new ServiceResult<>();
 		try {
 			// 事務開始
 			order = orderDetailsDao.findOrderDetails(conn, OrderId);
+			result.setData(order);
+			return result;
 			// 事務結束，提交事務
 		} catch (Exception e) { // SQL例外處理
 			// 取得錯誤訊息
@@ -257,7 +289,5 @@ public class MemberServiceImpl implements MemberService {
 			// 釋放資源<
 			JdbcUtils.release(conn);
 		}
-		ServiceResult<List<OrderDetails>> result = new ServiceResult<>(msg, order);
-		return result;
 	}
 }
