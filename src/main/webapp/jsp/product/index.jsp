@@ -312,7 +312,7 @@
             </button> <!-- end mobile menu button -->
 
             <!-- Logo -->
-            <a href="" class="logo">
+            <a href="${webApplicationPath}/jsp/product/index.jsp" class="logo">
               <img class="logo__img" src="${webApplicationPath}/static/picture/logo_life4fun.png" alt="logo" width="100" height="300">
               
             </a>
@@ -323,7 +323,7 @@
               <ul class="nav__menu">
 
                 <li class="nav__dropdown active">
-                  <a href="catalog.html">飾品</a>
+                  <a href="${webApplicationPath}/jsp/product/catalog.jsp?catalog=A">飾品</a>
                   <ul class="nav__dropdown-menu">
                     <li><a href="#">T-shirt</a></li>
                     <li><a href="#">Hoodie &amp; Jackets</a></li>
@@ -333,7 +333,7 @@
                 </li>
 
                 <li class="nav__dropdown">
-                  <a href="catalog.html">居家小物</a>
+                  <a href="${webApplicationPath}/jsp/product/catalog.jsp?catalog=H">居家小物</a>
                   <ul class="nav__dropdown-menu">
                     <li><a href="#">Underwear</a></li>
                     <li><a href="#">Hipster</a></li>

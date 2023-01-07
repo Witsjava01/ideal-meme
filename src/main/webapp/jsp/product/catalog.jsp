@@ -24,8 +24,40 @@
   <link rel="stylesheet" href="${webApplicationPath}/static/css/style.css">
   <link rel="stylesheet" href="${webApplicationPath}/static/css/color.css">
 
-  <!-- Favicons -->
- <script src="${webApplicationPath}/js/product/catalog.js"></script>  
+  
+  
+	<script >
+	function getQueryVariable(variable)
+	{
+	    var query = window.location.search.substring(1);
+	    var vars = query.split("&");
+	    for (var i=0;i<vars.length;i++) {
+	        var pair = vars[i].split("=");
+	        if(pair[0] == variable){return pair[1];}
+	    }
+	    return(false);
+	}
+	
+	var catalog = getQueryVariable("catalog");
+	switch(catalog){
+	case "A":
+		 var script = document.createElement('script');
+		  script.src = '${webApplicationPath}/js/product/catalog.js';
+		  document.write(script.outerHTML);
+		  console.log(script.outerHTML+""+catalog);
+		  break;
+	case "H":
+		 var script = document.createElement('script');
+		  script.src = '${webApplicationPath}/js/product/catalogH.js';
+		  document.write(script.outerHTML);
+		  console.log(script.outerHTML+""+catalog);
+		  break;
+	
+	}
+	</script>
+  	
+ 
+  
   
 <script type="text/javascript"
 	src="${webApplicationPath}/static/js/jquery.min.js"></script>
@@ -314,7 +346,7 @@
             </button> <!-- end mobile menu button -->
 
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="${webApplicationPath}/jsp/product/index.jsp" class="logo">
               <img class="logo__img" src="${webApplicationPath}/static/picture/logo_life4fun.png" alt="logo" width="100" height="500">
             </a>
 
@@ -323,7 +355,7 @@
               <ul class="nav__menu">
 
                 <li class="nav__dropdown active">
-                  <a href="">飾品</a>
+                    <a href="${webApplicationPath}/jsp/product/catalog.jsp?catalog=A">飾品</a>
                   <ul class="nav__dropdown-menu">
                     <li><a href="#">T-shirt</a></li>
                     <li><a href="#">Hoodie &amp; Jackets</a></li>
@@ -333,7 +365,7 @@
                 </li>
 
                 <li class="nav__dropdown">
-                  <a href="">居家小物</a>
+                   <a href="${webApplicationPath}/jsp/product/catalog.jsp?catalog=H">居家小物</a>
                   <ul class="nav__dropdown-menu">
                     <li><a href="#">Underwear</a></li>
                     <li><a href="#">Hipster</a></li>
@@ -471,9 +503,7 @@
           <li>
             <a href="index.html">分頁</a>
           </li>
-          <li class="active">
-            飾品
-          </li>
+          
         </ol>
 
         <div class="row">
@@ -485,16 +515,19 @@
               
               </p>
               <span class="woocommerce-ordering-label">排序</span>
+             
+              
               <form class="woocommerce-ordering">
-                <select>
+                <select onchange="report(this.value)">
                   <option value="default-sorting">全品項</option>
-                  <option value="price-low-to-high">Price: high to low</option>
-                  <option value="price-high-to-low">Price: low to high</option>
-                  <option value="by-popularity">By Popularity</option>
-                  <option value="date">By Newness</option>
-                  <option value="rating">By Rating</option>
+                  <option value="price-low-to-high" >價格: 低 到 高</option>
+                  <option value="price-high-to-low">價格: 高 到 低</option>
+                  <option value="date">最新上架</option>
+                  <option value="stock">庫存: 多 到 少</option>
                 </select>
               </form>
+              
+               
             </div>
 
             <div class="row row-8" id="catalogProduct">
@@ -702,4 +735,11 @@
 
 
 </body>
+
+<script>
+
+
+
+</script>
+
 </html>

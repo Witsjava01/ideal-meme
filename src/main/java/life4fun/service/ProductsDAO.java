@@ -44,7 +44,7 @@ class ProductsDAO {
 					p.setProductCatalog(rs.getString("product_catalog"));
 
 
-					System.out.println("product_name="+rs.getString("product_name")+" price= "+rs.getDouble("price"));
+					//System.out.println("product_name="+rs.getString("product_name")+" price= "+rs.getDouble("price"));
 					
 					list.add(p);
 				}
@@ -207,7 +207,7 @@ class ProductsDAO {
 					p.setOnshelf(rs.getString("Onshelf"));
 					p.setProductCatalog(rs.getString("product_catalog"));
 
-					System.out.println("product_id="+rs.getString("product_id")+"product_name="+rs.getString("product_name"));
+					//System.out.println("product_id="+rs.getString("product_id")+"product_name="+rs.getString("product_name"));
 
 					list.add(p);
 				}
@@ -327,4 +327,163 @@ class ProductsDAO {
 		}
 		return sizeList;
 	}
+	
+	
+	private static final String SELECT_PriceHightoLow = "SELECT * FROM life4fun.product order by price desc";
+
+	List<Product> PriceHightoLow() throws VGBException {
+		List<Product> list = new ArrayList<Product>();
+		System.out.println("查詢價格高低");
+		try (Connection connection = MySQLConnection.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_PriceHightoLow);) {
+			try (ResultSet rs = pstmt.executeQuery();) {
+
+				while (rs.next()) {
+					Product p = new Product();
+
+
+					p.setProductId(rs.getInt("product_id"));
+					p.setPhotoUrl1(rs.getString("photo_url_1"));
+					p.setProductName(rs.getString("product_name"));
+					p.setBrand(rs.getString("brand"));
+					p.setPrice(rs.getDouble("price"));
+					p.setSize(rs.getString("size"));
+					p.setColor(rs.getString("color"));
+					p.setStock(rs.getInt("stock"));
+					p.setDescription(rs.getString("description"));
+					p.setPhotoUrl2(rs.getString("photo_url_2"));
+					p.setPhotoUrl3(rs.getString("photo_url_3"));
+					p.setPhotoUrl4(rs.getString("photo_url_4"));
+					p.setOnshelf(rs.getString("Onshelf"));
+					p.setProductCatalog(rs.getString("product_catalog"));
+
+
+					//System.out.println("價格"+"product_name="+rs.getString("product_name")+" price= "+rs.getDouble("price"));
+					
+					list.add(p);
+				}
+			}
+		} catch (SQLException e) {
+			throw new VGBException("資料庫查詢有誤", e);
+		}
+		return list;
+	}
+	private static final String SELECT_PriceLowtoHigh = "SELECT * FROM life4fun.product order by price ";
+
+	List<Product> PriceLowtoHigh() throws VGBException {
+		List<Product> list = new ArrayList<Product>();
+		System.out.println("查詢價格高低");
+		try (Connection connection = MySQLConnection.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_PriceLowtoHigh);) {
+			try (ResultSet rs = pstmt.executeQuery();) {
+
+				while (rs.next()) {
+					Product p = new Product();
+
+
+					p.setProductId(rs.getInt("product_id"));
+					p.setPhotoUrl1(rs.getString("photo_url_1"));
+					p.setProductName(rs.getString("product_name"));
+					p.setBrand(rs.getString("brand"));
+					p.setPrice(rs.getDouble("price"));
+					p.setSize(rs.getString("size"));
+					p.setColor(rs.getString("color"));
+					p.setStock(rs.getInt("stock"));
+					p.setDescription(rs.getString("description"));
+					p.setPhotoUrl2(rs.getString("photo_url_2"));
+					p.setPhotoUrl3(rs.getString("photo_url_3"));
+					p.setPhotoUrl4(rs.getString("photo_url_4"));
+					p.setOnshelf(rs.getString("Onshelf"));
+					p.setProductCatalog(rs.getString("product_catalog"));
+
+
+					//System.out.println("價格"+"product_name="+rs.getString("product_name")+" price= "+rs.getDouble("price"));
+					
+					list.add(p);
+				}
+			}
+		} catch (SQLException e) {
+			throw new VGBException("資料庫查詢有誤", e);
+		}
+		return list;
+	}
+	private static final String SELECT_newOnshelf = "SELECT * FROM life4fun.product order by product_id desc";
+
+	List<Product> newOnshelf() throws VGBException {
+		List<Product> list = new ArrayList<Product>();
+		System.out.println("最新上架");
+		try (Connection connection = MySQLConnection.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_newOnshelf);) {
+			try (ResultSet rs = pstmt.executeQuery();) {
+
+				while (rs.next()) {
+					Product p = new Product();
+
+
+					p.setProductId(rs.getInt("product_id"));
+					p.setPhotoUrl1(rs.getString("photo_url_1"));
+					p.setProductName(rs.getString("product_name"));
+					p.setBrand(rs.getString("brand"));
+					p.setPrice(rs.getDouble("price"));
+					p.setSize(rs.getString("size"));
+					p.setColor(rs.getString("color"));
+					p.setStock(rs.getInt("stock"));
+					p.setDescription(rs.getString("description"));
+					p.setPhotoUrl2(rs.getString("photo_url_2"));
+					p.setPhotoUrl3(rs.getString("photo_url_3"));
+					p.setPhotoUrl4(rs.getString("photo_url_4"));
+					p.setOnshelf(rs.getString("Onshelf"));
+					p.setProductCatalog(rs.getString("product_catalog"));
+
+
+					//System.out.println("價格"+"product_name="+rs.getString("product_name")+" price= "+rs.getDouble("price"));
+					
+					list.add(p);
+				}
+			}
+		} catch (SQLException e) {
+			throw new VGBException("資料庫查詢有誤", e);
+		}
+		return list;
+	}
+	private static final String SELECT_stock = "SELECT * FROM life4fun.product order by stock desc";
+
+	List<Product> stock() throws VGBException {
+		List<Product> list = new ArrayList<Product>();
+		System.out.println("最新上架");
+		try (Connection connection = MySQLConnection.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_stock);) {
+			try (ResultSet rs = pstmt.executeQuery();) {
+
+				while (rs.next()) {
+					Product p = new Product();
+
+
+					p.setProductId(rs.getInt("product_id"));
+					p.setPhotoUrl1(rs.getString("photo_url_1"));
+					p.setProductName(rs.getString("product_name"));
+					p.setBrand(rs.getString("brand"));
+					p.setPrice(rs.getDouble("price"));
+					p.setSize(rs.getString("size"));
+					p.setColor(rs.getString("color"));
+					p.setStock(rs.getInt("stock"));
+					p.setDescription(rs.getString("description"));
+					p.setPhotoUrl2(rs.getString("photo_url_2"));
+					p.setPhotoUrl3(rs.getString("photo_url_3"));
+					p.setPhotoUrl4(rs.getString("photo_url_4"));
+					p.setOnshelf(rs.getString("Onshelf"));
+					p.setProductCatalog(rs.getString("product_catalog"));
+
+
+					//System.out.println("價格"+"product_name="+rs.getString("product_name")+" price= "+rs.getDouble("price"));
+					
+					list.add(p);
+				}
+			}
+		} catch (SQLException e) {
+			throw new VGBException("資料庫查詢有誤", e);
+		}
+		return list;
+	}
+	
 }

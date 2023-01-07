@@ -22,6 +22,30 @@ public class ProductService {
 	}
 	
 	
+	public List<Product> getPriceHightoLow() throws VGBException{
+		List<Product> list = dao.PriceHightoLow();
+		System.out.println("service->PriceHightoLow");
+		return list;
+	}
+	
+	public List<Product> PriceLowtoHigh() throws VGBException{
+		List<Product> list = dao.PriceLowtoHigh();
+		System.out.println("service->PriceLowtoHigh");
+		return list;
+	}
+	
+	
+
+	public List<Product> newOnshelf() throws VGBException{
+		List<Product> list = dao.newOnshelf();
+		System.out.println("service->newOnshelf");
+		return list;
+	}
+	public List<Product> stock() throws VGBException{
+		List<Product> list = dao.stock();
+		System.out.println("service->stock");
+		return list;
+	}
 	
 	public List<Product> getProductsByName(String keyword) throws VGBException{
 		if(keyword==null) {

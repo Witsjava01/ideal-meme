@@ -57,8 +57,41 @@ public class ProductServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
+		case "getPriceHightoLow":
+			try {
+				getPriceHightoLow(request, response);
+			} catch (ServletException | IOException | VGBException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case "getPriceLowtoHigh":
+			try {
+				getPriceLowtoHigh(request, response);
+			} catch (ServletException | IOException | VGBException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 			
-		
+		case "getnewOnshelf":
+			try {
+				getnewOnshelf(request, response);
+			} catch (ServletException | IOException | VGBException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			
+			
+		case "getStock":
+			try {
+				getStock(request, response);
+			} catch (ServletException | IOException | VGBException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 		
 		}
 	}
@@ -92,7 +125,61 @@ public class ProductServlet extends HttpServlet {
 		response.getWriter().append(JsonUtils.getGson().toJson(listArr));
 
 }
+	public void getPriceHightoLow(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, VGBException {
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		System.out.println("servlet->getPriceHightoLow");
+
+		ProductService service = new ProductService();
+		List<Product> listPriceHightoLow = null;
+		
+			listPriceHightoLow = service.getPriceHightoLow();
+
+		request.setAttribute("product",listPriceHightoLow);
+		response.getWriter().append(JsonUtils.getGson().toJson(listPriceHightoLow));
+
+}
+	public void getPriceLowtoHigh(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, VGBException {
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		System.out.println("servlet->getPriceLowtoHigh");
+
+		ProductService service = new ProductService();
+		List<Product> listPriceLowtoHigh = null;
+		
+		listPriceLowtoHigh = service.PriceLowtoHigh();
+
+		request.setAttribute("product",listPriceLowtoHigh);
+		response.getWriter().append(JsonUtils.getGson().toJson(listPriceLowtoHigh));
+
+}
 	
+	public void getnewOnshelf(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, VGBException {
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		System.out.println("servlet->getnewOnshelf");
+
+		ProductService service = new ProductService();
+		List<Product> listnewOnshelf = null;
+		
+		listnewOnshelf = service.newOnshelf();
+
+		request.setAttribute("product",listnewOnshelf);
+		response.getWriter().append(JsonUtils.getGson().toJson(listnewOnshelf));
+
+}
+	
+	public void getStock(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, VGBException {
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		System.out.println("servlet->getnewOnshelf");
+
+		ProductService service = new ProductService();
+		List<Product> listStock = null;
+		
+		listStock = service.stock();
+
+		request.setAttribute("product",listStock);
+		response.getWriter().append(JsonUtils.getGson().toJson(listStock));
+
+}
+
 
 
 }

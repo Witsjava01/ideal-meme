@@ -13,7 +13,7 @@ window.onload = function() {
 			var count = 1;
 			$.each(JSON.parse(e), (index, product) => {
 				//console.log(product.productName);
-				if (product.productCatalog == "Accessories") {
+				if (product.productCatalog == "Homeware") {
 
 					if (count % 4 == 0) {
 						$('#catalogProduct').append(`<div class=" col-sm-3 product">
@@ -145,7 +145,7 @@ function report(value) {
 		
 		$.each(JSON.parse(e), (index, product) => {
 
-			if (product.productCatalog == "Accessories") {
+			if (product.productCatalog == "Homeware") {
 
 				var count = 1;
 
