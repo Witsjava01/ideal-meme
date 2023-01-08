@@ -42,7 +42,7 @@ window.onload = function() {
 
                 <span class="product__price">
                   <ins>
-                    <span class="amount">NT ${product.price}</span>
+                    <span class="amount">NT${product.price}</span>
                   </ins>
                 </span>
               </div>

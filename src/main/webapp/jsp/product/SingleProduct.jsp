@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Namira | Single Product</title>
+  <title id="title"></title>
 
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
@@ -449,7 +449,7 @@
         </ol>
 
         <div class="row" id="singlePage">
-
+			
          
         </div> <!-- end row -->
        

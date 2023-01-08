@@ -28,33 +28,23 @@ window.onload = function() {
             <div class="flickity flickity-slider-wrap mfp-hover" id="gallery-main">
 
               <div class="gallery-cell">
-                <a href="/life4fun/img/life4fun/${product.photoUrl1}" class="lightbox-img">
+                <a>
                   <img src="/life4fun/img/life4fun/${product.photoUrl1}" alt="">
                 </a>
               </div>
-              <div class="gallery-cell">
-                <a href="/life4fun/img/life4fun/${product.photoUrl2}" class="lightbox-img">
-                  <img src="/life4fun/img/life4fun/${product.photoUrl2}" alt="">
-                </a>
-              </div>
-              <div class="gallery-cell">
-                <a href="/life4fun/img/life4fun/${product.photoUrl3}" class="lightbox-img">
-                  <img src="/life4fun/img/life4fun/${product.photoUrl3}" alt="">
-                </a>
-              </div>
-              
-              
+             
+      
             </div> <!-- end gallery main -->
 
             <div class="gallery-thumbs" id="gallery-thumbs">
               <div class="gallery-cell">
-                <img src="/life4fun/img/life4fun/${product.photoUrl1}" alt="">
+                <img src="/life4fun/img/life4fun/${product.photoUrl1}" alt="" height="100">
               </div>
               <div class="gallery-cell">
-                <img src="/life4fun/img/life4fun/${product.photoUrl2}" alt="">
+                <img src="/life4fun/img/life4fun/${product.photoUrl2}" alt=""  height="100">
               </div>
               <div class="gallery-cell">
-                <img src="/life4fun/img/life4fun/${product.photoUrl3}" alt="">
+                <img src="/life4fun/img/life4fun/${product.photoUrl3}" alt=""  height="100">
               </div>
             
             </div> <!-- end gallery thumbs -->
@@ -183,6 +173,10 @@ window.onload = function() {
           </li>
 					
 					`)
+					
+					
+					
+			$('#title').append(`life4fun | ${product.productName}`)
 
 		})
 
