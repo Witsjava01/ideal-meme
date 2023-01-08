@@ -324,103 +324,27 @@
 
                 <li class="nav__dropdown active">
                   <a href="${webApplicationPath}/jsp/product/catalog.jsp?catalog=A">飾品</a>
-                  <ul class="nav__dropdown-menu">
-                    <li><a href="#">T-shirt</a></li>
-                    <li><a href="#">Hoodie &amp; Jackets</a></li>
-                    <li><a href="#">Suits</a></li>
-                    <li><a href="#">Shorts</a></li>
-                  </ul>
+                  
                 </li>
 
                 <li class="nav__dropdown">
                   <a href="${webApplicationPath}/jsp/product/catalog.jsp?catalog=H">居家小物</a>
-                  <ul class="nav__dropdown-menu">
-                    <li><a href="#">Underwear</a></li>
-                    <li><a href="#">Hipster</a></li>
-                    <li><a href="#">Dress</a></li>
-                    <li><a href="#">Hoodie &amp; Jackets</a></li>
-                    <li><a href="#">Tees</a></li>
-                  </ul>
+                 
                 </li>
 
                 <li class="nav__dropdown">
                   <a href="catalog.html">美妝保養</a>
-                  <ul class="nav__dropdown-menu nav__megamenu">
-                    <li>
-                      <div class="nav__megamenu-wrap">
-                        <div class="row">
-
-                          <div class="col nav__megamenu-item">
-                            <a href="#" class="nav__megamenu-title">All accessories</a>
-                            <ul class="nav__megamenu-list">
-                              <li><a href="#">Wallets</a></li>
-                              <li><a href="#">Scarfs</a></li>
-                              <li><a href="#">Belts</a></li>
-                              <li><a href="#">Shoes</a></li>
-                            </ul>
-                          </div>
-
-                          <div class="col nav__megamenu-item">
-                            <a href="#" class="nav__megamenu-title">for her</a>
-                            <ul class="nav__megamenu-list">
-                              <li><a href="#">Underwear</a></li>
-                              <li><a href="#">Hipster</a></li>
-                              <li><a href="#">Dress</a></li>
-                              <li><a href="#">Hoodie &amp; Jackets</a></li>
-                              <li><a href="#">Tees</a></li>
-                            </ul>
-                          </div>
-
-                          <div class="col nav__megamenu-item">
-                            <a href="#" class="nav__megamenu-title">for him</a>
-                            <ul class="nav__megamenu-list">
-                              <li><a href="#">T-shirt</a></li>
-                              <li><a href="#">Hoodie &amp; Jackets</a></li>
-                              <li><a href="#">Suits</a></li>
-                              <li><a href="#">Shorts</a></li>
-                            </ul>
-                          </div>
-
-                          <div class="col nav__megamenu-item">
-                            <a href="#" class="nav__megamenu-title">watches</a>
-                            <ul class="nav__megamenu-list">
-                              <li><a href="#">Smart Watches</a></li>
-                              <li><a href="#">Diving Watches</a></li>
-                              <li><a href="#">Sport Watches</a></li>
-                              <li><a href="#">Classic Watches</a></li>
-                            </ul>
-                          </div>
-
-                          <div class="col nav__megamenu-item">
-                            <a href="#"><img src="${webApplicationPath}/static/picture/megamenu_banner.png" alt=""></a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
+                 
                 </li>
 
                 <li class="nav__dropdown">
                   <a href="#">男士保養</a>
-                  <ul class="nav__dropdown-menu">
-                    <li><a href="blog-standard.html">Blog Standard</a></li>
-                    <li><a href="blog-single.html">Single Post</a></li>
-                  </ul>
+                 
                 </li>
                 
                 <li class="nav__dropdown">
                   <a href="contact.html">其他</a>
-                  <ul class="nav__dropdown-menu">
-                    <li><a href="catalog.html">Catalog</a></li>
-                    <li><a href="single-product.html">Single Product</a></li>
-                    <li><a href="cart.html">Cart</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="404.html">404</a></li>
-                  </ul>
+                  
                 </li>
 
               </ul> <!-- end menu -->
