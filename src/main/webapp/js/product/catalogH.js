@@ -18,7 +18,7 @@ window.onload = function() {
 					if (count % 4 == 0) {
 						$('#catalogProduct').append(`<div class=" col-sm-3 product">
                 <div class="product__img-holder">
-                  <a href="single-product.html" class="product__link">
+                  <a href="${webApplicationPath}/jsp/product/SingleProduct.jsp?id=${product.productId}" >
                 <img src="${webApplicationPath}/img/life4fun/${product.photoUrl1}" alt="" class="product__img" width="200" height="200">
                 
                   </a>
@@ -36,7 +36,7 @@ window.onload = function() {
 
                 <div class="product__details">
                   <h3 class="product__title">
-                    <a href="single-product.html">${product.productName}</a>
+                    <a href="${webApplicationPath}/jsp/product/SingleProduct.jsp?id=${product.productId}">${product.productName}</a>
                   </h3>
                 </div>
 
@@ -50,7 +50,7 @@ window.onload = function() {
 					} else {
 						$('#catalogProduct').append(`  <div class=" col-sm-3 product">
                 <div class="product__img-holder">
-                  <a href="single-product.html" class="product__link">
+                  <a href="${webApplicationPath}/jsp/product/SingleProduct.jsp?id=${product.productId}" >
                 <img src="${webApplicationPath}/img/life4fun/${product.photoUrl1}" alt="" class="product__img" width="200" height="200">
                 
                   </a>
@@ -68,7 +68,7 @@ window.onload = function() {
 
                 <div class="product__details">
                   <h3 class="product__title">
-                    <a href="single-product.html">${product.productName}</a>
+                    <a href="${webApplicationPath}/jsp/product/SingleProduct.jsp?id=${product.productId}">${product.productName}</a>
                   </h3>
                 </div>
 
@@ -152,7 +152,7 @@ function report(value) {
 				if (count % 4 == 0) {
 					$('#catalogProduct').append(`<div class=" col-sm-3 product">
                 <div class="product__img-holder">
-                  <a href="single-product.html" class="product__link">
+                  <a href="${webApplicationPath}/jsp/product/SingleProduct.jsp?id=${product.productId}" >
                 <img src="${webApplicationPath}/img/life4fun/${product.photoUrl1}" alt="" class="product__img" width="200" height="200">
                 
                   </a>
@@ -170,7 +170,7 @@ function report(value) {
 
                 <div class="product__details">
                   <h3 class="product__title">
-                    <a href="single-product.html">${product.productName}</a>
+                    <a href="${webApplicationPath}/jsp/product/SingleProduct.jsp?id=${product.productId}">${product.productName}</a>
                   </h3>
                 </div>
 
@@ -184,7 +184,7 @@ function report(value) {
 				} else {
 					$('#catalogProduct').append(`  <div class=" col-sm-3 product">
                 <div class="product__img-holder">
-                  <a href="single-product.html" class="product__link">
+                  <a href="${webApplicationPath}/jsp/product/SingleProduct.jsp?id=${product.productId}" >
                 <img src="${webApplicationPath}/img/life4fun/${product.photoUrl1}" alt="" class="product__img" width="200" height="200">
                 
                   </a>
@@ -202,7 +202,7 @@ function report(value) {
 
                 <div class="product__details">
                   <h3 class="product__title">
-                    <a href="single-product.html">${product.productName}</a>
+                    <a href="${webApplicationPath}/jsp/product/SingleProduct.jsp?id=${product.productId}">${product.productName}</a>
                   </h3>
                 </div>
 

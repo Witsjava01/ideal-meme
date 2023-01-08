@@ -92,6 +92,15 @@ public class ProductServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
+			
+		case "getbyId":
+			try {
+				getbyId(request, response);
+			} catch (ServletException | IOException | VGBException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 		
 		}
 	}
@@ -178,6 +187,17 @@ public class ProductServlet extends HttpServlet {
 		request.setAttribute("product",listStock);
 		response.getWriter().append(JsonUtils.getGson().toJson(listStock));
 
+}
+	public void getbyId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, VGBException {
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		String id = request.getParameter("id");
+		ProductService service = new ProductService();
+		List<Product> listbyId = null;
+		
+		listbyId = service.getProductById(id);
+
+		request.setAttribute("product",listbyId);
+		response.getWriter().append(JsonUtils.getGson().toJson(listbyId));
 }
 
 

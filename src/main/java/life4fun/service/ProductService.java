@@ -73,22 +73,11 @@ public class ProductService {
 		return list;
 	}
 	
-	public Product getProductById(String productId)throws VGBException{		
-		if(productId==null || productId.length()==0) {
-			throw new IllegalArgumentException("用產品代碼查詢產品時必須有代碼資料");
-		}
-		Product p = dao.selectProductById(productId);
-//		if("xxx".equals(p.getCategory())) {
-//			p = dao.
-//		}
-		return p;
+	public List<Product> getProductById(String productId)throws VGBException{		
+		List<Product> list = dao.selectProductById(productId);
+		System.out.println("service->PriceLowtoHigh");
+		return list;
 	}
 	
-	public List<Size> getSizeList(String productId, String colorName)throws VGBException{
-		if(productId==null || colorName==null) {
-			throw new IllegalArgumentException("用產品代碼查詢Size時必須有代碼與colorName資料");
-		}
-		
-		return dao.selectSizeList(productId, colorName);
-	}
+
 }

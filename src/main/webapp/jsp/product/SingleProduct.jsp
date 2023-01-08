@@ -3,12 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>life4fun | 分頁</title>
-
-  
-<script>
-	var webApplicationPath = "${webApplicationPath}";
-</script>
+  <title>Namira | Single Product</title>
 
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
@@ -24,57 +19,10 @@
   <link rel="stylesheet" href="${webApplicationPath}/static/css/style.css">
   <link rel="stylesheet" href="${webApplicationPath}/static/css/color.css">
 
+  <!-- Favicons -->
   
+  <script src="${webApplicationPath}/js/product/SingleProduct.js"></script> 
   
-	<script >
-	function getQueryVariable(variable)
-	{
-	    var query = window.location.search.substring(1);
-	    var vars = query.split("&");
-	    for (var i=0;i<vars.length;i++) {
-	        var pair = vars[i].split("=");
-	        if(pair[0] == variable){return pair[1];}
-	    }
-	    return(false);
-	}
-	
-	var catalog = getQueryVariable("catalog");
-	switch(catalog){
-	case "A":
-		 var script = document.createElement('script');
-		  script.src = '${webApplicationPath}/js/product/catalog.js';
-		  document.write(script.outerHTML);
-		  console.log(script.outerHTML+""+catalog);
-		  break;
-	case "H":
-		 var script = document.createElement('script');
-		  script.src = '${webApplicationPath}/js/product/catalogH.js';
-		  document.write(script.outerHTML);
-		  console.log(script.outerHTML+""+catalog);
-		  break;
-	
-	}
-	</script>
-  	
- 
-  
-  
-<script type="text/javascript"
-	src="${webApplicationPath}/static/js/jquery.min.js"></script>
-<script type="text/javascript"
-	src="${webApplicationPath}/static/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="${webApplicationPath}/static/js/easing.min.js"></script>
-<script type="text/javascript"
-	src="${webApplicationPath}/static/js/jquery.magnific-popup.min.js"></script>
-<script type="text/javascript"
-	src="${webApplicationPath}/static/js/owl-carousel.min.js"></script>
-<script type="text/javascript"
-	src="${webApplicationPath}/static/js/flickity.pkgd.min.js"></script>
-<script type="text/javascript"
-	src="${webApplicationPath}/static/js/modernizr.min.js"></script>
-<script type="text/javascript"
-	src="${webApplicationPath}/static/js/scripts.js"></script>
   
 
 </head>
@@ -88,8 +36,7 @@
     </div>
   </div>
   
-
-  <!-- Mobile Sidenav -->    
+ <!-- Mobile Sidenav -->    
   <header class="sidenav" id="sidenav">
     <!-- Search -->
     <div class="sidenav__search-mobile">
@@ -489,153 +436,44 @@
 
       </div>
     </header> <!-- end navigation -->
+  
+    
 
-    <!-- Catalog -->
-    <section class="section-wrap pt-60 pb-30 catalog">
+    <!-- Single Product -->
+    <section class="section-wrap pb-20 product-single">
       <div class="container">
 
         <!-- Breadcrumbs -->
-        <ol class="breadcrumbs">
-          <li>
-            <a href="index.html">life4fun</a>
-          </li>
-          <li>
-            <a href="index.html">分頁</a>
-          </li>
+        <ol class="breadcrumbs" id="ol">
           
         </ol>
 
-        <div class="row">
-          <div class="col-lg-9 order-lg-2 mb-40">
+        <div class="row" id="singlePage">
 
-            <!-- Filter -->          
-            <div class="shop-filter">
-              <p class="woocommerce-result-count">
-              
-              </p>
-              <span class="woocommerce-ordering-label">排序</span>
-             
-              
-              <form class="woocommerce-ordering">
-                <select onchange="report(this.value)">
-                  <option value="default-sorting">全品項</option>
-                  <option value="price-low-to-high" >價格: 低 到 高</option>
-                  <option value="price-high-to-low">價格: 高 到 低</option>
-                  <option value="date">最新上架</option>
-                  <option value="stock">庫存: 多 到 少</option>
-                </select>
-              </form>
-              
-               
-            </div>
-
-            <div class="row row-8" id="catalogProduct">
- 
-            </div> <!-- end row -->
-            
-     
-
-          </div> <!-- end col -->
-
-
-          <!-- Sidebar -->
-          <aside class="col-lg-3 sidebar left-sidebar">
-
-            <!-- Categories -->
-            <div class="widget widget_categories widget--bottom-line">
-              <h4 class="widget-title">分類</h4>
-              <ul>
-                <li>
-                  <a href="#">飾品</a>
-                </li>
-                <li class="active">
-                  <a href="#">居家小物</a>
-                </li>
-                <li>
-                  <a href="#">美妝保養</a>
-                </li>
-                <li>
-                  <a href="#">男士保養</a>
-                </li>
-                <li>
-                  <a href="#">其他</a>
-                </li>
-             
-              </ul>
-            </div>
-
-            <!-- Size -->
-          <!-- <div class="widget widget__filter-by-size widget--bottom-line">
-              <h4 class="widget-title">Size</h4>
-              <ul class="size-select">
-                <li>
-                  <input type="checkbox" class="checkbox" id="small-size" name="small-size">
-                  <label for="small-size" class="checkbox-label">X-Small</label>
-                </li>                
-                <li>
-                  <input type="checkbox" class="checkbox" id="medium-size" name="medium-size">
-                  <label for="medium-size" class="checkbox-label">Small</label>
-                </li>
-                <li>
-                  <input type="checkbox" class="checkbox" id="large-size" name="large-size">
-                  <label for="large-size" class="checkbox-label">Meduim</label>
-                </li>
-                <li>
-                  <input type="checkbox" class="checkbox" id="xlarge-size" name="xlarge-size">
-                  <label for="xlarge-size" class="checkbox-label">Large</label>
-                </li>
-                <li>
-                  <input type="checkbox" class="checkbox" id="xxlarge-size" name="xxlarge-size">
-                  <label for="xxlarge-size" class="checkbox-label">X-Large</label>
-                </li>
-              </ul>
-            </div>
-            
-            <div class="widget widget__filter-by-color widget--bottom-line">
-              <h4 class="widget-title">Color</h4>
-              <ul class="color-select">
-                <li>
-                  <input type="checkbox" class="checkbox" id="green-color" name="green-color">
-                  <label for="green-color" class="checkbox-label">Green</label>
-                </li>
-                <li>
-                  <input type="checkbox" class="checkbox" id="red-color" name="red-color">
-                  <label for="red-color" class="checkbox-label">Red</label>
-                </li>
-                <li>
-                  <input type="checkbox" class="checkbox" id="blue-color" name="blue-color">
-                  <label for="blue-color" class="checkbox-label">Blue</label>
-                </li>
-                <li>
-                  <input type="checkbox" class="checkbox" id="white-color" name="white-color">
-                  <label for="white-color" class="checkbox-label">White</label>
-                </li>
-                <li>
-                  <input type="checkbox" class="checkbox" id="black-color" name="black-color">
-                  <label for="black-color" class="checkbox-label">Black</label>
-                </li>
-              </ul>
-            </div>
-
-            
-            <div class="widget widget__filter-by-price widget--bottom-line">
-              <h4 class="widget-title">Filter by Price</h4>
-               
-              <div id="slider-range"></div>
-              <p>
-                <label for="amount">Price:</label>
-                <input type="text" id="amount">
-                <a href="#" class="btn btn-sm btn-dark"><span>Filter</span></a>
-              </p>
-            </div>
-            --> 
-           
-
-          </aside> <!-- end sidebar -->
-
+         
         </div> <!-- end row -->
+       
       </div> <!-- end container -->
-    </section> <!-- end catalog -->
+    </section> <!-- end single product -->
+
+
+    <!-- Related Products -->
+    <section class="section-wrap pt-0 pb-40">
+      <div class="container">
+
+        <div class="heading-row">
+          <div class="text-center">
+            <h2 class="heading bottom-line">
+              Shop the look
+            </h2>
+          </div>
+        </div>
+
+        <div class="row row-8" id="theLook">
+
+        
+      </div> <!-- end container -->
+    </section> <!-- end related products -->
 
     <!-- Footer -->
     <footer class="footer">
@@ -731,14 +569,16 @@
   </main> <!-- end main-wrapper -->
 
 
-
+  
+  <!-- jQuery Scripts -->
+  <script type="text/javascript" src="${webApplicationPath}/static/js/jquery.min.js"></script>
+  <script type="text/javascript" src="${webApplicationPath}/static/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="${webApplicationPath}/static/js/easing.min.js"></script>
+  <script type="text/javascript" src="${webApplicationPath}/static/js/jquery.magnific-popup.min.js"></script>
+  <script type="text/javascript" src="${webApplicationPath}/static/js/owl-carousel.min.js"></script>  
+  <script type="text/javascript" src="${webApplicationPath}/static/js/flickity.pkgd.min.js"></script>
+  <script type="text/javascript" src="${webApplicationPath}/static/js/modernizr.min.js"></script>
+  <script type="text/javascript" src="${webApplicationPath}/static/js/scripts.js"></script>
 
 </body>
-
-<script>
-
-
-
-</script>
-
 </html>
