@@ -188,7 +188,7 @@
         </li>
 
         <li>
-          <a href="#" class="sidenav__menu-link">Sign In</a>
+          <a href="#" class="sidenav__menu-link">登 入</a>
         </li>
       </ul>
     </nav>
@@ -214,7 +214,7 @@
             <div class="top-bar__right">
 
               <!-- Sign In -->
-              <a href="login.html" class="top-bar__item top-bar__sign-in" id="top-bar__sign-in"><i class="ui-user"></i>Sign In</a>
+              <a href="login.html" class="top-bar__item top-bar__sign-in" id="top-bar__sign-in"><i class="ui-user"></i>登 入</a>
 
               <!-- Wishlist -->
               <a href="#" class="top-bar__item"><i class="ui-heart"></i></a>
@@ -334,7 +334,7 @@
             <!-- Search -->
             <div class="flex-child nav__search d-none d-lg-block">
               <form method="get" class="nav__search-form">
-                <input type="search" class="nav__search-input" placeholder="Search">
+                <input type="search" class="nav__search-input" placeholder="查詢">
                 <button type="submit" class="nav__search-submit">
                   <i class="ui-search"></i>
                 </button>
@@ -389,7 +389,7 @@
         <div class="heading-row">
           <div class="text-center">
             <h2 class="heading bottom-line">
-              Shop the look
+              Shop the look 
             </h2>
           </div>
         </div>

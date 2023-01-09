@@ -267,7 +267,7 @@
             <div class="top-bar__right">
 
               <!-- Sign In -->
-              <a href="login.html" class="top-bar__item top-bar__sign-in" id="top-bar__sign-in"><i class="ui-user"></i>Sign In</a>
+              <a href="login.html" class="top-bar__item top-bar__sign-in" id="top-bar__sign-in"><i class="ui-user"></i>登入</a>
 
               <!-- Wishlist -->
               <a href="#" class="top-bar__item"><i class="ui-heart"></i></a>
