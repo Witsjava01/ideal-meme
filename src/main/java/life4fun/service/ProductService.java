@@ -73,10 +73,10 @@ public class ProductService {
 		return list;
 	}
 	
-	public List<Product> getProductById(String productId)throws VGBException{		
-		List<Product> list = dao.selectProductById(productId);
-		System.out.println("service->PriceLowtoHigh");
-		return list;
+	public Product getProductById(String productId)throws VGBException{		
+		Product p = dao.selectProductById(productId);
+		System.out.println("service->getProductById");
+		return p;
 	}
 	
 

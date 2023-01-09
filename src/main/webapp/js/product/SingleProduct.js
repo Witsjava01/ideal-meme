@@ -19,9 +19,9 @@ window.onload = function() {
 
 	};
 	$.ajax(settings).done(function(e) {
-		bestSaleList = JSON.parse(JSON.stringify(e));
+		Saleproduct = JSON.parse(JSON.stringify(e));
 		//console.log(bestSaleList);
-		$.each(JSON.parse(e), (index, product) => {
+		var product= JSON.parse(Saleproduct);
 			$('#singlePage').append(`
 				 <div class="col-md-6 product-slider mb-50">
 
@@ -178,7 +178,7 @@ window.onload = function() {
 					
 			$('#title').append(`life4fun | ${product.productName}`)
 
-		})
+	
 
 
 

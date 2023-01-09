@@ -192,12 +192,12 @@ public class ProductServlet extends HttpServlet {
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		String id = request.getParameter("id");
 		ProductService service = new ProductService();
-		List<Product> listbyId = null;
+		Product productbyId = null;
 		
-		listbyId = service.getProductById(id);
+		productbyId = service.getProductById(id);
 
-		request.setAttribute("product",listbyId);
-		response.getWriter().append(JsonUtils.getGson().toJson(listbyId));
+		request.setAttribute("product",productbyId);
+		response.getWriter().append(JsonUtils.getGson().toJson(productbyId));
 }
 
 

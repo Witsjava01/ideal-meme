@@ -223,16 +223,16 @@ class ProductsDAO {
 
 	private static final String select_Product_By_Id = "SELECT * FROM life4fun.product" + "        WHERE product_Id=?";
 
-	List<Product> selectProductById(String productId) throws VGBException {
-		List<Product> list = new ArrayList<Product>();
+	Product selectProductById(String productId) throws VGBException {
+		
 		Product p = null;
 		try (Connection connection = MySQLConnection.getConnection(); 
 				PreparedStatement pstmt = connection.prepareStatement(select_Product_By_Id);
 		) {
-			// 3.1 ��?����
+			
 			pstmt.setString(1, productId);
 
-			try (ResultSet rs = pstmt.executeQuery(); // 4.�銵�誘
+			try (ResultSet rs = pstmt.executeQuery(); 
 			) {
 			
 				while(rs.next()) {
@@ -255,9 +255,9 @@ class ProductsDAO {
 					p.setProductCatalog(rs.getString("product_catalog"));
 
 
-					System.out.println("測試 id"+"product_name="+rs.getString("product_name")+" id= "+rs.getInt("product_id"));
+					//System.out.println("測試 id"+"product_name="+rs.getString("product_name")+" id= "+rs.getInt("product_id"));
 					
-					list.add(p);
+					
 					}					
 					
 				
@@ -265,7 +265,7 @@ class ProductsDAO {
 		} catch (SQLException e) {
 			throw new VGBException("資料庫查詢有誤", e);
 		}
-		return list;
+		return p;
 	}
 
 	
