@@ -3,6 +3,10 @@ package life4fun.exception;
 import life4fun.entity.OrderDetails;
 
 public class StockShortageException extends VGBException {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final OrderDetails orderDetails;
 	
 	public StockShortageException(OrderDetails orderDetails) {

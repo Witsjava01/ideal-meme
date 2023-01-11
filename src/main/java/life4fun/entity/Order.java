@@ -1,7 +1,6 @@
 package life4fun.entity;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,10 +38,10 @@ public class Order {
 	private Double orderAmount;
 	
 	@Column(name="shipping_type")
-	private ShippingType shippingType;//修改類別為enum
+	private ShippingType shippingType;
 	
 	@Column(name="payment_type")
-	private PaymentType paymentType;//修改類別為enum
+	private PaymentType paymentType;
 	
 	@Column(name="recipient_name")
 	private String recipientName;

@@ -9,7 +9,7 @@ import life4fun.dao.ProductDao;
 import life4fun.entity.OrderDetails;
 import life4fun.entity.Product;
 
-public class ProductDaoImpl extends BaseDao<Product> implements ProductDao<ProductDao>{
+public class ProductDaoImpl extends BaseDao<Product> implements ProductDao<Product>{
 
 	@Override
 	public Product findStockByProductId(Connection conn, Integer productId) throws SQLException {

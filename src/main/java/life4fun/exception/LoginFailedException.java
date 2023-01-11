@@ -2,6 +2,11 @@ package life4fun.exception;
 
 public class LoginFailedException extends VGBException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public LoginFailedException() {
 		super();		
 	}

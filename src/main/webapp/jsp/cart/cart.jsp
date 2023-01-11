@@ -5,46 +5,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>life4fun | 購物車</title>
-
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  	<meta name="description" content="">
+  	
+	<title>Live4Fun | 購物車</title>
 	
-  <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-  <script>
-	var webApplicationPath = "${webApplicationPath}";
-	var isUpdate = ${isUpdate};
-  </script>
-  
-  <!-- Google Fonts -->
-  <link href='static/css/css.css' rel='stylesheet'>
-  <!-- Css -->
-  <link rel="stylesheet" href="${webApplicationPath}/${STATIC_SOURCE}/css/bootstrap.min.css">
-  <link rel="stylesheet" href="${webApplicationPath}/${STATIC_SOURCE}/css/font-icons.css">
-  <link rel="stylesheet" href="${webApplicationPath}/${STATIC_SOURCE}/css/style.css">
-  <link rel="stylesheet" href="${webApplicationPath}/${STATIC_SOURCE}/css/color.css">
+	<script>
+		var webApplicationPath = "${webApplicationPath}";
+	</script>
+	
+	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+	<script src="${webApplicationPath}/${JS_SOURCE}/cart.js"></script>
+	<link rel="stylesheet" href="${STATIC_SOURCE}/css/css.css">
+	
+	  <link rel="stylesheet" href="${webApplicationPath}/static/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="${webApplicationPath}/static/css/font-icons.css">
+	  <link rel="stylesheet" href="${webApplicationPath}/static/css/style.css">
+	  <link rel="stylesheet" href="${webApplicationPath}/static/css/color.css">
 
-  <!-- Favicons -->
-  
- 
-  <!-- jQuery Scripts -->
-  <script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/jquery.min.js"></script>
-  <script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/easing.min.js"></script>
-  <script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/jquery.magnific-popup.min.js"></script>
-  <script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/owl-carousel.min.js"></script>  
-  <script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/flickity.pkgd.min.js"></script>
-  <script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/modernizr.min.js"></script>
-  <script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/scripts.js"></script>
-    
-  
-
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
+	
+	<!-- jQuery Scripts -->
+	<script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/easing.min.js"></script>
+	<script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/owl-carousel.min.js"></script>  
+	<script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/flickity.pkgd.min.js"></script>
+	<script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/modernizr.min.js"></script>
+	<script type="text/javascript" src="${webApplicationPath}/${STATIC_SOURCE}/js/scripts.js"></script>
+	<style>
+	</style>
 </head>
 
 <body>
-  <%@ include file="/subviews/header.jsp" %>
-   
+
+  <jsp:include page="../subviews/header.jsp">
+    <jsp:param name="a" value="1" />
+    <jsp:param name="b" value="2" />
+  </jsp:include>
+  <!-- end navigation -->
 
     <!-- Page Title -->
     <section class="page-title text-center">
@@ -62,10 +66,10 @@
           <table class="shop_table cart table">
             <thead>
               <tr>
-                <th class="product-name" colspan="2">商品</th>
-                <th class="product-price">價格</th>
-                <th class="product-quantity">數量</th>
-                <th class="product-subtotal" colspan="2">總計</th>
+                <th class="product-name" colspan="2">Product</th>
+                <th class="product-price">Price</th>
+                <th class="product-quantity">Quantity</th>
+                <th class="product-subtotal" colspan="2">Total</th>
               </tr>
             </thead>
             <tbody>
@@ -73,7 +77,7 @@
                 <td class="product-thumbnail">
                   <a href="#">
                     <img src="static/picture/product_1.jpg" alt="">
-                  </a><!-- ${} -->
+                  </a>
                 </td>
                 <td class="product-name">
                   <a href="#">Joeby Tailored Trouser</a>
@@ -161,9 +165,9 @@
             <h2 class="uppercase mb-30">Calculate Shipping</h2>
             <p class="form-row form-row-wide">
               <select name="calc_shipping_country" id="calc_shipping_country" class="country_to_state" rel="calc_shipping_state">
-                <option>Select a countryâ¦</option>
+                <option>Select a country…</option>
                 <option value="AF">Afghanistan</option>
-                <option value="AX">Ãland Islands</option>
+                <option value="AX">Åland Islands</option>
                 <option value="AL">Albania</option>
                 <option value="DZ">Algeria</option>
                 <option value="AS">American Samoa</option>
@@ -216,10 +220,10 @@
                 <option value="CD">Congo, the Democratic Republic of the</option>
                 <option value="CK">Cook Islands</option>
                 <option value="CR">Costa Rica</option>
-                <option value="CI">CÃ´te d'Ivoire</option>
+                <option value="CI">Côte d'Ivoire</option>
                 <option value="HR">Croatia</option>
                 <option value="CU">Cuba</option>
-                <option value="CW">CuraÃ§ao</option>
+                <option value="CW">Curaçao</option>
                 <option value="CY">Cyprus</option>
                 <option value="CZ">Czech Republic</option>
                 <option value="DK">Denmark</option>
@@ -342,11 +346,11 @@
                 <option value="PT">Portugal</option>
                 <option value="PR">Puerto Rico</option>
                 <option value="QA">Qatar</option>
-                <option value="RE">RÃ©union</option>
+                <option value="RE">Réunion</option>
                 <option value="RO">Romania</option>
                 <option value="RU">Russian Federation</option>
                 <option value="RW">Rwanda</option>
-                <option value="BL">Saint BarthÃ©lemy</option>
+                <option value="BL">Saint Barthélemy</option>
                 <option value="SH">Saint Helena, Ascension and Tristan da Cunha</option>
                 <option value="KN">Saint Kitts and Nevis</option>
                 <option value="LC">Saint Lucia</option>
@@ -469,10 +473,13 @@
     </section> <!-- end cart -->
 
 
-    <%@ include file="/subviews/footer.jsp" %>	
+<jsp:include page="../subviews/footer.jsp">
+    <jsp:param name="a" value="1" />
+    <jsp:param name="b" value="2" />
+</jsp:include>
 
   </main> <!-- end main-wrapper -->
 
-  
+    
 </body>
 </html>

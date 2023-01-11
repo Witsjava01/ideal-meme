@@ -22,7 +22,11 @@
   <!-- Favicons -->
   
   <script src="${webApplicationPath}/js/product/SingleProduct.js"></script> 
-  
+  <script src="${webApplicationPath}/js/cart/cart.js"></script> 
+	 <script
+	  src="https://code.jquery.com/jquery-3.6.3.js"
+	  integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+	  crossorigin="anonymous"></script>
   
 
 </head>
@@ -258,7 +262,6 @@
                         </a>
                         <div class="nav-cart__price">
                           <span>1 x</span>
-                          <span>29.00</span>
                         </div>
                       </div>
                       <div class="nav-cart__remove">

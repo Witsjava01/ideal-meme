@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,10 +17,7 @@ import com.mysql.cj.util.StringUtils;
 import life4fun.dto.RequestResult;
 import life4fun.entity.CartItem;
 import life4fun.entity.Member;
-import life4fun.entity.Order;
-import life4fun.entity.OrderDetails;
 import life4fun.entity.Product;
-import life4fun.entity.ShoppingCart;
 import life4fun.service.MemberService;
 import life4fun.service.OrderService;
 import life4fun.service.ProductService;

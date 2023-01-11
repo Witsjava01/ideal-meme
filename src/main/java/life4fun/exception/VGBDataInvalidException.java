@@ -2,6 +2,11 @@ package life4fun.exception;
 
 public class VGBDataInvalidException extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public VGBDataInvalidException() {
 		super();
 	}

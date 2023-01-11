@@ -3,7 +3,6 @@ package life4fun.servlet;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.fasterxml.jackson.databind.cfg.EnumFeature;
 import com.mysql.cj.util.StringUtils;
 
 import life4fun.dto.RequestResult;
@@ -22,11 +20,8 @@ import life4fun.entity.CartItem;
 import life4fun.entity.Member;
 import life4fun.entity.Order;
 import life4fun.entity.OrderDetails;
-import life4fun.entity.ShoppingCart;
 import life4fun.enumerate.PaymentType;
 import life4fun.enumerate.ShippingType;
-import life4fun.exception.StockShortageException;
-import life4fun.exception.VGBException;
 import life4fun.service.MemberService;
 import life4fun.service.OrderService;
 import life4fun.service.impl.MemberServiceImpl;
