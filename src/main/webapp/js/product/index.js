@@ -17,16 +17,7 @@ window.onload = function() {
                 <a href="${webApplicationPath}/jsp/product/SingleProduct.jsp?id=${product.productId}" class="product__link" aria-label="Product">
                   <img src="${webApplicationPath}/img/life4fun/${product.photoUrl1}" alt="" class="product__img" width="200" height="200">
                 </a>
-                <div class="product__actions">
-                  <a href="quickview.html" class="product__quickview">
-                    <i class="ui-eye"></i>
-                    <span>Quick View</span>
-                  </a>
-                  <a href="#" class="product__add-to-wishlist">
-                    <i class="ui-heart"></i>
-                    <span>Wishlist</span>
-                  </a>
-                </div>
+                
               </div>
               <div class="product__details">
                 <h3 class="product__title">
@@ -79,16 +70,7 @@ var settingsArrivals = {
                 <img src="${webApplicationPath}/img/life4fun/${product.photoUrl1}" alt="" class="product__img" width="200" height="200">
                
               </a>
-              <div class="product__actions">
-                <a href="quickview.html" class="product__quickview">
-                  <i class="ui-eye"></i>
-                  <span>Quick View</span>
-                </a>
-                <a href="#" class="product__add-to-wishlist">
-                  <i class="ui-heart"></i>
-                  <span>Wishlist</span>
-                </a>
-              </div>
+              
             </div>
 
             <div class="product__details">

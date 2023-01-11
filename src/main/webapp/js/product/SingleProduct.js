@@ -92,13 +92,13 @@ window.onload = function() {
               <div class="col">
                 <a href="#" class="btn btn-lg btn-color product-single__add-to-cart">
                   <i class="ui-bag"></i>
-                  <span>Add to Cart</span>
+                  <span>加入購物車</span>
                 </a>
               </div>
               <div class="col">
                 <a href="#" class="btn btn-lg btn-dark product-single__add-to-wishlist">
                   <i class="ui-heart"></i>
-                  <span>Wishlist</span>
+                  <span>願望清單</span>
                 </a>
               </div>
             </div>            
