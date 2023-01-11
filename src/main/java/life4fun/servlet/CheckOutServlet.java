@@ -63,22 +63,39 @@ public class CheckOutServlet extends HttpServlet {
 		System.out.println("CheckOutServlet method -> " + method);
 		
 		switch (method) {
-//		case "orderSearch":
-//			orderSearch(request, response);
-//			break;
+		case "sendOrder":
+			sendOrder(request, response);
+			break;
 		
-		case "checkOut":
+		case "checkout":
 		default:
-			checkOut(request, response);
+			checkout(request, response);
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		
+		
 	}
 	
-	public void checkOut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void checkout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		
+		
+		//1.讀取request的Form Data: productId, quantity
+		String productId = request.getParameter("productId");
+		String quantity = request.getParameter("quantity");
+		System.out.printf("productId:%s, quantity:%s\n", productId, quantity);
+		
+		request.setAttribute("quantity", quantity);
+//		request.getRequestDispatcher(JSP_SOURCE + "check_out.jsp").forward(request, response);
+		request.getRequestDispatcher("/jsp/checkout/check_out.jsp").forward(request, response);
+	}
+	
+	public void sendOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		List<String> errorsList = new ArrayList<>();
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
@@ -192,10 +209,9 @@ public class CheckOutServlet extends HttpServlet {
 		}
 		//3.2 失敗:forward to /member/check_out.jsp
 		request.setAttribute("error", errorsList);
-		request.getRequestDispatcher("check_out.jsp").forward(request, response);
-		
 		request.setAttribute("orderList", orderService.findOrder(phoneNumber).getData());
 		request.getRequestDispatcher(JSP_SOURCE + "order.jsp").forward(request, response);
+		
 	}
 
 

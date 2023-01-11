@@ -3,7 +3,7 @@ package life4fun.enumerate;
 public enum PaymentType {
 	SHOP("門市付款", ShippingType.SHOP),
 	ATM("ATM轉帳", ShippingType.HOME, ShippingType.STORE),
-	HOME("貨到府款", 50, ShippingType.HOME),
+	HOME("貨到付款", 50, ShippingType.HOME),
 	STORE("超商付款", ShippingType.STORE),
 	CARD("信用卡",ShippingType.HOME, ShippingType.STORE);
 	

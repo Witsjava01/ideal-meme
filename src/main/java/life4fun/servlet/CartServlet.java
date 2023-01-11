@@ -68,9 +68,6 @@ public class CartServlet extends HttpServlet {
 		case "updateCart":
 			updateCart(request, response);
 			break;
-		case "deleteCart":
-			deleteCart(request, response);
-			break;
 		case "cart":
 		default:
 			cart(request, response);
@@ -86,27 +83,38 @@ public class CartServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-		Integer memberId = Integer.valueOf((String) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER_ID));
 		
-		Member sessionMember = memberService.findMemberById(memberId).getData();
-		String phoneNumber = sessionMember.getPhoneNumber();
+		//1.驗證登入狀態：若未登入，跳轉登入畫面
+		try {
+			Integer memberId = Integer.valueOf((String) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER_ID));
+			Member sessionMember = memberService.findMemberById(memberId).getData();
+			String phoneNumber = sessionMember.getPhoneNumber();
 			
-		if (StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
-			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
-			return;
-		}
-			
+			if (StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
+				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
+				request.getRequestDispatcher("/jsp/member/login.jsp").forward(request, response);
+				return;
+			}
+		} catch (Exception e) {
+			// 500
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("/jsp/member/login.jsp").forward(request, response);
+		}	
+		
+		//2.若已有登入，則跳轉購物車
 		List<CartItem> cartItemList = (List<CartItem>)session.getAttribute("cart");				
 		if(cartItemList==null || cartItemList.isEmpty()){
 			String msg = "購物車是空的";
 		}else{ 
-			session.removeAttribute("stockError");
-			session.getAttribute("cart");
-			request.getRequestDispatcher(JSP_SOURCE + "cart.jsp").forward(request, response);
-		}			
+			System.out.println("購物車有東西");
+			//request.getRequestDispatcher("/jsp/cart/cart.jsp").forward(request, response);//這段要寫嗎?
+			request.setAttribute("cart", cartItemList);
+		}	
 
 	}
 	
+	
+		
 	public void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		List<String> errorsList = new ArrayList<>();
@@ -127,31 +135,47 @@ public class CartServlet extends HttpServlet {
 		
 		//2.若無誤執行商業邏輯
 		if(errorsList.isEmpty()) {
-			ProductService pService = new ProductService();			
+			ProductService pService = new ProductService();	
+			
 			try {
 				Product p = pService.getProductById(productId);//查詢商品
+				
 				if(p!=null) {
+					
 					int qty = Integer.parseInt(quantity);//前端訂購的數量					
 					if(qty>0) {//如果大於零
 						List<CartItem> cartItemList = (List<CartItem>)session.getAttribute("cart");//從session取得cart
-						if(cartItemList==null && cartItemList.size()==0) {//如果沒有cart
+						System.out.println("sessionHas: "+cartItemList);
+						if(cartItemList==null || cartItemList.size()==0) {//如果沒有cart
 							cartItemList = new ArrayList<CartItem>();//就建立一個
 							session.setAttribute("cart", cartItemList);//並放入session
+							//System.out.println("sessionNew: "+session);
 						}	
 						CartItem cartItem =new CartItem();
 						cartItem.setProduct(p);
 						cartItem.setQuantity(qty);
-						cartItemList.add(cartItem);						
+						cartItemList.add(cartItem);		
+						//System.out.println("cartItemList: "+cartItemList);
 					}else {
 						errorsList.add("加入購物車時qty必須>0: " + qty);	
 					}	
+				
 				}else {
 					errorsList.add("加入購物車時查無此產品:" + productId);					
 				}
+				
 			} catch (Exception e) {
-				this.log("發生非預期錯誤!", e);				
+				this.log("發生非預期錯誤!", e);	
+				System.out.println("errorsList: "+errorsList);
 			}	
 		}
+		if(errorsList.size()>0) {
+			this.log("加入購物車發生錯誤:\n" + errorsList.toString());
+		}
+		//System.out.println("SessionCartItemList: "+session.getAttribute("cart"));
+		request.getRequestDispatcher(JSP_SOURCE +"cart.jsp").forward(request, response);
+		//System.out.println(request.getContextPath()+"/jsp/cart/cart.jsp");
+		System.out.println(JSP_SOURCE +"cart.jsp");
 	}
 
 	public void updateCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -197,8 +221,5 @@ public class CartServlet extends HttpServlet {
 	
 	
 	
-	public void deleteCart(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 	
-	}
 }
