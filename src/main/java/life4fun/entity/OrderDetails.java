@@ -1,5 +1,7 @@
 package life4fun.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -33,4 +35,7 @@ public class OrderDetails {
 	private Double price;
 	@Column(name="quantity")
 	private Integer quantity;
+	
+	private List<OrderDetails> orderDetailsList;
+	
 }

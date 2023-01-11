@@ -8,6 +8,7 @@ import life4fun.dao.BaseDao;
 import life4fun.dao.OrderDao;
 import life4fun.entity.Order;
 
+
 public class OrderDaoImpl extends BaseDao<Order> implements OrderDao<Order> {
 	@Override
 	public List<Order> findOrder(Connection conn,String phoneNumber) throws SQLException {
@@ -56,4 +57,29 @@ public class OrderDaoImpl extends BaseDao<Order> implements OrderDao<Order> {
 		
 		return getBeanList(conn,selectSql,phoneNumber,orderId);
 	}
+	
+	
+	
+	@Override
+	public void addOrder(Connection conn, Order order) throws SQLException {
+		String insertOrderSql ="INSERT INTO `order` (phoneNumber, created_time, order_status, order_amount, shipping_type, payment_type,"
+				+ " recipient_name, recipient_phoneNumber, recipient_postalCode, recipient_city, recipient_district, recipient_road, recipient_address) "
+				+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		insert(conn,insertOrderSql,
+				order.getPhoneNumber(),
+				order.getCreatedTime(),
+				order.getOrderStatus(),
+				order.getOrderAmount(),
+				order.getShippingType().name(),
+				order.getPaymentType().name(),
+				order.getRecipientName(),
+				order.getRecipientPhoneNumber(),
+				order.getRecipientPostalCode(),
+				order.getRecipientCity(),
+				order.getRecipientDistrict(),
+				order.getRecipientRoad(),
+				order.getRecipientAddress()
+				);
+	}
+	
 }

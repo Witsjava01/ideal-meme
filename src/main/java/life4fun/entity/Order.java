@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import life4fun.enumerate.PaymentType;
+import life4fun.enumerate.ShippingType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,10 +39,10 @@ public class Order {
 	private Double orderAmount;
 	
 	@Column(name="shipping_type")
-	private String shippingType;
+	private ShippingType shippingType;//修改類別為enum
 	
 	@Column(name="payment_type")
-	private String paymentType;
+	private PaymentType paymentType;//修改類別為enum
 	
 	@Column(name="recipient_name")
 	private String recipientName;

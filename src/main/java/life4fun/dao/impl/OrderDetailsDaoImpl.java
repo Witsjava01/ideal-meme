@@ -15,4 +15,22 @@ public class OrderDetailsDaoImpl extends BaseDao<OrderDetails> implements OrderD
 				+ "price as price, quantity as quantity FROM life4fun.order_details WHERE order_id =?";
 		return getBeanList(conn,selectSql,orderId);
 	}
+
+	@Override
+	public void addOrderDetails(Connection conn, Integer orderId, List<OrderDetails> orderDetailsList)
+			throws SQLException {
+		String insertDetailsSql ="INSERT INTO order_details (order_id, product_id, product_name, product_color, product_size, price, quantity) "
+				+ "VALUES (?,?,?,?,?,?,?)";
+		for(OrderDetails orderDetail:orderDetailsList ) {
+			insert(conn, insertDetailsSql,
+					orderId,
+					orderDetail.getProductId(),
+					orderDetail.getProductName(),
+					orderDetail.getProductColor(),
+					orderDetail.getProductSize(),
+					orderDetail.getPrice(),
+					orderDetail.getQuantity());
+		}		
+	}
+	
 }

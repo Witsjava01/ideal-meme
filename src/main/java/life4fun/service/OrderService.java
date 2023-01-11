@@ -17,7 +17,8 @@ public interface OrderService {
 
 	public ServiceResult<List<OrderDetails>> findOrderetails(Integer OrderId);
 
-
+	public String createOrder(Order order,List<OrderDetails> orderDetailsList);
+	
 }
 
 
