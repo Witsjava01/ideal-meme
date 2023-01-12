@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@page isELIgnored="false"%>
-<!--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>-->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
   <!-- Preloader -->
   <div class="loader-mask">
@@ -25,7 +25,7 @@
     <nav>
       <ul class="sidenav__menu">
         <li>
-          <a href="#" class="sidenav__menu-link">Men</a>
+          <a href="#" class="sidenav__menu-link">飾品</a>
           <button class="sidenav__menu-toggle"><i class="ui-arrow-down"></i></button>
           <ul class="sidenav__menu-dropdown">
             <li><a href="#" class="sidenav__menu-link">T-shirt</a></li>
@@ -36,7 +36,7 @@
         </li>
       
         <li>
-          <a href="#" class="sidenav__menu-link">Women</a>
+          <a href="#" class="sidenav__menu-link">居家小物</a>
           <button class="sidenav__menu-toggle"><i class="ui-arrow-down"></i></button>
           <ul class="sidenav__menu-dropdown">
             <li><a href="#" class="sidenav__menu-link">Underwear</a></li>
@@ -48,7 +48,7 @@
         </li>
         
         <li>
-          <a href="#" class="sidenav__menu-link">Accessories</a>
+          <a href="#" class="sidenav__menu-link">美妝保養</a>
           <button class="sidenav__menu-toggle"><i class="ui-arrow-down"></i></button>
           <ul class="sidenav__menu-dropdown">
             <li>
@@ -137,7 +137,7 @@
         </li>
         
         <li>
-          <a href="#" class="sidenav__menu-link">News</a>
+          <a href="#" class="sidenav__menu-link">男士保養</a>
           <button class="sidenav__menu-toggle"><i class="ui-arrow-down"></i></button>
           <ul class="sidenav__menu-dropdown">
             <li><a href="blog-standard.html" class="sidenav__menu-link">Blog Standard</a></li>
@@ -146,7 +146,7 @@
         </li>
 
         <li>
-          <a href="#" class="sidenav__menu-link">Pages</a>
+          <a href="#" class="sidenav__menu-link">其他</a>
           <button class="sidenav__menu-toggle"><i class="ui-arrow-down"></i></button>
           <ul class="sidenav__menu-dropdown">
             <li><a href="catalog.html" class="sidenav__menu-link">Catalog</a></li>
@@ -162,7 +162,7 @@
         </li>
 
         <li>
-          <a href="#" class="sidenav__menu-link">Sign In</a>
+          <a href="#" class="sidenav__menu-link">登入</a>
         </li>
       </ul>
     </nav>
@@ -182,7 +182,7 @@
             <!-- Currency / Language -->
             <ul class="top-bar__currency-language">
               <li class="top-bar__language">
-                <a href="#">English</a>
+                <a href="#"></a>
                 <div class="top-bar__language-dropdown">
                   <ul>
                     <li><a href="#">English</a></li>
@@ -193,7 +193,7 @@
                 </div>
               </li>
               <li class="top-bar__currency">
-                <a href="#">USD</a>
+                <a href="#"></a>
                 <div class="top-bar__currency-dropdown">
                   <ul>
                     <li><a href="#">USD</a></li>
@@ -204,64 +204,46 @@
             </ul>
 
             <!-- Promo -->
-            <p class="top-bar__promo text-center">Free shipping on orders over $50</p>
+            <p class="top-bar__promo text-center"></p>
 
             <!-- Sign in / Wishlist / Cart -->
             <div class="top-bar__right">
 
               <!-- Sign In -->
               <a href="login.html" class="top-bar__item top-bar__sign-in" id="top-bar__sign-in">
-              <i class="ui-user"></i><a href="login.html" id="SignIn_A">Sign In</a></a>
+              <i class="ui-user"></i><a href="../member/login.jsp" id="SignIn_A">登入</a></a>
 
               <!-- Wishlist -->
               <a href="#" class="top-bar__item"><i class="ui-heart"></i></a>
 
               <div class="top-bar__item nav-cart">                
                 <a href="">
-                  <i class="ui-bag"></i>(2)
+                  <a href="../cart/cart.jsp" id="Cart"><i class="ui-bag"></i></a><c:out value="${cartItemCount}"></c:out>
                 </a>
                 <div class="nav-cart__dropdown">
                   <div class="nav-cart__items">
-
+					<c:forEach items="${cartItemList}" var="item" >
                     <div class="nav-cart__item clearfix">
                       <div class="nav-cart__img">
                         <a href="#">
-                          <img src="static/picture/cart_small_1.jpg" alt="">
+                          <img src="static/picture/${item[p].photoUrl1}" alt="">
                         </a>
                       </div>
                       <div class="nav-cart__title">
                         <a href="#">
-                          Classic White Tailored Shirt
+                        
                         </a>
                         <div class="nav-cart__price">
-                          <span>1 x</span>
-                          <span>19.99</span>
+                          <span><c:out value="${item.quantity}"></c:out> x</span>
+                          <span><c:out value="${item[p].price}"></c:out></span>
                         </div>
                       </div>
                       <div class="nav-cart__remove">
                         <a href="#"><i class="ui-close"></i></a>
                       </div>
                     </div>
-
-                    <div class="nav-cart__item clearfix">
-                      <div class="nav-cart__img">
-                        <a href="#">
-                          <img src="static/picture/cart_small_2.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="nav-cart__title">
-                        <a href="#">
-                          Sport Hi Adidas
-                        </a>
-                        <div class="nav-cart__price">
-                          <span>1 x</span>
-                          <span>29.00</span>
-                        </div>
-                      </div>
-                      <div class="nav-cart__remove">
-                        <a href="#"><i class="ui-close"></i></a>
-                      </div>
-                    </div>
+					</c:forEach>
+                    
 
                   </div> <!-- end cart items -->
 
@@ -271,8 +253,8 @@
                   </div>
 
                   <div class="nav-cart__actions mt-20">
-                    <a href="javascript:;" class="btn btn-md btn-light"><span>View Cart</span></a>
-                    <a href="javascript:;" class="btn btn-md btn-color mt-10"><span>Proceed to Checkout</span></a>
+                    <a href="javascript:;" class="btn btn-md btn-light"><span>查看購物車</span></a>
+                    <a href="javascript:;" class="btn btn-md btn-color mt-10"><span>進入結帳</span></a>
                   </div>
                 </div>
               </div>
@@ -291,7 +273,7 @@
 
             <!-- Logo -->
             <a href="index.html" class="logo">
-              <img class="logo__img" src="static/picture/logo_light.png" alt="logo">
+              <img class="logo__img" src="/life4fun/static/picture/logo_life4fun.png" alt="logo">
             </a>
 
             <!-- Nav-wrap -->
@@ -299,7 +281,7 @@
               <ul class="nav__menu">
 
                 <li class="nav__dropdown active">
-                  <a href="catalog.html">Men</a>
+                  <a href="catalog.html">飾品</a>
                   <ul class="nav__dropdown-menu">
                     <li><a href="#">T-shirt</a></li>
                     <li><a href="#">Hoodie &amp; Jackets</a></li>
@@ -309,7 +291,7 @@
                 </li>
 
                 <li class="nav__dropdown">
-                  <a href="catalog.html">Women</a>
+                  <a href="catalog.html">居家小物</a>
                   <ul class="nav__dropdown-menu">
                     <li><a href="#">Underwear</a></li>
                     <li><a href="#">Hipster</a></li>
@@ -320,14 +302,14 @@
                 </li>
 
                 <li class="nav__dropdown">
-                  <a href="catalog.html">Accessories</a>
+                  <a href="catalog.html">美妝保養</a>
                   <ul class="nav__dropdown-menu nav__megamenu">
                     <li>
                       <div class="nav__megamenu-wrap">
                         <div class="row">
 
                           <div class="col nav__megamenu-item">
-                            <a href="#" class="nav__megamenu-title">All accessories</a>
+                            <a href="#" class="nav__megamenu-title">美妝保養</a>
                             <ul class="nav__megamenu-list">
                               <li><a href="#">Wallets</a></li>
                               <li><a href="#">Scarfs</a></li>
@@ -378,7 +360,7 @@
                 </li>
 
                 <li class="nav__dropdown">
-                  <a href="#">News</a>
+                  <a href="#">男士保養</a>
                   <ul class="nav__dropdown-menu">
                     <li><a href="blog-standard.html">Blog Standard</a></li>
                     <li><a href="blog-single.html">Single Post</a></li>
@@ -386,7 +368,7 @@
                 </li>
                 
                 <li class="nav__dropdown">
-                  <a href="contact.html">Pages</a>
+                  <a href="contact.html">其他</a>
                   <ul class="nav__dropdown-menu">
                     <li><a href="catalog.html">Catalog</a></li>
                     <li><a href="single-product.html">Single Product</a></li>
@@ -407,7 +389,7 @@
             <!-- Search -->
             <div class="flex-child nav__search d-none d-lg-block">
               <form method="get" class="nav__search-form">
-                <input type="search" class="nav__search-input" placeholder="Search">
+                <input type="search" class="nav__search-input" placeholder="查詢">
                 <button type="submit" class="nav__search-submit">
                   <i class="ui-search"></i>
                 </button>
@@ -423,7 +405,7 @@
             <!-- Mobile Cart -->
             <a href="" class="nav__mobile-cart d-lg-none">
               <i class="ui-bag"></i>
-              <span class="nav__mobile-cart-amount">${sessionScope.cart.totalQuantity}</span>
+              <span class="nav__mobile-cart-amount"></span>
             </a>
 
             

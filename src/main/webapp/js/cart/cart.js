@@ -28,7 +28,7 @@ addtoCart=function(id){
 		//contentType: "application/x-www-form-urlencoded;charset=utf-8",
 		success: function(response) {
 			console.log(response)
-			alert("成功加入購物車");
+			alert("此商品已新增至購物車");
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			alert("失敗");
@@ -51,43 +51,9 @@ checkCart=function(id){
 		//dataType: "json",
 		//contentType: "application/x-www-form-urlencoded;charset=utf-8",
 		success: function(response) {
-			alert("跳轉購物車!");
+			alert("進入結帳!");
 			console.log(response.msg);
-			window.location.assign("/life4fun/jsp/cart/cart.jsp");
-			$('#singlePage').append(`
-			<tr class="cart_item">
-                <td class="product-thumbnail">
-                  <a href="#">
-                    <img src="static/picture/product_1.jpg" alt="">
-                  </a>
-                </td>
-                <td class="product-name">
-                  <a href="#">Joeby Tailored Trouser</a>
-                  <ul>
-                    <li>尺寸: XL</li>
-                    <li>顏色: White</li>
-                  </ul>
-                </td>
-                <td class="product-price">
-                  <span class="amount">$1250.00</span>
-                </td>
-                <td class="product-quantity">
-                  <div class="quantity buttons_added">
-                    <input type="button" value="-" class="minus">
-                    <input type="number" step="1" min="0" value="1" title="Qty" class="input-text qty text">
-                    <input type="button" value="+" class="plus">
-                  </div>
-                </td>
-                <td class="product-subtotal">
-                  <span class="amount">$1250.00</span>
-                </td>
-                <td class="product-remove">
-                  <a href="#" class="remove" title="Remove this item">
-                    <i class="ui-close"></i>
-                  </a>
-                </td>
-              </tr>`);
-			
+			window.location.assign("/life4fun/jsp/cart/cart.jsp");			
 		},
 		error: function() {
 			alert("失敗");
@@ -95,6 +61,7 @@ checkCart=function(id){
 		}
 	});
 }
+
 
 
 	

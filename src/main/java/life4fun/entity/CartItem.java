@@ -1,25 +1,14 @@
 package life4fun.entity;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-public class CartItem implements Comparable<CartItem> {
+public class CartItem {
 
 	private Product product;
 	private Integer quantity;
-	private LocalDateTime createdTime = LocalDateTime.now();
 	private List<CartItem> cartItemList;
-	
 
-	public List<CartItem> getCartItemList() {
-		return cartItemList;
-	}
-
-	public void setCartItemList(List<CartItem> cartItemList) {
-		this.cartItemList = cartItemList;
-	}
-	
-
+//所有商品總計
 	public double getTotalAmount(List<CartItem> cartItemList) {
 		double sum = 0;
 		for (CartItem item : cartItemList) {
@@ -28,10 +17,19 @@ public class CartItem implements Comparable<CartItem> {
 		return sum;
 	}
 
+//個別品項總計
 	public double getItemAmount(CartItem item) {
 		int qty = this.getQuantity();
 		double amount = this.getPrice() * qty;
 		return amount;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public Integer getQuantity() {
@@ -42,13 +40,12 @@ public class CartItem implements Comparable<CartItem> {
 		this.quantity = quantity;
 	}
 
-
-	public Product getProduct() {
-		return product;
+	public List<CartItem> getCartItemList() {
+		return cartItemList;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setCartItemList(List<CartItem> cartItemList) {
+		this.cartItemList = cartItemList;
 	}
 
 	/* 以下getter是根據cart.jsp中cartItem的欄位提供的 */
@@ -131,15 +128,6 @@ public class CartItem implements Comparable<CartItem> {
 		return "編號=" + getProductId() + ",\n 名稱=" + getProductName() + ",\n PhotoUrl=" + getPhotoUrl1() + ",\n 購買顏色="
 				+ getProductColor() + ",\n 購買size=" + getProductSize() + ",\n 定價=" + getPrice() + ",\n 數量="
 				+ getQuantity();
-	}
-
-	@Override
-	public int compareTo(CartItem anotherItem) {
-		int result = this.createdTime.compareTo(anotherItem.createdTime);
-		if (result == 0) {
-			result = this.hashCode() - anotherItem.hashCode();
-		}
-		return result;
 	}
 
 }

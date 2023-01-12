@@ -47,6 +47,28 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
+	public Member findMemberByMemberId(Integer id) {
+		// 獲取資料庫連接對象
+		var conn = JdbcUtils.getConnection();
+		Member member = null;
+		try {
+			// 事務開始
+			member = memberDao.findMemberById(conn, id);
+			
+			return member;
+			// 事務結束，提交事務
+		} catch (Exception e) { // SQL例外處理
+			// 取得錯誤訊息
+			e.printStackTrace();
+			// 回滾事務
+			throw new ServiceException(e);
+		} finally {
+			// 釋放資源<
+			JdbcUtils.release(conn);
+		}
+	}
+
+	@Override
 	public ServiceResult<Member> findMember(String phoneNumber, String password) {
 
 		// 獲取資料庫連接對象

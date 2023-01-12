@@ -165,12 +165,12 @@ public class OrderServiceImpl implements OrderService {
 				sum =Math.round(sum);
 			}
 			order.setOrderAmount(sum);
-			orderDao.addOrder(conn, order);
+			Integer orderIdAuto=orderDao.addOrder(conn, order);
 			
 			
 			//新增訂單明細
-			Integer orderId = order.getOrderId();
-			orderDetailsDao.addOrderDetails(conn, orderId, orderDetailsList);			
+			//Integer orderId = order.getOrderId();//要怎麼取得orderID
+			orderDetailsDao.addOrderDetails(conn, orderIdAuto, orderDetailsList);			
 			
 			// 事務結束，提交事務
 			JdbcUtils.commitTransaction(conn);

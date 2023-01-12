@@ -11,7 +11,12 @@ public enum LoginFilterValidate {
 	LOGIN_ORDER("/OrderServlet", new KeyValue<String, String>("method", "order")),
 	LOGIN_FINDORDERDETAILS("/OrderServlet", new KeyValue<String, String>("method", "findOrderDetails")),
 	LOGIN_SHOWORDERDETAILS("/OrderServlet", new KeyValue<String, String>("method", "showOrderDetails")),
-	LOGIN_ORDERSEARCH("/OrderServlet", new KeyValue<String, String>("method", "orderSearch"))
+	LOGIN_ORDERSEARCH("/OrderServlet", new KeyValue<String, String>("method", "orderSearch")),
+	LOGIN_CART("/CartServlet", new KeyValue<String, String>("method", "cart")),
+	LOGIN_UPDATECART("/CartServlet", new KeyValue<String, String>("method", "updateCart")),
+	LOGIN_DELETECART("/CartServlet", new KeyValue<String, String>("method", "deleteCart")),
+	LOGIN_CHECKOUT("/CheckOutServlet", new KeyValue<String, String>("method", "checkout")),
+	LOGIN_SENDORDER("/CheckOutServlet", new KeyValue<String, String>("method", "sendOrder"))
 	;
 	
 	private String path;

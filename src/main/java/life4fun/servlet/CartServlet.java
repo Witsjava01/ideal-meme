@@ -39,7 +39,7 @@ public class CartServlet extends HttpServlet {
 	public static final String STATIC_SOURCE = "static";
 	
 	private MemberService memberService = new MemberServiceImpl();
-	private OrderService orderService = new OrderServiceImpl();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -58,7 +58,7 @@ public class CartServlet extends HttpServlet {
 		request.setAttribute(ApplicationUtils.STATIC_SOURCE_KEY, STATIC_SOURCE);
 		
 		request.setCharacterEncoding("UTF-8");
-		String method = request.getParameter("method") == null ? "cart" : request.getParameter("method");
+		String method = request.getParameter("method") == null ? "login" : request.getParameter("method");
 		System.out.println("CartServlet method -> " + method);
 		
 		switch (method) {
@@ -79,6 +79,7 @@ public class CartServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
+	//??沒有登入
 	public void cart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
@@ -92,9 +93,9 @@ public class CartServlet extends HttpServlet {
 			
 			if (StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
 				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
-				request.getRequestDispatcher("/jsp/member/login.jsp").forward(request, response);
 				return;
 			}
+			//request.getRequestDispatcher("/jsp/member/login.jsp").forward(request, response);
 		} catch (Exception e) {
 			// 500
 			System.out.println(e.getMessage());
@@ -103,12 +104,25 @@ public class CartServlet extends HttpServlet {
 		
 		//2.若已有登入，則跳轉購物車
 		List<CartItem> cartItemList = (List<CartItem>)session.getAttribute("cart");				
+		double sum = 0;
 		if(cartItemList==null || cartItemList.isEmpty()){
 			String msg = "購物車是空的";
 		}else{ 
-			System.out.println("購物車有東西");
-			//request.getRequestDispatcher("/jsp/cart/cart.jsp").forward(request, response);//這段要寫嗎?
-			request.setAttribute("cart", cartItemList);
+			for(CartItem item:cartItemList){ 
+//				request.setAttribute("photoUrl1",item.getPhotoUrl1());
+//				request.setAttribute("productName",item.getProductName());
+//				request.setAttribute("productSize",item.getProductSize());				
+//				request.setAttribute("productColor",item.getProductColor());
+//				request.setAttribute("price",item.getPrice());
+//				request.setAttribute("quantity",item.getQuantity());
+//				request.setAttribute("itemAmount",item.getItemAmount(item));
+//				cartItemList.add(item);
+				sum += item.getItemAmount(item);
+			}
+			request.setAttribute("sum",sum);
+			
+			session.setAttribute("cart", cartItemList);
+			session.setAttribute("memberId","933421481");
 		}	
 
 	}
@@ -117,7 +131,6 @@ public class CartServlet extends HttpServlet {
 		
 	public void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		List<String> errorsList = new ArrayList<>();
 		HttpSession session = request.getSession();
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		
@@ -125,7 +138,9 @@ public class CartServlet extends HttpServlet {
 		String productId = request.getParameter("productId");
 		String quantity = request.getParameter("quantity");
 		System.out.printf("productId:%s, quantity:%s\n", productId, quantity);
-		
+
+		//errorsList
+		List<String> errorsList = new ArrayList<>();
 		if (StringUtils.isNullOrEmpty(productId)) {
 			errorsList.add("沒有productId無法加入購物車");	
 		}
@@ -156,6 +171,9 @@ public class CartServlet extends HttpServlet {
 						cartItem.setQuantity(qty);
 						cartItemList.add(cartItem);		
 						//System.out.println("cartItemList: "+cartItemList);
+						session.setAttribute("cartItemCount", cartItemList.size());
+						session.setAttribute("cartItemList", cartItemList);//存入session
+						session.setAttribute("memberId","933421481");
 					}else {
 						errorsList.add("加入購物車時qty必須>0: " + qty);	
 					}	
@@ -172,12 +190,14 @@ public class CartServlet extends HttpServlet {
 		if(errorsList.size()>0) {
 			this.log("加入購物車發生錯誤:\n" + errorsList.toString());
 		}
+		
 		//System.out.println("SessionCartItemList: "+session.getAttribute("cart"));
 		request.getRequestDispatcher(JSP_SOURCE +"cart.jsp").forward(request, response);
 		//System.out.println(request.getContextPath()+"/jsp/cart/cart.jsp");
 		System.out.println(JSP_SOURCE +"cart.jsp");
 	}
 
+	//??
 	public void updateCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 		List<String> errorsList = new ArrayList<>();
@@ -209,17 +229,22 @@ public class CartServlet extends HttpServlet {
 				}
 			}
 		}
+		request.setAttribute("cartItemCount", cartItemList.size());
 		
 		//3.redirect 回/member/cart.jsp
 		String submit = request.getParameter("submit");
 		if("checkout".equals(submit)) {
 			response.sendRedirect("check_out.jsp");
 		}else {
-			response.sendRedirect(request.getContextPath() + "/cart/cart.jsp");
+			response.sendRedirect(request.getContextPath() + "/jsp/cart/cart.jsp");
 		}
 	}
 	
-	
-	
+	//?
+	public void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		List<CartItem> cartItemList = (List<CartItem>)session.getAttribute("cart");//從session取得cart
+	}
 	
 }

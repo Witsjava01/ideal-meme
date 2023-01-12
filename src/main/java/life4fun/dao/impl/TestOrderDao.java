@@ -64,11 +64,11 @@ public class TestOrderDao {
 		orderDetails2.setPrice(p2.getPrice());
 		orderDetailsList.add(orderDetails2);
 		
-		productDao.updateStock(conn,orderDetailsList);		
+		//productDao.updateStock(conn,orderDetailsList);		
 		System.out.println("updateStock: "+orderDetailsList);
 		
 		// test addOrderDetails:ok
-		orderDetailsDao.addOrderDetails(conn,14,orderDetailsList);
+		//orderDetailsDao.addOrderDetails(conn,16,orderDetailsList);
 		System.out.println("addOrderDetails: "+orderDetailsList);
 		
 		// test addOrder:ok
@@ -87,7 +87,7 @@ public class TestOrderDao {
 		order.setRecipientRoad("忠孝東路５段");
 		order.setRecipientAddress(null);
 		
-		orderDao.addOrder(conn,order);
+		//orderDao.addOrder(conn,order);
 		System.out.println("addOrder: "+order);
 		
 		

@@ -1,7 +1,17 @@
+<%@page import="life4fun.service.impl.MemberServiceImpl"%>
+<%@page import="life4fun.service.MemberService"%>
+<%@page import="life4fun.service.impl.StreetNameServiceImpl"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="life4fun.entity.StreetName"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@page isELIgnored="false"%>
-<!--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>-->
+<%@page import="life4fun.entity.Member"%>
+<%@page import="life4fun.entity.CartItem"%>
+<%@page import="life4fun.service.MemberService"%>
+<%@page import="life4fun.service.impl.MemberServiceImpl"%>
+<%@page import="java.util.List"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,37 +24,39 @@
 	
 	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 	<script src="${webApplicationPath}/${JS_SOURCE}/checkout.js"></script>
-	<link rel="stylesheet" href="../../static/css/css.css">
+	<link rel="stylesheet" href="${webApplicationPath}/static/css/css.css">
 	
-	<link rel="stylesheet" href="../../static/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../../static/css/font-icons.css">
-	<link rel="stylesheet" href="../../static/css/style.css">
-	<link rel="stylesheet" href="../../static/css/color.css">
+	<link rel="stylesheet" href="${webApplicationPath}/static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${webApplicationPath}/static/css/font-icons.css">
+	<link rel="stylesheet" href="${webApplicationPath}/static/css/style.css">
+	<link rel="stylesheet" href="${webApplicationPath}/static/css/color.css">
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 		crossorigin="anonymous"></script>
 	
 	<!-- jQuery Scripts -->
-	<script type="text/javascript" src="../../static/js/jquery.min.js"></script>
-	<script type="text/javascript" src="../../static/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="../../static/js/easing.min.js"></script>
-	<script type="text/javascript" src="../../static/js/jquery.magnific-popup.min.js"></script>
-	<script type="text/javascript" src="../../static/js/owl-carousel.min.js"></script>  
-	<script type="text/javascript" src="../../static/js/flickity.pkgd.min.js"></script>
-	<script type="text/javascript" src="../../static/js/modernizr.min.js"></script>
-	<script type="text/javascript" src="../../static/js/scripts.js"></script>
-	<style>
-	</style>
+	<script type="text/javascript" src="${webApplicationPath}/static/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${webApplicationPath}/static/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${webApplicationPath}/static/js/easing.min.js"></script>
+	<script type="text/javascript" src="${webApplicationPath}/static/js/jquery.magnific-popup.min.js"></script>
+	<script type="text/javascript" src="${webApplicationPath}/static/js/owl-carousel.min.js"></script>  
+	<script type="text/javascript" src="${webApplicationPath}/static/js/flickity.pkgd.min.js"></script>
+	<script type="text/javascript" src="${webApplicationPath}/static/js/modernizr.min.js"></script>
+	<script type="text/javascript" src="${webApplicationPath}/static/js/scripts.js"></script>
+
+	<script>
+		var webApplicationPath = "${webApplicationPath}";
+		var isUpdate = ${isUpdate};
+	</script>
+
 </head>
 
 <body>
 
-<jsp:include page="../subviews/header.jsp">
-    <jsp:param name="a" value="1" />
-    <jsp:param name="b" value="2" />
-</jsp:include>
-<!-- end navigation -->
+	<!-- header start -->
+	  <%@ include file="../subviews/header.jsp" %>
+	<!-- header end -->
   
     <!-- Page Title -->
     <section class="page-title text-center">
@@ -74,76 +86,52 @@
 
               <div class="col-lg-7" id="customer_details">
                 <div>
-                  <h2 class="uppercase mb-30">訂單明細</h2>
+                  <h2 class="uppercase mb-30">訂單明細</h2>       
 
                   <p class="form-row form-row-first validate-required ecommerce-invalid ecommerce-invalid-required-field" id="billing_first_name_field">
                     <label for="billing_first_name">姓名
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" class="input-text" placeholder="" value="" name="billing_first_name" id="billing_first_name">
+                    <input type="text" class="input-text" placeholder="${member.name}" value="" name="billing_first_name" id="billing_first_name">
                   </p>
-                  
                   <p class="form-row form-row-wide address-field update_totals_on_change validate-required ecommerce-validated" id="billing_country_field">
-                    <label for="billing_city">請填寫郵遞區號
+                    <label for="billing_postalCode">請填寫郵遞區號
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" name="billing_postalCode" id="billing_country" class="country_to_state country_select" title="PostalCode *">
-                   
+                    <input type="text" name="billing_postalCode" id="billing_country" class="country_to_state country_select" title="PostalCode *" value="${member.postalCode}">
                   </p>
-                  
                   <p class="form-row form-row-wide address-field update_totals_on_change validate-required ecommerce-validated" id="billing_city_field">
                     <label for="billing_city">縣/市
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <select name="billing_city" id="billing_city" class="country_to_state country_select" title="City *">
-                      <option>請選擇縣市…</option>
-                      <option value="AF">Afghanistan</option>                    
-                      <option value="EH">Western Sahara</option>
-                    </select>
+                    <input type="text" name="billing_city" id="billing_city" class="country_to_state country_select" title="City *" value="${member.city}">
                   </p>
-                  
                   <p class="form-row form-row-wide address-field update_totals_on_change validate-required ecommerce-validated" id="billing_district_field">
                     <label for="billing_district">鄉鎮/市區
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <select name="billing_district" id="billing_district" class="country_to_state country_select" title="District *">
-                      <option>請選擇鄉鎮市區…</option>
-                      <option value="AF">Afghanistan</option>          
-                    </select>
+                    <input type="text" name="billing_district" id="billing_district" class="country_to_state country_select" title="District *" value="${member.district}">
                   </p>
-                  
                   <p class="form-row form-row-wide address-field update_totals_on_change validate-required ecommerce-validated" id="billing_country_field">
                     <label for="billing_road">請選擇道路或街名
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <select name="billing_road" id="billing_road" class="country_to_state country_select" title="Road *">
-                      <option>請選擇道路或街名…</option>
-                      <option value="AF">Afghanistan</option>          
-                    </select>
+                    <input type="text" name="billing_road" id="billing_road" class="country_to_state country_select" title="Road *" value="${member.road}">
                   </p>
-
                   <p class="form-row form-row-wide address-field validate-required ecommerce-invalid ecommerce-invalid-required-field" id="billing_address_1_field">
                     <label for="billing_address_1">地址
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" class="input-text" placeholder="Street address" value="" name="billing_address_1" id="billing_address_1">
+                    <input type="text" class="input-text" placeholder="Street address" value="${member.address}" name="billing_address_1" id="billing_address_1">
                   </p>
-
-                  <p class="form-row form-row-wide address-field" id="billing_address_2_field">
-                    <input type="text" class="input-text" placeholder="Apartment, suite, unit etc. (optional)" value="" name="billing_address_2" id="billing_address_2">
-                  </p>
-                  
                   <p class="form-row form-row-last validate-required validate-phone" id="billing_phone_field">
                     <label for="billing_phone">連絡電話
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" class="input-text" placeholder="" value="" name="billing_phone" id="billing_phone">
+                    <input type="text" class="input-text" placeholder="" value="${member.phoneNumber}" name="billing_phone" id="billing_phone">
                   </p>
-                   
-
                 </div>
 
-              
 
                 <div>
            
@@ -157,24 +145,25 @@
                   <h2 class="uppercase">您的訂單</h2>
                   <table class="table shop_table ecommerce-checkout-review-order-table">
                     <tbody>
+                    <% 
+		           		 List<CartItem> cartItemList = (List<CartItem>)session.getAttribute("cartItemList");
+                    		if(cartItemList==null){
+                    %>			
+                    <p>購物車是空的</p>
+                    <% 	}else{
+		            	    double sum = 0;
+                    		for(CartItem item:cartItemList){ 
+		                    	sum += item.getItemAmount(item);
+		            %>
                       <tr>
-                        <th>${item.productName}<span class="count"> x ${item.quantity}</span></th>
+                        <th><%= item.getProductName()%><span class="count"> x <%= item.getQuantity()%></span></th>
                         <td>
-                          <span class="amount">$ ${item.subAmount}</span>
+                          <span class="amount">$ <%=sum%></span>
                         </td>
                       </tr>
-                      <!--<tr>
-                        <th>California Dress<span class="count"> x 1</span></th>
-                        <td>
-                          <span class="amount">$1299.00</span>
-                        </td>
-                      </tr>
-                      <tr class="cart-subtotal">
-                        <th>Cart Subtotal</th>
-                        <td>
-                          <span class="amount">$1799.00</span>
-                        </td>
-                      </tr>  -->
+                    <%}
+                    }%>
+
                       <tr class="shipping">
                         <th>運費</th>
                         <td>
@@ -184,7 +173,7 @@
                       <tr class="order-total">
                         <th><strong>訂單總金額</strong></th>
                         <td>
-                          <strong><span class="amount">$ ${item.subAmount}</span></strong>
+                          <strong><span class="amount">$</span></strong>
                         </td>
                       </tr>
                     </tbody>
@@ -231,11 +220,9 @@
       </div> <!-- end container -->
     </section> <!-- end checkout -->
 
-
-<jsp:include page="../subviews/footer.jsp">
-    <jsp:param name="a" value="1" />
-    <jsp:param name="b" value="2" />
-</jsp:include>
+	<!-- Footer -->
+		<%@ include file="../subviews/footer.jsp" %>
+	<!-- end footer -->
 
   </main> <!-- end main-wrapper -->
 

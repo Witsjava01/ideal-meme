@@ -61,11 +61,11 @@ public class OrderDaoImpl extends BaseDao<Order> implements OrderDao<Order> {
 	
 	
 	@Override
-	public void addOrder(Connection conn, Order order) throws SQLException {
+	public Integer addOrder(Connection conn, Order order) throws SQLException {
 		String insertOrderSql ="INSERT INTO `order` (phoneNumber, created_time, order_status, order_amount, shipping_type, payment_type,"
 				+ " recipient_name, recipient_phoneNumber, recipient_postalCode, recipient_city, recipient_district, recipient_road, recipient_address) "
 				+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
-		insert(conn,insertOrderSql,
+		return insert(conn,insertOrderSql,
 				order.getPhoneNumber(),
 				order.getCreatedTime(),
 				order.getOrderStatus(),
@@ -80,6 +80,6 @@ public class OrderDaoImpl extends BaseDao<Order> implements OrderDao<Order> {
 				order.getRecipientRoad(),
 				order.getRecipientAddress()
 				);
+		 
 	}
-	
 }

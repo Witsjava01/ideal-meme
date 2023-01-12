@@ -29,6 +29,7 @@ public interface MemberService {
 
 	public ServiceResult<Member> findMemberById(Integer id);
 
+	public Member findMemberByMemberId(Integer id);
 }
 
 

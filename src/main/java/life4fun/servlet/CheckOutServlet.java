@@ -20,12 +20,15 @@ import life4fun.entity.CartItem;
 import life4fun.entity.Member;
 import life4fun.entity.Order;
 import life4fun.entity.OrderDetails;
+import life4fun.entity.StreetName;
 import life4fun.enumerate.PaymentType;
 import life4fun.enumerate.ShippingType;
 import life4fun.service.MemberService;
 import life4fun.service.OrderService;
+import life4fun.service.StreetNameService;
 import life4fun.service.impl.MemberServiceImpl;
 import life4fun.service.impl.OrderServiceImpl;
+import life4fun.service.impl.StreetNameServiceImpl;
 import life4fun.utils.ApplicationUtils;
 import life4fun.utils.ConstantUtils;
 import life4fun.utils.JsonUtils;
@@ -59,7 +62,7 @@ public class CheckOutServlet extends HttpServlet {
 		request.setAttribute(ApplicationUtils.STATIC_SOURCE_KEY, STATIC_SOURCE);
 		request.setCharacterEncoding("UTF-8");
 		
-		String method = request.getParameter("method") == null ? "checkout" : request.getParameter("method");
+		String method = request.getParameter("method") == null ? "login" : request.getParameter("method");
 		System.out.println("CheckOutServlet method -> " + method);
 		
 		switch (method) {
@@ -82,17 +85,33 @@ public class CheckOutServlet extends HttpServlet {
 	
 	protected void checkout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		//1. 驗證是否登入
+		String phoneNumber;
+		Integer memberId = Integer.valueOf((String) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER_ID));
+		Member sessionMember = memberService.findMemberById(memberId).getData();
+		phoneNumber = sessionMember.getPhoneNumber();
+		if (StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
+			response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
+			return;
+		}	
 		
+				
+		//2.取出session中的member(登入狀態)
+		Integer memberId1=(Integer)session.getAttribute("memberId");
+		System.out.println("memberId1"+memberId1);
 		
-		//1.讀取request的Form Data: productId, quantity
-		String productId = request.getParameter("productId");
-		String quantity = request.getParameter("quantity");
-		System.out.printf("productId:%s, quantity:%s\n", productId, quantity);
+		if(memberId1==null) {
+			request.getRequestDispatcher("../member/login.jsp").forward(request, response);
+		}
 		
-		request.setAttribute("quantity", quantity);
-//		request.getRequestDispatcher(JSP_SOURCE + "check_out.jsp").forward(request, response);
-		request.getRequestDispatcher("/jsp/checkout/check_out.jsp").forward(request, response);
+		MemberService memberService = new MemberServiceImpl();
+		Member member = memberService.findMemberByMemberId(memberId1);
+		request.setAttribute("member",member);
+		
+		//3.回傳前端
+		request.getRequestDispatcher(JSP_SOURCE + "check_out.jsp").forward(request, response);
 	}
 	
 	public void sendOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
