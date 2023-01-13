@@ -53,7 +53,7 @@ checkCart=function(id){
 		success: function(response) {
 			alert("進入結帳!");
 			console.log(response.msg);
-			window.location.assign("/life4fun/jsp/cart/cart.jsp");			
+			window.location.assign("/life4fun/CartServlet?method=showCart");			
 		},
 		error: function() {
 			alert("失敗");

@@ -126,7 +126,11 @@ public class CartServlet extends HttpServlet {
 		}	
 
 	}
-	
+	public void showCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		//request.getRequestDispatcher("/jsp/cart/cart.jsp").forward(request, response);
+		request.getRequestDispatcher(JSP_SOURCE+"cart.jsp").forward(request, response);
+	}
 	
 		
 	public void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
