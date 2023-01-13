@@ -77,8 +77,8 @@ public class TestOrderDao {
 		order.setCreatedTime(null);//todo
 		order.setOrderStatus("OD003");
 		order.setOrderAmount(8000.0);//double
-		order.setShippingType(ShippingType.SHOP);//todo，沒顯示中文
-		order.setPaymentType(PaymentType.SHOP);//todo，沒顯示中文
+		order.setShippingType("到店取貨");//todo，沒顯示中文
+		order.setPaymentType("");//todo，沒顯示中文
 		order.setRecipientName("ann");//todo
 		order.setRecipientPhoneNumber("0977666777");
 		order.setRecipientPostalCode("201");

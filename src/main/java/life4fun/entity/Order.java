@@ -38,10 +38,10 @@ public class Order {
 	private Double orderAmount;
 	
 	@Column(name="shipping_type")
-	private ShippingType shippingType;
+	private String shippingType;
 	
 	@Column(name="payment_type")
-	private PaymentType paymentType;
+	private String paymentType;
 	
 	@Column(name="recipient_name")
 	private String recipientName;
