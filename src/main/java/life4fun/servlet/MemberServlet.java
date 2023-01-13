@@ -195,7 +195,7 @@ public class MemberServlet extends HttpServlet {
 	public void register(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setAttribute("isUpdate", false);
-		request.setAttribute("streetName", streetNameService.findAllStreetName().getData());
+		request.setAttribute("streetNameList", streetNameService.findAllStreetName().getData());
 		request.getRequestDispatcher(JSP_SOURCE + "member.jsp").forward(request, response);
 	}
 	
