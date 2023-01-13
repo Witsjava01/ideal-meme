@@ -180,7 +180,6 @@ public class CartServlet extends HttpServlet {
 						//System.out.println("cartItemList: "+cartItemList);
 						session.setAttribute("cartItemCount", cartItemList.size());
 						session.setAttribute("cartItemList", cartItemList);//存入session
-						session.setAttribute("memberId","933421481");
 					}else {
 						errorsList.add("加入購物車時qty必須>0: " + qty);	
 					}	
