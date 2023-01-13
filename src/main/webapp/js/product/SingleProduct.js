@@ -78,7 +78,7 @@ window.onload = function() {
               
               <div class="quantity">
 
-                <label>Quantity</label>                 
+                <label>數量</label>                 
                 <select name="quantity" id="quantity__select" class="quantity__select" onchange="quantity(this.value)">
 
                   <option value="1">1</option>
