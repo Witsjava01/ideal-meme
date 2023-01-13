@@ -24,7 +24,7 @@ window.onload = function() {
 		var product= JSON.parse(Saleproduct);
 			$('#singlePage').append(`
 				 <div class="col-md-6 product-slider mb-50">
-
+			
             <div class="flickity flickity-slider-wrap mfp-hover" id="gallery-main">
 
               <div class="gallery-cell">
@@ -78,7 +78,7 @@ window.onload = function() {
               
               <div class="quantity">
                 <label>Quantity</label>                 
-                <select name="quantity" id="quantity__select" class="quantity__select">
+                <select name="quantity" id="quantity__select" class="quantity__select" onchange="quantity(this.value)">
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -92,13 +92,13 @@ window.onload = function() {
               <div class="col">
                 <a href="#" class="btn btn-lg btn-color product-single__add-to-cart">
                   <i class="ui-bag"></i>
-                  <span>加入購物車</span>
+                  <span id="addtoCart" onclick="addtoCart(${product.productId})">加入購物車</span>
                 </a>
               </div>
               <div class="col">
                 <a href="#" class="btn btn-lg btn-dark product-single__add-to-wishlist">
                   <i class="ui-heart"></i>
-                  <span>願望清單</span>
+                  <span onclick="checkCart(${product.productId})">直接結帳</span>
                 </a>
               </div>
             </div>            
