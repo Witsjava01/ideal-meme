@@ -4,8 +4,8 @@ $(document).ready(function() {
 	});
 	$('#loginButton').on("click", function() {
 		var inputData = {};
-		if ($('input[id="account"]').val() === "" || $('input[id="password"]').val() === "" ||
-			$('input[id="account"]').val() === null || $('input[id="password"]').val() === null) {
+		if ($('#account').val() === "" || $('#password').val() === "" ||
+			$('#account').val() === null || $('#password').val() === null) {
 			alert('請輸入帳號密碼!')
 			return false;
 		} else {
