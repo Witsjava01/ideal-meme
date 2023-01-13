@@ -4,7 +4,7 @@
 <html>
 <head>
   <title>life4fun | 首頁</title>
-  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script>
 	var webApplicationPath = "${webApplicationPath}";
 </script>
@@ -47,6 +47,7 @@
 
 </head>
 <body>
+
 
   <!-- Preloader -->
   <div class="loader-mask">
@@ -233,8 +234,8 @@
             <div class="top-bar__right">
 
               <!-- Sign In -->
-              <a href="login.html" class="top-bar__item top-bar__sign-in" id="top-bar__sign-in"><i class="ui-user"></i>登入</a>
-
+  <a href="login.html" class="top-bar__item top-bar__sign-in" id="top-bar__sign-in">
+              <i class="ui-user"></i><a href="${webApplicationPath}/MemberServlet?method=login" id="SignIn_A">Sign In</a></a>
               <!-- Wishlist -->
               <a href="#" class="top-bar__item"><i class="ui-heart"></i></a>
 
@@ -384,37 +385,47 @@
     </header> <!-- end navigation -->
 
     <!-- Hero Slider -->
-    <section class="hero">
-      <div id="owl-hero" class="owl-carousel owl-theme owl-carousel--dots-inside">        
-
-        <div class="hero__slide" style="background-image: url(life4fun/img/hero/1.jpg)">
-          <div class="container text-center">
-            <h1 class="hero__title">第二組的專題 主畫面</h1>
-            <a href="#" class="hero__link">開始購物</a>
-          </div>          
+    <div class="bd-example">
+  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="${webApplicationPath}/static/image/3.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>              <img class="logo__img" src="${webApplicationPath}/static/picture/logo_life4fun.png" alt="logo" width="100" height="300">
+</h5>
+          
         </div>
-
-        <div class="hero__slide" style="background-image: url(life4fun/img/hero/2.jpg)">
-          <div class="container relative">
-            <div class="hero__holder">
-              <h1 class="hero__title-1">dope<br>street<br>wear</h1>
-              <a href="#" class="hero__link-1 btn btn-lg btn-dark"><span>New Arrivals</span></a>
-            </div>
-          </div>
+      </div>
+      <div class="carousel-item">
+        <img src="${webApplicationPath}/static/image/3.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Second slide label</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
-
-        <div class="hero__slide" style="background-image: url(life4fun/static/image/3.jpg)">
-          <div class="container text-center">
-            <div class="hero__holder-1">
-              <h1 class="hero__title-2">第二組的專題 主畫面</h1>
-              <!-- <h3 class="hero__subtitle">Sale 50% off. Get only trendy items</h3> -->
-              <a href="#" class="hero__link-1 btn btn-lg btn-color"><span>開始購物</span></a>
-            </div>
-          </div>
+      </div>
+      <div class="carousel-item">
+        <img src="life4fun/img/hero/1.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Third slide label</h5>
+          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
         </div>
-
-      </div> <!-- end owl -->
-    </section>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
      <!-- end hero slider -->
 
     

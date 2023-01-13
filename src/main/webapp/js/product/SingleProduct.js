@@ -69,7 +69,7 @@ window.onload = function() {
 
             <div class="size-quantity clearfix">
               <div class="size">
-                <label>Size</label>
+                <label>尺寸</label>
                 <select name="size" id="size__select" class="size__select">
                   <option value="xs">${product.size}</option>
                   
@@ -77,8 +77,13 @@ window.onload = function() {
               </div>
               
               <div class="quantity">
+<<<<<<< Upstream, based on branch 'main' of https://github.com/Witsjava01/life4fun.git
                 <label>Quantity</label>                 
                 <select name="quantity" id="quantity__select" class="quantity__select" onchange="quantity(this.value)">
+=======
+                <label>數量</label>                 
+                <select name="quantity" id="quantity__select" class="quantity__select" >
+>>>>>>> 0173d28 20230113
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -90,7 +95,7 @@ window.onload = function() {
 
             <div class="row row-10 product-single__actions clearfix">
               <div class="col">
-                <a href="#" class="btn btn-lg btn-color product-single__add-to-cart">
+                <a href="#" class="btn btn-lg btn-color product-single__add-to-cart" >
                   <i class="ui-bag"></i>
                   <span id="addtoCart" onclick="addtoCart(${product.productId})">加入購物車</span>
                 </a>
@@ -180,10 +185,9 @@ window.onload = function() {
 
 	
 
-
-
 	})
 	
+
 
 {
 var settingsArrivals = {
