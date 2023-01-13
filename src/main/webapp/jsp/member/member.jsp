@@ -203,36 +203,14 @@
 
 		<!-- Navigation -->
 		<header class="nav">
-
 			<div class="nav__holder nav--sticky">
 				<div class="container relative">
 
 					<!-- Top Bar -->
 					<div class="top-bar d-none d-lg-flex">
 
-						<!-- Currency / Language -->
-						<ul class="top-bar__currency-language">
-							<li class="top-bar__language"><a href="#">English</a>
-								<div class="top-bar__language-dropdown">
-									<ul>
-										<li><a href="#">English</a></li>
-										<li><a href="#">Spanish</a></li>
-										<li><a href="#">German</a></li>
-										<li><a href="#">Chinese</a></li>
-									</ul>
-								</div></li>
-							<li class="top-bar__currency"><a href="#">USD</a>
-								<div class="top-bar__currency-dropdown">
-									<ul>
-										<li><a href="#">USD</a></li>
-										<li><a href="#">EUR</a></li>
-									</ul>
-								</div></li>
-						</ul>
 
-						<!-- Promo -->
-						<p class="top-bar__promo text-center">Free shipping on orders
-							over $50</p>
+
 
 						<!-- Sign in / Wishlist / Cart -->
 						<div class="top-bar__right">
@@ -252,7 +230,8 @@
 
 										<div class="nav-cart__item clearfix">
 											<div class="nav-cart__img">
-												<a href="#"> <img src="static/picture/cart_small_1.jpg"
+												<a href="#"> <img
+													src="${webApplicationPath}/static/picture/cart_small_1.jpg"
 													alt="">
 												</a>
 											</div>
@@ -269,7 +248,8 @@
 
 										<div class="nav-cart__item clearfix">
 											<div class="nav-cart__img">
-												<a href="#"> <img src="static/picture/cart_small_2.jpg"
+												<a href="#"> <img
+													src="${webApplicationPath}/static/picture/cart_small_2.jpg"
 													alt="">
 												</a>
 											</div>
@@ -307,7 +287,8 @@
 					<div class="flex-parent">
 
 						<!-- Mobile Menu Button -->
-						<button class="nav-icon-toggle" id="nav-icon-toggle">
+						<button class="nav-icon-toggle" id="nav-icon-toggle"
+							aria-label="Open mobile menu">
 							<span class="nav-icon-toggle__box"> <span
 								class="nav-icon-toggle__inner"></span>
 							</span>
@@ -315,106 +296,33 @@
 						<!-- end mobile menu button -->
 
 						<!-- Logo -->
-						<a href="index.html" class="logo"> <img class="logo__img"
-							src="static/picture/logo_light.png" alt="logo">
+						<a href="${webApplicationPath}/jsp/product/index.jsp" class="logo">
+							<img class="logo__img"
+							src="${webApplicationPath}/static/picture/logo_life4fun.png"
+							alt="logo" width="100" height="300">
+
 						</a>
+
 
 						<!-- Nav-wrap -->
 						<nav class="flex-child nav__wrap d-none d-lg-block">
 							<ul class="nav__menu">
 
-								<li class="nav__dropdown active"><a href="">Men</a>
-									<ul class="nav__dropdown-menu">
-										<li><a href="#">T-shirt</a></li>
-										<li><a href="#">Hoodie &amp; Jackets</a></li>
-										<li><a href="#">Suits</a></li>
-										<li><a href="#">Shorts</a></li>
-									</ul></li>
+								<li class="nav__dropdown active"><a
+									href="${webApplicationPath}/jsp/product/catalog.jsp?catalog=A">飾品</a>
 
-								<li class="nav__dropdown"><a href="">Women</a>
-									<ul class="nav__dropdown-menu">
-										<li><a href="#">Underwear</a></li>
-										<li><a href="#">Hipster</a></li>
-										<li><a href="#">Dress</a></li>
-										<li><a href="#">Hoodie &amp; Jackets</a></li>
-										<li><a href="#">Tees</a></li>
-									</ul></li>
+								</li>
 
-								<li class="nav__dropdown"><a href="">Accessories</a>
-									<ul class="nav__dropdown-menu nav__megamenu">
-										<li>
-											<div class="nav__megamenu-wrap">
-												<div class="row">
+								<li class="nav__dropdown"><a
+									href="${webApplicationPath}/jsp/product/catalog.jsp?catalog=H">居家小物</a>
 
-													<div class="col nav__megamenu-item">
-														<a href="#" class="nav__megamenu-title">All
-															accessories</a>
-														<ul class="nav__megamenu-list">
-															<li><a href="#">Wallets</a></li>
-															<li><a href="#">Scarfs</a></li>
-															<li><a href="#">Belts</a></li>
-															<li><a href="#">Shoes</a></li>
-														</ul>
-													</div>
+								</li>
 
-													<div class="col nav__megamenu-item">
-														<a href="#" class="nav__megamenu-title">for her</a>
-														<ul class="nav__megamenu-list">
-															<li><a href="#">Underwear</a></li>
-															<li><a href="#">Hipster</a></li>
-															<li><a href="#">Dress</a></li>
-															<li><a href="#">Hoodie &amp; Jackets</a></li>
-															<li><a href="#">Tees</a></li>
-														</ul>
-													</div>
+								<li class="nav__dropdown"><a href="catalog.html">美妝保養</a></li>
 
-													<div class="col nav__megamenu-item">
-														<a href="#" class="nav__megamenu-title">for him</a>
-														<ul class="nav__megamenu-list">
-															<li><a href="#">T-shirt</a></li>
-															<li><a href="#">Hoodie &amp; Jackets</a></li>
-															<li><a href="#">Suits</a></li>
-															<li><a href="#">Shorts</a></li>
-														</ul>
-													</div>
+								<li class="nav__dropdown"><a href="#">男士保養</a></li>
 
-													<div class="col nav__megamenu-item">
-														<a href="#" class="nav__megamenu-title">watches</a>
-														<ul class="nav__megamenu-list">
-															<li><a href="#">Smart Watches</a></li>
-															<li><a href="#">Diving Watches</a></li>
-															<li><a href="#">Sport Watches</a></li>
-															<li><a href="#">Classic Watches</a></li>
-														</ul>
-													</div>
-
-													<div class="col nav__megamenu-item">
-														<a href="#"><img
-															src="static/picture/megamenu_banner.png" alt=""></a>
-													</div>
-
-												</div>
-											</div>
-										</li>
-									</ul></li>
-
-								<li class="nav__dropdown"><a href="#">News</a>
-									<ul class="nav__dropdown-menu">
-										<li><a href="blog-standard.html">Blog Standard</a></li>
-										<li><a href="blog-single.html">Single Post</a></li>
-									</ul></li>
-
-								<li class="nav__dropdown"><a href="contact.html">Pages</a>
-									<ul class="nav__dropdown-menu">
-										<li><a href="">Catalog</a></li>
-										<li><a href="single-product.html">Single Product</a></li>
-										<li><a href="cart.html">Cart</a></li>
-										<li><a href="checkout.html">Checkout</a></li>
-										<li><a href="about.html">About</a></li>
-										<li><a href="contact.html">Contact</a></li>
-										<li><a href="faq.html">FAQ</a></li>
-										<li><a href="404.html">404</a></li>
-									</ul></li>
+								<li class="nav__dropdown"><a href="contact.html">其他</a></li>
 
 							</ul>
 							<!-- end menu -->
@@ -436,24 +344,22 @@
 
 
 						<!-- Mobile Wishlist -->
-						<a href="#" class="nav__mobile-wishlist d-lg-none"> <i
-							class="ui-heart"></i>
+						<a href="#" class="nav__mobile-wishlist d-lg-none"
+							aria-label="Mobile wishlist"> <i class="ui-heart"></i>
 						</a>
 
 						<!-- Mobile Cart -->
-						<a href="cart.html" class="nav__mobile-cart d-lg-none"> <i
-							class="ui-bag"></i> <span class="nav__mobile-cart-amount">(2)</span>
+						<a href="${webApplicationPath}/CartServlet?method=showCart"
+							class="nav__mobile-cart d-lg-none"> <i class="ui-bag"></i> <span
+							class="nav__mobile-cart-amount">(2)</span>
 						</a>
-
-
-
-
 					</div>
 					<!-- end flex-parent -->
 				</div>
 				<!-- end container -->
 
 			</div>
+
 		</header>
 		<!-- end navigation -->
 
@@ -474,33 +380,38 @@
 										<div class="row row-12">
 											<div class="col-md-12">
 												<div class="row row-12">
-													<p style="color:red;margin-left:15px">*</p>
+													<p style="color: red; margin-left: 15px">*</p>
 													<p>姓名</p>
 												</div>
-												<input type="text" class="input-text inputData" value="" maxlength="5"
-													placeholder="name" name="name" id="name"onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" 
-													onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" 
+												<input type="text" class="input-text inputData" value=""
+													maxlength="5" placeholder="name" name="name" id="name"
+													onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"
+													onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))"
 													required="required">
 											</div>
 											<div class="col-md-12">
 												<div class="row row-12">
-													<p style="color:red;margin-left:15px">*</p>
+													<p style="color: red; margin-left: 15px">*</p>
 													<p>電話號碼</p>
 												</div>
 												<input type="text" class="input-text inputData" value=""
-													placeholder="phoneNumber" name="phoneNumber" id="phoneNumber" maxlength="15"
+													placeholder="phoneNumber" name="phoneNumber"
+													id="phoneNumber" maxlength="15"
 													oninput="if(value.length>15)value=value.slice(0,15)"
-                  									onkeypress="return event.charCode>=48 && event.charCode<=57" disabled>
+													onkeypress="return event.charCode>=48 && event.charCode<=57"
+													disabled>
 											</div>
 											<div class="col-md-12" id="passwordDiv">
 												<div class="row row-12">
-													<p style="color:red;margin-left:15px">*</p>
+													<p style="color: red; margin-left: 15px">*</p>
 													<p>密碼</p>
 												</div>
-												<input type="password" class="input-text inputData" value="" maxlength="12"
-													placeholder="password" name="password" id="password"
+												<input type="password" class="input-text inputData" value=""
+													maxlength="12" placeholder="password" name="password"
+													id="password"
 													oninput="if(value.length>12)value=value.slice(0,12)"
-													onKeyUp="value=value.replace(/[\W]/g,'')" required="required">
+													onKeyUp="value=value.replace(/[\W]/g,'')"
+													required="required">
 											</div>
 											<div class="col-md-4">
 												<p class="form-row form-row-wide">性別</p>
@@ -511,32 +422,30 @@
 											</div>
 											<div class="col-md-4">
 												<p class="form-row form-row-wide">年齡</p>
-												<input
-													type="text" class="form-control inputData" id="age"
+												<input type="text" class="form-control inputData" id="age"
 													placeholder="age" disabled>
 											</div>
 											<div class="col-md-12">
 												<div class="row row-12">
-													<p style="color:red;margin-left:15px">*</p>
+													<p style="color: red; margin-left: 15px">*</p>
 													<p>生日</p>
 												</div>
-												<p style="color:red;" id="age_p" hidden="hidden">年齡不可小於12歲!</p>
+												<p style="color: red;" id="age_p" hidden="hidden">年齡不可小於12歲!</p>
 												<input type="date" class="input-text inputData" value=""
 													placeholder="YYYY-MM-DD" name="birthday" id="birthday"
 													oninput="calculateAge(this)" required="required">
 											</div>
 											<div class="col-md-12">
 												<p>E-mail</p>
-												<p style="color:red;" id="eamil_p" hidden="hidden">E-mail格式不正確!</p>
+												<p style="color: red;" id="eamil_p" hidden="hidden">E-mail格式不正確!</p>
 												<input type="text" class="input-text inputData" value=""
 													placeholder="E-mail" name="email" id="email" maxlength="30"
 													oninput="IsEmail(this.value)">
 											</div>
 											<div class="col-md-12">
 												<p class="form-row form-row-wide">郵遞區號</p>
-												<input
-													type="text" class="form-control inputData" id="postalCode"
-													placeholder="郵遞區號" value="" disabled>
+												<input type="text" class="form-control inputData"
+													id="postalCode" placeholder="郵遞區號" value="" disabled>
 											</div>
 											<div class="col-md-4">
 												<p class="form-row form-row-wide">縣/市</p>
@@ -547,7 +456,8 @@
 											<div class="col-md-4">
 												<p class="form-row form-row-wide">區域</p>
 												<select id="district" class="form-select">
-													<option id="districtOption" value="districtDefault" selected>請選擇區域</option>
+													<option id="districtOption" value="districtDefault"
+														selected>請選擇區域</option>
 												</select>
 											</div>
 											<div class="col-md-4">
@@ -557,9 +467,10 @@
 												</select>
 											</div>
 											<div class="col-md-12">
-												<label for="" class="form-label">地址</label> 
-												<input type="text" class="form-control inputData" id="address" placeholder="地址" maxlength="30"
-												onkeyup="this.value=this.value.replace(/\s+/g,'')">
+												<label for="" class="form-label">地址</label> <input
+													type="text" class="form-control inputData" id="address"
+													placeholder="地址" maxlength="30"
+													onkeyup="this.value=this.value.replace(/\s+/g,'')">
 											</div>
 										</div>
 									</div>
@@ -573,17 +484,23 @@
 							<div class="col-md col-sm-6">
 								<div class="" id="revise">
 									<p>
-						              <input type="submit" id="reviseButton" name="reviseButton" value="修改" class="btn btn-md btn-dark btn-button" style="margin-left :15px;">
-						            </p>    
+										<input type="submit" id="reviseButton" name="reviseButton"
+											value="修改" class="btn btn-md btn-dark btn-button"
+											style="margin-left: 15px;">
+									</p>
 								</div>
 								<div class="row justify-content" id="register">
-								    <div class="col-4">
-								      <input type="submit" id="registerButton" name="registerButton" value="註冊" class="btn btn-md btn-dark btn-button" style="margin-left :15px;">
-						             </div>
-								    <div class="col-4" align="center">
-								      <input type="submit" id="loginButton" name="loginButton" value="上一頁" class="btn btn-md btn-color btn-button" style="margin-right :15px;">
-						            </div>
-								 </div>
+									<div class="col-4">
+										<input type="submit" id="registerButton" name="registerButton"
+											value="註冊" class="btn btn-md btn-dark btn-button"
+											style="margin-left: 15px;">
+									</div>
+									<div class="col-4" align="center">
+										<input type="submit" id="loginButton" name="loginButton"
+											value="上一頁" class="btn btn-md btn-color btn-button"
+											style="margin-right: 15px;">
+									</div>
+								</div>
 							</div>
 						</div>
 						<!-- end row -->
@@ -595,21 +512,25 @@
 					<aside class="col-lg-3 sidebar left-sidebar">
 
 						<!-- member -->
-						<div class="widget widget_categories widget--bottom-line" id="memberList">
+						<div class="widget widget_categories widget--bottom-line"
+							id="memberList">
 							<h4 class="widget-title">會員中心</h4>
 							<ul>
-								<li style="color:orange">個人資料</li>
-								<li><a href="${webApplicationPath}/MemberServlet?method=password">修改密碼</a></li>
-								<li><a href="${webApplicationPath}/OrderServlet?method=order">訂單查詢</a></li>
+								<li style="color: orange">個人資料</li>
+								<li><a
+									href="${webApplicationPath}/MemberServlet?method=password">修改密碼</a></li>
+								<li><a
+									href="${webApplicationPath}/OrderServlet?method=order">訂單查詢</a></li>
 							</ul>
 						</div>
 						<div id="signOut">
-						<input type="submit" id="signOutButton" name="signOutButton" value="登出" class="btn btn-md btn-dark btn-button">
+							<input type="submit" id="signOutButton" name="signOutButton"
+								value="登出" class="btn btn-md btn-dark btn-button">
 						</div>
-						
+
 					</aside>
 					<!-- end sidebar -->
-					
+
 				</div>
 				<!-- end row -->
 			</div>
