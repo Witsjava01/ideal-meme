@@ -77,13 +77,10 @@ window.onload = function() {
               </div>
               
               <div class="quantity">
-<<<<<<< Upstream, based on branch 'main' of https://github.com/Witsjava01/life4fun.git
+
                 <label>Quantity</label>                 
                 <select name="quantity" id="quantity__select" class="quantity__select" onchange="quantity(this.value)">
-=======
-                <label>數量</label>                 
-                <select name="quantity" id="quantity__select" class="quantity__select" >
->>>>>>> 0173d28 20230113
+
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>

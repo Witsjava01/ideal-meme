@@ -4,7 +4,9 @@
 <html lang="en">
 <head>
   <title id="title"></title>
-
+<script>
+	var webApplicationPath = "${webApplicationPath}";
+</script>
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -403,7 +405,7 @@
       </div> <!-- end container -->
     </section> <!-- end related products -->
 
-    <!-- Footer -->
+      <!-- Footer -->
     <footer class="footer">
       <div class="container">
         <div class="footer__widgets">
