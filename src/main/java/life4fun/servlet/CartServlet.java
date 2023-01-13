@@ -68,6 +68,9 @@ public class CartServlet extends HttpServlet {
 		case "updateCart":
 			updateCart(request, response);
 			break;
+		case "showCart":
+			updateCart(request, response);
+			break;
 		case "cart":
 		default:
 			cart(request, response);
