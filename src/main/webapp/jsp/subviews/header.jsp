@@ -165,65 +165,10 @@
 							href="${webApplicationPath}/MemberServlet?method=login"
 							id="SignIn_A">Sign In</a></a>
 
-						<!-- Wishlist -->
-						<a href="#" class="top-bar__item"><i class="ui-heart"></i></a>
 
 						<div class="top-bar__item nav-cart">
-							<a href="cart.html"> <i class="ui-bag"></i>(2)
+							<a href="${webApplicationPath}/CartServlet?method=showCart"> <i class="ui-bag"></i>(2)
 							</a>
-							<div class="nav-cart__dropdown">
-								<div class="nav-cart__items">
-
-									<div class="nav-cart__item clearfix">
-										<div class="nav-cart__img">
-											<a href="#"> <img
-												src="${webApplicationPath}/static/picture/cart_small_1.jpg"
-												alt="">
-											</a>
-										</div>
-										<div class="nav-cart__title">
-											<a href="#"> Classic White Tailored Shirt </a>
-											<div class="nav-cart__price">
-												<span>1 x</span> <span>19.99</span>
-											</div>
-										</div>
-										<div class="nav-cart__remove">
-											<a href="#"><i class="ui-close"></i></a>
-										</div>
-									</div>
-
-									<div class="nav-cart__item clearfix">
-										<div class="nav-cart__img">
-											<a href="#"> <img
-												src="${webApplicationPath}/static/picture/cart_small_2.jpg"
-												alt="">
-											</a>
-										</div>
-										<div class="nav-cart__title">
-											<a href="#"> Sport Hi Adidas </a>
-											<div class="nav-cart__price">
-												<span>1 x</span> <span>29.00</span>
-											</div>
-										</div>
-										<div class="nav-cart__remove">
-											<a href="#"><i class="ui-close"></i></a>
-										</div>
-									</div>
-
-								</div>
-								<!-- end cart items -->
-
-								<div class="nav-cart__summary">
-									<span>Cart Subtotal</span> <span class="nav-cart__total-price">$1799.00</span>
-								</div>
-
-								<div class="nav-cart__actions mt-20">
-									<a href="javascript:;" class="btn btn-md btn-light"><span>View
-											Cart</span></a> <a href="javascript:;"
-										class="btn btn-md btn-color mt-10"><span>Proceed to
-											Checkout</span></a>
-								</div>
-							</div>
 						</div>
 					</div>
 
@@ -296,8 +241,9 @@
 
 					<!-- Mobile Cart -->
 					<a href="${webApplicationPath}/CartServlet?method=showCart"
-						class="nav__mobile-cart d-lg-none"> <i class="ui-bag"></i> <span
-						class="nav__mobile-cart-amount">(2)</span>
+						class="nav__mobile-cart d-lg-none"> 
+						<i class="ui-bag"></i> 
+						<span class="nav__mobile-cart-amount"></span>
 					</a>
 				</div>
 				<!-- end flex-parent -->
