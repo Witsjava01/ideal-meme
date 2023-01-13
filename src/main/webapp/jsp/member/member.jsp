@@ -55,313 +55,255 @@
 </style>
 </head>
 <body>
+<!-- Preloader -->
+<div class="loader-mask">
+	<div class="loader">
+		<div></div>
+	</div>
+</div>
 
-	<!-- Preloader -->
-	<div class="loader-mask">
-		<div class="loader">
-			<div></div>
-		</div>
+<!-- Mobile Sidenav -->
+<header class="sidenav" id="sidenav">
+	<!-- Search -->
+	<div class="sidenav__search-mobile">
+		<form method="get" class="sidenav__search-mobile-form">
+			<input type="search" class="sidenav__search-mobile-input"
+				placeholder="Search...">
+			<button type="submit" class="sidenav__search-mobile-submit">
+				<i class="ui-search"></i>
+			</button>
+		</form>
 	</div>
 
-
-	<!-- Mobile Sidenav -->
-	<header class="sidenav" id="sidenav">
-		<!-- Search -->
-		<div class="sidenav__search-mobile">
-			<form method="get" class="sidenav__search-mobile-form">
-				<input type="search" class="sidenav__search-mobile-input"
-					placeholder="Search...">
-				<button type="submit" class="sidenav__search-mobile-submit">
-					<i class="ui-search"></i>
+	<nav>
+		<ul class="sidenav__menu">
+			<li><a href="#" class="sidenav__menu-link">Men</a>
+				<button class="sidenav__menu-toggle">
+					<i class="ui-arrow-down"></i>
 				</button>
-			</form>
-		</div>
+				<ul class="sidenav__menu-dropdown">
+					<li><a href="#" class="sidenav__menu-link">T-shirt</a></li>
+					<li><a href="#" class="sidenav__menu-link">Hoodie &amp;
+							Jackets</a></li>
+					<li><a href="#" class="sidenav__menu-link">Suits</a></li>
+					<li><a href="#" class="sidenav__menu-link">Shorts</a></li>
+				</ul></li>
 
-		<nav>
-			<ul class="sidenav__menu">
-				<li><a href="#" class="sidenav__menu-link">Men</a>
-					<button class="sidenav__menu-toggle">
-						<i class="ui-arrow-down"></i>
-					</button>
-					<ul class="sidenav__menu-dropdown">
-						<li><a href="#" class="sidenav__menu-link">T-shirt</a></li>
-						<li><a href="#" class="sidenav__menu-link">Hoodie &amp;
-								Jackets</a></li>
-						<li><a href="#" class="sidenav__menu-link">Suits</a></li>
-						<li><a href="#" class="sidenav__menu-link">Shorts</a></li>
-					</ul></li>
+			<li><a href="#" class="sidenav__menu-link">Women</a>
+				<button class="sidenav__menu-toggle">
+					<i class="ui-arrow-down"></i>
+				</button>
+				<ul class="sidenav__menu-dropdown">
+					<li><a href="#" class="sidenav__menu-link">Underwear</a></li>
+					<li><a href="#" class="sidenav__menu-link">Hipster</a></li>
+					<li><a href="#" class="sidenav__menu-link">Dress</a></li>
+					<li><a href="#" class="sidenav__menu-link">Hoodie &amp;
+							Jackets</a></li>
+					<li><a href="#" class="sidenav__menu-link">Tees</a></li>
+				</ul></li>
 
-				<li><a href="#" class="sidenav__menu-link">Women</a>
-					<button class="sidenav__menu-toggle">
-						<i class="ui-arrow-down"></i>
-					</button>
-					<ul class="sidenav__menu-dropdown">
-						<li><a href="#" class="sidenav__menu-link">Underwear</a></li>
-						<li><a href="#" class="sidenav__menu-link">Hipster</a></li>
-						<li><a href="#" class="sidenav__menu-link">Dress</a></li>
-						<li><a href="#" class="sidenav__menu-link">Hoodie &amp;
-								Jackets</a></li>
-						<li><a href="#" class="sidenav__menu-link">Tees</a></li>
-					</ul></li>
+			<li><a href="#" class="sidenav__menu-link">Accessories</a>
+				<button class="sidenav__menu-toggle">
+					<i class="ui-arrow-down"></i>
+				</button>
+				<ul class="sidenav__menu-dropdown">
+					<li><a href="#" class="sidenav__menu-link">All accessories</a>
+						<button class="sidenav__menu-toggle">
+							<i class="ui-arrow-down"></i>
+						</button>
+						<ul class="sidenav__menu-dropdown">
+							<li><a href="#" class="sidenav__menu-link">Wallets</a></li>
+							<li><a href="#" class="sidenav__menu-link">Scarfs</a></li>
+							<li><a href="#" class="sidenav__menu-link">Shirt</a></li>
+							<li><a href="#" class="sidenav__menu-link">Shoes</a></li>
+						</ul></li>
 
-				<li><a href="#" class="sidenav__menu-link">Accessories</a>
-					<button class="sidenav__menu-toggle">
-						<i class="ui-arrow-down"></i>
-					</button>
-					<ul class="sidenav__menu-dropdown">
-						<li><a href="#" class="sidenav__menu-link">All
-								accessories</a>
-							<button class="sidenav__menu-toggle">
-								<i class="ui-arrow-down"></i>
-							</button>
-							<ul class="sidenav__menu-dropdown">
-								<li><a href="#" class="sidenav__menu-link">Wallets</a></li>
-								<li><a href="#" class="sidenav__menu-link">Scarfs</a></li>
-								<li><a href="#" class="sidenav__menu-link">Shirt</a></li>
-								<li><a href="#" class="sidenav__menu-link">Shoes</a></li>
-							</ul></li>
+					<li><a href="#" class="sidenav__menu-link">for her</a>
+						<button class="sidenav__menu-toggle">
+							<i class="ui-arrow-down"></i>
+						</button>
+						<ul class="sidenav__menu-dropdown">
+							<li><a href="#" class="sidenav__menu-link">Underwear</a></li>
+							<li><a href="#" class="sidenav__menu-link">Hipster</a></li>
+							<li><a href="#" class="sidenav__menu-link">Dress</a></li>
+							<li><a href="#" class="sidenav__menu-link">Hoodie &amp;
+									Jackets</a></li>
+							<li><a href="#" class="sidenav__menu-link">Tees</a></li>
+						</ul></li>
 
-						<li><a href="#" class="sidenav__menu-link">for her</a>
-							<button class="sidenav__menu-toggle">
-								<i class="ui-arrow-down"></i>
-							</button>
-							<ul class="sidenav__menu-dropdown">
-								<li><a href="#" class="sidenav__menu-link">Underwear</a></li>
-								<li><a href="#" class="sidenav__menu-link">Hipster</a></li>
-								<li><a href="#" class="sidenav__menu-link">Dress</a></li>
-								<li><a href="#" class="sidenav__menu-link">Hoodie &amp;
-										Jackets</a></li>
-								<li><a href="#" class="sidenav__menu-link">Tees</a></li>
-							</ul></li>
+					<li><a href="#" class="sidenav__menu-link">for him</a>
+						<button class="sidenav__menu-toggle">
+							<i class="ui-arrow-down"></i>
+						</button>
+						<ul class="sidenav__menu-dropdown">
+							<li><a href="#" class="sidenav__menu-link">T-shirt</a></li>
+							<li><a href="#" class="sidenav__menu-link">Hoodie &amp;
+									Jackets</a></li>
+							<li><a href="#" class="sidenav__menu-link">Dress</a></li>
+							<li><a href="#" class="sidenav__menu-link">Suits</a></li>
+							<li><a href="#" class="sidenav__menu-link">Shorts</a></li>
+						</ul></li>
 
-						<li><a href="#" class="sidenav__menu-link">for him</a>
-							<button class="sidenav__menu-toggle">
-								<i class="ui-arrow-down"></i>
-							</button>
-							<ul class="sidenav__menu-dropdown">
-								<li><a href="#" class="sidenav__menu-link">T-shirt</a></li>
-								<li><a href="#" class="sidenav__menu-link">Hoodie &amp;
-										Jackets</a></li>
-								<li><a href="#" class="sidenav__menu-link">Dress</a></li>
-								<li><a href="#" class="sidenav__menu-link">Suits</a></li>
-								<li><a href="#" class="sidenav__menu-link">Shorts</a></li>
-							</ul></li>
+					<li><a href="#" class="sidenav__menu-link">Watches</a>
+						<button class="sidenav__menu-toggle">
+							<i class="ui-arrow-down"></i>
+						</button>
+						<ul class="sidenav__menu-dropdown">
+							<li><a href="#" class="sidenav__menu-link">Smart Watches</a>
+							</li>
+							<li><a href="#" class="sidenav__menu-link">Diving
+									Watches</a></li>
+							<li><a href="#" class="sidenav__menu-link">Sport Watches</a>
+							</li>
+							<li><a href="#" class="sidenav__menu-link">Classic
+									Watches</a></li>
+						</ul></li>
 
-						<li><a href="#" class="sidenav__menu-link">Watches</a>
-							<button class="sidenav__menu-toggle">
-								<i class="ui-arrow-down"></i>
-							</button>
-							<ul class="sidenav__menu-dropdown">
-								<li><a href="#" class="sidenav__menu-link">Smart
-										Watches</a></li>
-								<li><a href="#" class="sidenav__menu-link">Diving
-										Watches</a></li>
-								<li><a href="#" class="sidenav__menu-link">Sport
-										Watches</a></li>
-								<li><a href="#" class="sidenav__menu-link">Classic
-										Watches</a></li>
-							</ul></li>
+				</ul></li>
 
-					</ul></li>
+			<li><a href="#" class="sidenav__menu-link">News</a>
+				<button class="sidenav__menu-toggle">
+					<i class="ui-arrow-down"></i>
+				</button>
+				<ul class="sidenav__menu-dropdown">
+					<li><a href="blog-standard.html" class="sidenav__menu-link">Blog
+							Standard</a></li>
+					<li><a href="blog-single.html" class="sidenav__menu-link">Single
+							Post</a></li>
+				</ul></li>
 
-				<li><a href="#" class="sidenav__menu-link">News</a>
-					<button class="sidenav__menu-toggle">
-						<i class="ui-arrow-down"></i>
-					</button>
-					<ul class="sidenav__menu-dropdown">
-						<li><a href="blog-standard.html" class="sidenav__menu-link">Blog
-								Standard</a></li>
-						<li><a href="blog-single.html" class="sidenav__menu-link">Single
-								Post</a></li>
-					</ul></li>
+			<li><a href="#" class="sidenav__menu-link">Pages</a>
+				<button class="sidenav__menu-toggle">
+					<i class="ui-arrow-down"></i>
+				</button>
+				<ul class="sidenav__menu-dropdown">
+					<li><a href="catalog.html" class="sidenav__menu-link">Catalog</a></li>
+					<li><a href="single-product.html" class="sidenav__menu-link">Single
+							Product</a></li>
+					<li><a href="" class="sidenav__menu-link">Cart</a></li>
+					<li><a href="checkout.html" class="sidenav__menu-link">Checkout</a></li>
+					<li><a href="about.html" class="sidenav__menu-link">About</a></li>
+					<li><a href="contact.html" class="sidenav__menu-link">Contact</a></li>
+					<li><a href="login.html" class="sidenav__menu-link">Login</a></li>
+					<li><a href="faq.html" class="sidenav__menu-link">FAQ</a></li>
+					<li><a href="404.html" class="sidenav__menu-link">404</a></li>
+				</ul></li>
 
-				<li><a href="#" class="sidenav__menu-link">Pages</a>
-					<button class="sidenav__menu-toggle">
-						<i class="ui-arrow-down"></i>
-					</button>
-					<ul class="sidenav__menu-dropdown">
-						<li><a href="" class="sidenav__menu-link">Catalog</a></li>
-						<li><a href="single-product.html" class="sidenav__menu-link">Single
-								Product</a></li>
-						<li><a href="cart.html" class="sidenav__menu-link">Cart</a></li>
-						<li><a href="checkout.html" class="sidenav__menu-link">Checkout</a></li>
-						<li><a href="about.html" class="sidenav__menu-link">About</a></li>
-						<li><a href="contact.html" class="sidenav__menu-link">Contact</a></li>
-						<li><a href="login.html" class="sidenav__menu-link">Login</a></li>
-						<li><a href="faq.html" class="sidenav__menu-link">FAQ</a></li>
-						<li><a href="404.html" class="sidenav__menu-link">404</a></li>
-					</ul></li>
+			<li><a href="#" class="sidenav__menu-link">Sign In</a></li>
+		</ul>
+	</nav>
+</header>
+<!-- end mobile sidenav -->
 
-				<li><a href="#" class="sidenav__menu-link">Sign In</a></li>
-			</ul>
-		</nav>
-	</header>
-	<!-- end mobile sidenav -->
+<main class="main oh" id="main">
 
+	<!-- Navigation -->
+	<header class="nav">
+		<div class="nav__holder nav--sticky">
+			<div class="container relative">
 
-	<main class="main oh" id="main">
-
-		<!-- Navigation -->
-		<header class="nav">
-			<div class="nav__holder nav--sticky">
-				<div class="container relative">
-
-					<!-- Top Bar -->
-					<div class="top-bar d-none d-lg-flex">
+				<!-- Top Bar -->
+				<div class="top-bar d-none d-lg-flex">
 
 
 
 
-						<!-- Sign in / Wishlist / Cart -->
-						<div class="top-bar__right">
+					<!-- Sign in / Wishlist / Cart -->
+					<div class="top-bar__right">
 
-							<!-- Sign In -->
+						<!-- Sign In -->
 							<a href="login.html" class="top-bar__item top-bar__sign-in" id="top-bar__sign-in">
 							<i class="ui-user"></i><a href="${webApplicationPath}/MemberServlet?method=member" id="SignIn_A">會員中心</a></a>
 
-							<!-- Wishlist -->
-							<a href="#" class="top-bar__item"><i class="ui-heart"></i></a>
 
-							<div class="top-bar__item nav-cart">
-								<a href="cart.html"> <i class="ui-bag"></i>(2)
-								</a>
-								<div class="nav-cart__dropdown">
-									<div class="nav-cart__items">
-
-										<div class="nav-cart__item clearfix">
-											<div class="nav-cart__img">
-												<a href="#"> <img
-													src="${webApplicationPath}/static/picture/cart_small_1.jpg"
-													alt="">
-												</a>
-											</div>
-											<div class="nav-cart__title">
-												<a href="#"> Classic White Tailored Shirt </a>
-												<div class="nav-cart__price">
-													<span>1 x</span> <span>19.99</span>
-												</div>
-											</div>
-											<div class="nav-cart__remove">
-												<a href="#"><i class="ui-close"></i></a>
-											</div>
-										</div>
-
-										<div class="nav-cart__item clearfix">
-											<div class="nav-cart__img">
-												<a href="#"> <img
-													src="${webApplicationPath}/static/picture/cart_small_2.jpg"
-													alt="">
-												</a>
-											</div>
-											<div class="nav-cart__title">
-												<a href="#"> Sport Hi Adidas </a>
-												<div class="nav-cart__price">
-													<span>1 x</span> <span>29.00</span>
-												</div>
-											</div>
-											<div class="nav-cart__remove">
-												<a href="#"><i class="ui-close"></i></a>
-											</div>
-										</div>
-
-									</div>
-									<!-- end cart items -->
-
-									<div class="nav-cart__summary">
-										<span>Cart Subtotal</span> <span class="nav-cart__total-price">$1799.00</span>
-									</div>
-
-									<div class="nav-cart__actions mt-20">
-										<a href="javascript:;" class="btn btn-md btn-light"><span>View
-												Cart</span></a> <a href="javascript:;"
-											class="btn btn-md btn-color mt-10"><span>Proceed
-												to Checkout</span></a>
-									</div>
-								</div>
-							</div>
+						<div class="top-bar__item nav-cart">
+							<a href="${webApplicationPath}/CartServlet?method=showCart"> <i class="ui-bag"></i>(2)
+							</a>
 						</div>
-
 					</div>
-					<!-- end top bar -->
 
-					<div class="flex-parent">
-
-						<!-- Mobile Menu Button -->
-						<button class="nav-icon-toggle" id="nav-icon-toggle"
-							aria-label="Open mobile menu">
-							<span class="nav-icon-toggle__box"> <span
-								class="nav-icon-toggle__inner"></span>
-							</span>
-						</button>
-						<!-- end mobile menu button -->
-
-						<!-- Logo -->
-						<a href="${webApplicationPath}/jsp/product/index.jsp" class="logo">
-							<img class="logo__img"
-							src="${webApplicationPath}/static/picture/logo_life4fun.png"
-							alt="logo" width="100" height="300">
-
-						</a>
-
-
-						<!-- Nav-wrap -->
-						<nav class="flex-child nav__wrap d-none d-lg-block">
-							<ul class="nav__menu">
-
-								<li class="nav__dropdown active"><a
-									href="${webApplicationPath}/jsp/product/catalog.jsp?catalog=A">飾品</a>
-
-								</li>
-
-								<li class="nav__dropdown"><a
-									href="${webApplicationPath}/jsp/product/catalog.jsp?catalog=H">居家小物</a>
-
-								</li>
-
-								<li class="nav__dropdown"><a href="catalog.html">美妝保養</a></li>
-
-								<li class="nav__dropdown"><a href="#">男士保養</a></li>
-
-								<li class="nav__dropdown"><a href="contact.html">其他</a></li>
-
-							</ul>
-							<!-- end menu -->
-
-						</nav>
-						<!-- end nav-wrap -->
-
-
-						<!-- Search -->
-						<div class="flex-child nav__search d-none d-lg-block">
-							<form method="get" class="nav__search-form">
-								<input type="search" class="nav__search-input"
-									placeholder="Search">
-								<button type="submit" class="nav__search-submit">
-									<i class="ui-search"></i>
-								</button>
-							</form>
-						</div>
-
-
-						<!-- Mobile Wishlist -->
-						<a href="#" class="nav__mobile-wishlist d-lg-none"
-							aria-label="Mobile wishlist"> <i class="ui-heart"></i>
-						</a>
-
-						<!-- Mobile Cart -->
-						<a href="${webApplicationPath}/CartServlet?method=showCart"
-							class="nav__mobile-cart d-lg-none"> <i class="ui-bag"></i> <span
-							class="nav__mobile-cart-amount">(2)</span>
-						</a>
-					</div>
-					<!-- end flex-parent -->
 				</div>
-				<!-- end container -->
+				<!-- end top bar -->
 
+				<div class="flex-parent">
+
+					<!-- Mobile Menu Button -->
+					<button class="nav-icon-toggle" id="nav-icon-toggle"
+						aria-label="Open mobile menu">
+						<span class="nav-icon-toggle__box"> <span
+							class="nav-icon-toggle__inner"></span>
+						</span>
+					</button>
+					<!-- end mobile menu button -->
+
+					<!-- Logo -->
+					<a href="${webApplicationPath}/jsp/product/index.jsp" class="logo">
+						<img class="logo__img"
+						src="${webApplicationPath}/static/picture/logo_life4fun.png"
+						alt="logo" width="100" height="300">
+
+					</a>
+
+
+					<!-- Nav-wrap -->
+					<nav class="flex-child nav__wrap d-none d-lg-block">
+						<ul class="nav__menu">
+
+							<li class="nav__dropdown active"><a
+								href="${webApplicationPath}/jsp/product/catalog.jsp?catalog=A">飾品</a>
+
+							</li>
+
+							<li class="nav__dropdown"><a
+								href="${webApplicationPath}/jsp/product/catalog.jsp?catalog=H">居家小物</a>
+
+							</li>
+
+							<li class="nav__dropdown"><a href="catalog.html">美妝保養</a></li>
+
+							<li class="nav__dropdown"><a href="#">男士保養</a></li>
+
+							<li class="nav__dropdown"><a href="contact.html">其他</a></li>
+
+						</ul>
+						<!-- end menu -->
+
+					</nav>
+					<!-- end nav-wrap -->
+
+
+					<!-- Search -->
+					<div class="flex-child nav__search d-none d-lg-block">
+						<form method="get" class="nav__search-form">
+							<input type="search" class="nav__search-input"
+								placeholder="Search">
+							<button type="submit" class="nav__search-submit">
+								<i class="ui-search"></i>
+							</button>
+						</form>
+					</div>
+
+
+					<!-- Mobile Wishlist -->
+					<a href="#" class="nav__mobile-wishlist d-lg-none"
+						aria-label="Mobile wishlist"> <i class="ui-heart"></i>
+					</a>
+
+					<!-- Mobile Cart -->
+					<a href="${webApplicationPath}/CartServlet?method=showCart"
+						class="nav__mobile-cart d-lg-none"> 
+						<i class="ui-bag"></i> 
+						<span class="nav__mobile-cart-amount"></span>
+					</a>
+				</div>
+				<!-- end flex-parent -->
 			</div>
+			<!-- end container -->
 
-		</header>
-		<!-- end navigation -->
+		</div>
+
+	</header>
+	<!-- end navigation -->
 
 		<!-- Catalog -->
 		<section class="section-wrap pt-60 pb-30 catalog">
@@ -380,38 +322,33 @@
 										<div class="row row-12">
 											<div class="col-md-12">
 												<div class="row row-12">
-													<p style="color: red; margin-left: 15px">*</p>
+													<p style="color:red;margin-left:15px">*</p>
 													<p>姓名</p>
 												</div>
-												<input type="text" class="input-text inputData" value=""
-													maxlength="5" placeholder="name" name="name" id="name"
-													onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"
-													onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))"
+												<input type="text" class="input-text inputData" value="" maxlength="5"
+													placeholder="name" name="name" id="name"onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" 
+													onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" 
 													required="required">
 											</div>
 											<div class="col-md-12">
 												<div class="row row-12">
-													<p style="color: red; margin-left: 15px">*</p>
+													<p style="color:red;margin-left:15px">*</p>
 													<p>電話號碼</p>
 												</div>
 												<input type="text" class="input-text inputData" value=""
-													placeholder="phoneNumber" name="phoneNumber"
-													id="phoneNumber" maxlength="15"
+													placeholder="phoneNumber" name="phoneNumber" id="phoneNumber" maxlength="15"
 													oninput="if(value.length>15)value=value.slice(0,15)"
-													onkeypress="return event.charCode>=48 && event.charCode<=57"
-													disabled>
+                  									onkeypress="return event.charCode>=48 && event.charCode<=57" disabled>
 											</div>
 											<div class="col-md-12" id="passwordDiv">
 												<div class="row row-12">
-													<p style="color: red; margin-left: 15px">*</p>
+													<p style="color:red;margin-left:15px">*</p>
 													<p>密碼</p>
 												</div>
-												<input type="password" class="input-text inputData" value=""
-													maxlength="12" placeholder="password" name="password"
-													id="password"
+												<input type="password" class="input-text inputData" value="" maxlength="12"
+													placeholder="password" name="password" id="password"
 													oninput="if(value.length>12)value=value.slice(0,12)"
-													onKeyUp="value=value.replace(/[\W]/g,'')"
-													required="required">
+													onKeyUp="value=value.replace(/[\W]/g,'')" required="required">
 											</div>
 											<div class="col-md-4">
 												<p class="form-row form-row-wide">性別</p>
@@ -422,30 +359,32 @@
 											</div>
 											<div class="col-md-4">
 												<p class="form-row form-row-wide">年齡</p>
-												<input type="text" class="form-control inputData" id="age"
+												<input
+													type="text" class="form-control inputData" id="age"
 													placeholder="age" disabled>
 											</div>
 											<div class="col-md-12">
 												<div class="row row-12">
-													<p style="color: red; margin-left: 15px">*</p>
+													<p style="color:red;margin-left:15px">*</p>
 													<p>生日</p>
 												</div>
-												<p style="color: red;" id="age_p" hidden="hidden">年齡不可小於12歲!</p>
+												<p style="color:red;" id="age_p" hidden="hidden">年齡不可小於12歲!</p>
 												<input type="date" class="input-text inputData" value=""
 													placeholder="YYYY-MM-DD" name="birthday" id="birthday"
 													oninput="calculateAge(this)" required="required">
 											</div>
 											<div class="col-md-12">
 												<p>E-mail</p>
-												<p style="color: red;" id="eamil_p" hidden="hidden">E-mail格式不正確!</p>
+												<p style="color:red;" id="eamil_p" hidden="hidden">E-mail格式不正確!</p>
 												<input type="text" class="input-text inputData" value=""
 													placeholder="E-mail" name="email" id="email" maxlength="30"
 													oninput="IsEmail(this.value)">
 											</div>
 											<div class="col-md-12">
 												<p class="form-row form-row-wide">郵遞區號</p>
-												<input type="text" class="form-control inputData"
-													id="postalCode" placeholder="郵遞區號" value="" disabled>
+												<input
+													type="text" class="form-control inputData" id="postalCode"
+													placeholder="郵遞區號" value="" disabled>
 											</div>
 											<div class="col-md-4">
 												<p class="form-row form-row-wide">縣/市</p>
@@ -456,8 +395,7 @@
 											<div class="col-md-4">
 												<p class="form-row form-row-wide">區域</p>
 												<select id="district" class="form-select">
-													<option id="districtOption" value="districtDefault"
-														selected>請選擇區域</option>
+													<option id="districtOption" value="districtDefault" selected>請選擇區域</option>
 												</select>
 											</div>
 											<div class="col-md-4">
@@ -467,10 +405,9 @@
 												</select>
 											</div>
 											<div class="col-md-12">
-												<label for="" class="form-label">地址</label> <input
-													type="text" class="form-control inputData" id="address"
-													placeholder="地址" maxlength="30"
-													onkeyup="this.value=this.value.replace(/\s+/g,'')">
+												<label for="" class="form-label">地址</label> 
+												<input type="text" class="form-control inputData" id="address" placeholder="地址" maxlength="30"
+												onkeyup="this.value=this.value.replace(/\s+/g,'')">
 											</div>
 										</div>
 									</div>
@@ -484,23 +421,17 @@
 							<div class="col-md col-sm-6">
 								<div class="" id="revise">
 									<p>
-										<input type="submit" id="reviseButton" name="reviseButton"
-											value="修改" class="btn btn-md btn-dark btn-button"
-											style="margin-left: 15px;">
-									</p>
+						              <input type="submit" id="reviseButton" name="reviseButton" value="修改" class="btn btn-md btn-dark btn-button" style="margin-left :15px;">
+						            </p>    
 								</div>
 								<div class="row justify-content" id="register">
-									<div class="col-4">
-										<input type="submit" id="registerButton" name="registerButton"
-											value="註冊" class="btn btn-md btn-dark btn-button"
-											style="margin-left: 15px;">
-									</div>
-									<div class="col-4" align="center">
-										<input type="submit" id="loginButton" name="loginButton"
-											value="上一頁" class="btn btn-md btn-color btn-button"
-											style="margin-right: 15px;">
-									</div>
-								</div>
+								    <div class="col-4">
+								      <input type="submit" id="registerButton" name="registerButton" value="註冊" class="btn btn-md btn-dark btn-button" style="margin-left :15px;">
+						             </div>
+								    <div class="col-4" align="center">
+								      <input type="submit" id="loginButton" name="loginButton" value="上一頁" class="btn btn-md btn-color btn-button" style="margin-right :15px;">
+						            </div>
+								 </div>
 							</div>
 						</div>
 						<!-- end row -->
@@ -512,25 +443,21 @@
 					<aside class="col-lg-3 sidebar left-sidebar">
 
 						<!-- member -->
-						<div class="widget widget_categories widget--bottom-line"
-							id="memberList">
+						<div class="widget widget_categories widget--bottom-line" id="memberList">
 							<h4 class="widget-title">會員中心</h4>
 							<ul>
-								<li style="color: orange">個人資料</li>
-								<li><a
-									href="${webApplicationPath}/MemberServlet?method=password">修改密碼</a></li>
-								<li><a
-									href="${webApplicationPath}/OrderServlet?method=order">訂單查詢</a></li>
+								<li style="color:orange">個人資料</li>
+								<li><a href="${webApplicationPath}/MemberServlet?method=password">修改密碼</a></li>
+								<li><a href="${webApplicationPath}/OrderServlet?method=order">訂單查詢</a></li>
 							</ul>
 						</div>
 						<div id="signOut">
-							<input type="submit" id="signOutButton" name="signOutButton"
-								value="登出" class="btn btn-md btn-dark btn-button">
+						<input type="submit" id="signOutButton" name="signOutButton" value="登出" class="btn btn-md btn-dark btn-button">
 						</div>
-
+						
 					</aside>
 					<!-- end sidebar -->
-
+					
 				</div>
 				<!-- end row -->
 			</div>

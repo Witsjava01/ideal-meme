@@ -36,7 +36,6 @@ Date.prototype.format = function(format) {
 	return format;
 };
 $(document).ready(function() {
-	
 	$('#signOutButton').on("click", function() {
 		window.location.assign(webApplicationPath + "/MemberServlet");
 	});

@@ -23,7 +23,7 @@ $(document).ready(function() {
 						console.log(response);
 						alert("登入成功");
 						$("#SignIn_A").text("會員中心");
-						window.location.assign(webApplicationPath + "/CartMemberServlet?method=showCart");
+						window.location.assign(webApplicationPath + "/MemberServlet?method=member");
 					} else {
 						alert(response.msg);
 					}
