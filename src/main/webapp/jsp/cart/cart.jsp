@@ -31,10 +31,9 @@
 	<script>
 	$(document).ready(function(){
 	 	$("#btnCheckout").on("click", function() {
-	  		//alert("btnCheckout");
 	  		location.href='../checkout/checkout.jsp';
 	  		//window.location.assign("../checkout/CheckoutServlet?method=checkout");
-	  		/*$.ajax({
+	  		$.ajax({
 	  			url: "CheckoutServlet?method=checkout",
 	  			success: function(response) {
 	  				alert("已修改數量!");
@@ -43,7 +42,7 @@
 	  			error: function() {
 	  				alert("失敗");
 	  			}
-	  		});*/
+	  		});
 	  	});
 	 	
 	 	$("#btnUpdateCart").on("click", function() {
@@ -52,6 +51,7 @@
 	  		
 	  		quantity=$("#qty").val();
 	  		console.log("quantity: "+quantity);
+	  		
 	  		productId=$("#productId").val();
 	  		console.log("productId: "+productId);
 
@@ -74,6 +74,27 @@
 	  		});
 	  	});
 	 
+	 	$("[name='delete']").on("click", function() {
+	  		productId=$("#productId").val();
+	  		console.log("productId: "+productId);
+
+	 		alert("delete");	
+	 		$.ajax({
+	  			url: "CartServlet?method=deleteCart",
+	  			method: "POST",
+	  			data: {
+	  				"productId":productId
+	  			},
+	  			success: function(response) {
+	  				alert("已刪除商品!");
+	  				console.log(response.msg);
+	  			},
+	  			error: function() {
+	  				alert("失敗");
+	  				
+	  			}
+	  		});
+	 	});
 		$("#btnBack").on("click", function() {
 		  	//alert("btnBack");		  
 		  	//window.location.assign(webApplicationPath + "/jsp/product/index.jsp");
@@ -101,7 +122,6 @@
     <section class="section-wrap cart pt-50 pb-40">
       <div class="container relative">
 
-        <!-- <form method='POST' action='CheckOutServlet?method=checkout' id='cartForm'> -->
 		<div>
         <div class="table-wrap">
           <table class="shop_table cart table">
@@ -114,42 +134,33 @@
               </tr>
             </thead>
             <tbody id="cart_item_table">
-            <% 
-           		 List<CartItem> cartItemList = (List<CartItem>)session.getAttribute("cart");
-            	    double sum = 0;
-              		if(cartItemList == null || cartItemList.isEmpty()){ 
-            %>	
         				<h3>購物車是空的!</h3>		
-            <%  }else{ 
-                    for(CartItem item:cartItemList){ 
-                    	sum += item.getItemAmount(item);
-            %>
-              
+              <c:forEach items="${cartItemList}" var="cartItem">
               <tr class="cart_item">
                 <td class="product-thumbnail">
                   <a href="#">
-                    <img src="../../img/life4fun/<%= item.getPhotoUrl1()%>" alt="">
+                    <img src="../../img/life4fun/<c:out value="${cartItem.photoUrl1}"></c:out>" alt="">
                   </a>
                 </td>
                 <td class="product-name">
-                  <a href="#"><%= item.getProductName()%></a>
+                  <a href="#"><c:out value="${cartItem.productName}"></c:out></a>
                   <ul>
-                    <li>尺寸: <%= item.getProductSize()%></li>
-                    <li>顏色: <%= item.getProductColor()%></li>
+                    <li>尺寸: <c:out value="${cartItem.size}"></c:out></li>
+                    <li>顏色: <c:out value="${cartItem.color}"></c:out></li>
                   </ul>
                 </td>
                 <td class="product-price">
-                  <span class="amount">$<%= item.getPrice()%></span>
+                  <span class="amount">$<c:out value="${cartItem.price}"></c:out></span>
                 </td>
                 <td class="product-quantity">
                   <div class="quantity buttons_added">
                     <input type="button" value="-" class="minus">
-                    <input type="number" step="1" min="0" value="<%= item.getQuantity()%>" title="qty" class="input-text qty text" name="qty" id="qty">
+                    <input type="number" step="1" min="0" value="<c:out value="${cartItem.quantity}"></c:out>" title="qty" class="input-text qty text" name="qty" id="qty">
                     <input type="button" value="+" class="plus">
                   </div>
                 </td>
                 <td class="product-subtotal">
-                  <span class="amount">$<%=item.getItemAmount(item)%></span>
+                  <span class="amount">$<c:out value="${itemAmount}"></c:out></span>
                 </td>
                 <td class="product-remove">
                   <a href="#" class="remove" name="delete" title="Remove this item">
@@ -157,8 +168,7 @@
                   </a>
                 </td>
               </tr>
-			<% } 
-			}%>
+			</c:forEach>
               
             </tbody>
           </table>
@@ -193,7 +203,7 @@
                   <tr class="cart-subtotal">
                     <th>購物車小計</th>
                     <td>
-                      <span class="amount">$<%= sum%></span>
+                      <span class="amount">$<c:out value="${totalAmount}"></c:out></span>
                     </td>
                   </tr>
                   <tr class="shipping">
@@ -205,7 +215,7 @@
                   <tr class="order-total">
                     <th>訂單總金額</th>
                     <td>
-                      <strong><span class="amount">$<%= sum%></span></strong>
+                      <strong><span class="amount">$<c:out value="${totalAmount}"></c:out></span></strong>
                     </td>
                   </tr>
                 </tbody>

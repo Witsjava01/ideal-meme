@@ -84,45 +84,34 @@ public class CartServlet extends HttpServlet {
 	
 	//??沒有登入
 	public void cart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//建立session
 		HttpSession session = request.getSession();
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		//從session取出cartlist
+		List<CartItem> cartItemList = (List<CartItem>)session.getAttribute("cartItemList");				
 		
-		//1.驗證登入狀態：若未登入，跳轉登入畫面
-		try {
-			Integer memberId = Integer.valueOf((String) request.getSession().getAttribute(ConstantUtils.LOGIN_MEMBER_ID));
-			Member sessionMember = memberService.findMemberById(memberId).getData();
-			String phoneNumber = sessionMember.getPhoneNumber();
-			
-			if (StringUtils.isNullOrEmpty(sessionMember.getPhoneNumber())) {
-				response.getWriter().append(JsonUtils.getGson().toJson(RequestResult.fail("非登入狀態!")));
-				return;
-			}
-			//request.getRequestDispatcher("/jsp/member/login.jsp").forward(request, response);
-		} catch (Exception e) {
-			// 500
-			System.out.println(e.getMessage());
-			request.getRequestDispatcher("/jsp/member/login.jsp").forward(request, response);
-		}	
-		
-		//2.若已有登入，則跳轉購物車
-		List<CartItem> cartItemList = (List<CartItem>)session.getAttribute("cart");				
 		double sum = 0;
+		//若裡面是空的
 		if(cartItemList==null || cartItemList.isEmpty()){
+			//回傳空的response.msg取出
 			String msg = "購物車是空的";
 		}else{ 
+			//若有東西則回傳list
+			request.setAttribute("sum",sum);
+			
 			for(CartItem item:cartItemList){ 
-//				request.setAttribute("photoUrl1",item.getPhotoUrl1());
-//				request.setAttribute("productName",item.getProductName());
-//				request.setAttribute("productSize",item.getProductSize());				
-//				request.setAttribute("productColor",item.getProductColor());
-//				request.setAttribute("price",item.getPrice());
+//				cartItem.setProductName(p.getProductName());
+//				cartItem.setPhotoUrl1(p.getPhotoUrl1());
+//				cartItem.setPrice(p.getPrice());
+//				cartItem.setSize(p.getSize());
+//				cartItem.setColor(p.getColor());
+//				cartItem.setColor(p.getColor());
+//				
 //				request.setAttribute("quantity",item.getQuantity());
 //				request.setAttribute("itemAmount",item.getItemAmount(item));
 //				cartItemList.add(item);
-				sum += item.getItemAmount(item);
+//				sum += item.getItemAmount(item);
 			}
-			request.setAttribute("sum",sum);
 			
 			session.setAttribute("cart", cartItemList);
 			session.setAttribute("memberId","933421481");
@@ -137,14 +126,13 @@ public class CartServlet extends HttpServlet {
 	
 		
 	public void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		HttpSession session = request.getSession();
+		
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		
 		//1.讀取request的Form Data: productId, quantity
 		String productId = request.getParameter("productId");
 		String quantity = request.getParameter("quantity");
-		System.out.printf("productId:%s, quantity:%s\n", productId, quantity);
+		System.out.println( "quantity: "+quantity);
 
 		//errorsList
 		List<String> errorsList = new ArrayList<>();
@@ -160,26 +148,26 @@ public class CartServlet extends HttpServlet {
 			ProductService pService = new ProductService();	
 			
 			try {
-				Product p = pService.getProductById(productId);//查詢商品
+				Product p= pService.getProductById(productId);//查詢商品
 				
 				if(p!=null) {
 					
 					int qty = Integer.parseInt(quantity);//前端訂購的數量					
+				
 					if(qty>0) {//如果大於零
-						List<CartItem> cartItemList = (List<CartItem>)session.getAttribute("cart");//從session取得cart
-						System.out.println("sessionHas: "+cartItemList);
+						List<CartItem> cartItemList = (List<CartItem>)request.getAttribute("cartItemList");//從session取得cart
 						if(cartItemList==null || cartItemList.size()==0) {//如果沒有cart
 							cartItemList = new ArrayList<CartItem>();//就建立一個
-							session.setAttribute("cart", cartItemList);//並放入session
-							//System.out.println("sessionNew: "+session);
+							request.setAttribute("cartItemList", cartItemList);//並放入session
 						}	
 						CartItem cartItem =new CartItem();
-						cartItem.setProduct(p);
+						cartItem.setProductId(productId);
 						cartItem.setQuantity(qty);
 						cartItemList.add(cartItem);		
-						//System.out.println("cartItemList: "+cartItemList);
-						session.setAttribute("cartItemCount", cartItemList.size());
-						session.setAttribute("cartItemList", cartItemList);//存入session
+						request.setAttribute("itemAmount", cartItem.getItemAmount());//小圖示用
+						request.setAttribute("totalAmount", cartItem.getTotalAmount(cartItemList));//小圖示用
+						request.setAttribute("cartItemCount", cartItemList.size());//小圖示用
+						request.setAttribute("cartItemList", cartItemList);//存入session
 					}else {
 						errorsList.add("加入購物車時qty必須>0: " + qty);	
 					}	
@@ -197,9 +185,7 @@ public class CartServlet extends HttpServlet {
 			this.log("加入購物車發生錯誤:\n" + errorsList.toString());
 		}
 		
-		//System.out.println("SessionCartItemList: "+session.getAttribute("cart"));
 		request.getRequestDispatcher(JSP_SOURCE +"cart.jsp").forward(request, response);
-		//System.out.println(request.getContextPath()+"/jsp/cart/cart.jsp");
 		System.out.println(JSP_SOURCE +"cart.jsp");
 	}
 

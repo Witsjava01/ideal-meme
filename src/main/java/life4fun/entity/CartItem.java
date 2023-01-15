@@ -4,7 +4,13 @@ import java.util.List;
 
 public class CartItem {
 
-	private Product product;
+	private String productId;
+	private String productName;	
+	private String photoUrl1;
+	private double price;
+	private String size;
+	private String color;
+	private int stock;
 	private Integer quantity;
 	private List<CartItem> cartItemList;
 
@@ -12,24 +18,73 @@ public class CartItem {
 	public double getTotalAmount(List<CartItem> cartItemList) {
 		double sum = 0;
 		for (CartItem item : cartItemList) {
-			sum += this.getItemAmount(item);
+			sum += this.getItemAmount();
 		}
 		return sum;
 	}
 
 //個別品項總計
-	public double getItemAmount(CartItem item) {
+	public double getItemAmount() {
 		int qty = this.getQuantity();
 		double amount = this.getPrice() * qty;
 		return amount;
 	}
 
-	public Product getProduct() {
-		return product;
+
+	public String getProductId() {
+		return productId;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	public String getPhotoUrl1() {
+		return photoUrl1;
+	}
+
+	public void setPhotoUrl1(String photoUrl1) {
+		this.photoUrl1 = photoUrl1;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 	public Integer getQuantity() {
@@ -48,61 +103,23 @@ public class CartItem {
 		this.cartItemList = cartItemList;
 	}
 
-	/* 以下getter是根據cart.jsp中cartItem的欄位提供的 */
-	public int getProductId() {
-		if (product != null) {
-			return product.getProductId();
-		} else
-			return -1;
-	}
 
-	public String getProductName() {
-		if (product != null) {
-			return product.getProductName();
-		} else
-			return "無產品資料";
-	}
-
-	public String getPhotoUrl1() {
-		if (product != null) {
-			return product.getPhotoUrl1();
-		} else
-			return null;
-	}
-
-	public String getProductColor() {
-		if (product != null) {
-			return product.getColor();
-		} else
-			return "";
-	}
-
-	public String getProductSize() {
-		if (product != null) {
-			return product.getSize();
-		} else
-			return "";
-	}
-
-	public double getPrice() {
-		if (product != null) {
-			return product.getPrice();
-		} else
-			return 0;
-	}
-
-	public int getStock() {
-		if (product != null) {
-			return product.getStock();
-		} else
-			return 0;
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((product == null) ? 0 : product.hashCode());
+		result = prime * result + ((cartItemList == null) ? 0 : cartItemList.hashCode());
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((photoUrl1 == null) ? 0 : photoUrl1.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(price);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
+		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
+		result = prime * result + ((size == null) ? 0 : size.hashCode());
+		result = prime * result + stock;
 		return result;
 	}
 
@@ -115,19 +132,55 @@ public class CartItem {
 		if (getClass() != obj.getClass())
 			return false;
 		CartItem other = (CartItem) obj;
-		if (product == null) {
-			if (other.product != null)
+		if (cartItemList == null) {
+			if (other.cartItemList != null)
 				return false;
-		} else if (!product.equals(other.product))
+		} else if (!cartItemList.equals(other.cartItemList))
+			return false;
+		if (color == null) {
+			if (other.color != null)
+				return false;
+		} else if (!color.equals(other.color))
+			return false;
+		if (photoUrl1 == null) {
+			if (other.photoUrl1 != null)
+				return false;
+		} else if (!photoUrl1.equals(other.photoUrl1))
+			return false;
+		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
+			return false;
+		if (productId == null) {
+			if (other.productId != null)
+				return false;
+		} else if (!productId.equals(other.productId))
+			return false;
+		if (productName == null) {
+			if (other.productName != null)
+				return false;
+		} else if (!productName.equals(other.productName))
+			return false;
+		if (quantity == null) {
+			if (other.quantity != null)
+				return false;
+		} else if (!quantity.equals(other.quantity))
+			return false;
+		if (size == null) {
+			if (other.size != null)
+				return false;
+		} else if (!size.equals(other.size))
+			return false;
+		if (stock != other.stock)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "編號=" + getProductId() + ",\n 名稱=" + getProductName() + ",\n PhotoUrl=" + getPhotoUrl1() + ",\n 購買顏色="
-				+ getProductColor() + ",\n 購買size=" + getProductSize() + ",\n 定價=" + getPrice() + ",\n 數量="
-				+ getQuantity();
+		return "CartItem [productId=" + productId + ", photoUrl1=" + photoUrl1 + ", productName=" + productName
+				+ ", price=" + price + ", size=" + size + ", color=" + color + ", stock=" + stock + ", quantity="
+				+ quantity + ", cartItemList=" + cartItemList + "]";
 	}
+
+	
 
 }

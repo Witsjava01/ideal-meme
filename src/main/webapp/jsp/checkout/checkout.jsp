@@ -44,10 +44,9 @@
 	<script type="text/javascript" src="${webApplicationPath}/static/js/flickity.pkgd.min.js"></script>
 	<script type="text/javascript" src="${webApplicationPath}/static/js/modernizr.min.js"></script>
 	<script type="text/javascript" src="${webApplicationPath}/static/js/scripts.js"></script>
-
+  	<script src="${webApplicationPath}/js/checkout/checkout.js"></script>
 	<script>
-		var webApplicationPath = "${webApplicationPath}";
-		var isUpdate = ${isUpdate};
+		
 	</script>
 
 </head>
@@ -82,7 +81,7 @@
               </div>  -->
             </div>
 
-            <form method='POST' action='CheckOutServlet?method=sendOrder' id="sendOrder" class="checkout ecommerce-checkout row" >
+            <div class="checkout ecommerce-checkout row" >
 
               <div class="col-lg-7" id="customer_details">
                 <div>
@@ -92,43 +91,43 @@
                     <label for="billing_first_name">姓名
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" class="input-text" placeholder="${member.name}" value="" name="billing_first_name" id="billing_first_name">
+                    <input type="text" class="input-text" placeholder="${member.name}" value="" name="recipientName" id="recipientName">
                   </p>
                   <p class="form-row form-row-wide address-field update_totals_on_change validate-required ecommerce-validated" id="billing_country_field">
                     <label for="billing_postalCode">請填寫郵遞區號
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" name="billing_postalCode" id="billing_country" class="country_to_state country_select" title="PostalCode *" value="${member.postalCode}">
+                    <input type="text" name="recipientPostalCode" id="recipientPostalCode" class="country_to_state country_select" title="PostalCode *" value="${member.postalCode}">
                   </p>
                   <p class="form-row form-row-wide address-field update_totals_on_change validate-required ecommerce-validated" id="billing_city_field">
                     <label for="billing_city">縣/市
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" name="billing_city" id="billing_city" class="country_to_state country_select" title="City *" value="${member.city}">
+                    <input type="text" name="recipientCity" id="recipientCity" class="country_to_state country_select" title="City *" value="${member.city}">
                   </p>
                   <p class="form-row form-row-wide address-field update_totals_on_change validate-required ecommerce-validated" id="billing_district_field">
                     <label for="billing_district">鄉鎮/市區
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" name="billing_district" id="billing_district" class="country_to_state country_select" title="District *" value="${member.district}">
+                    <input type="text" name="recipientDistrict" id="recipientDistrict" class="country_to_state country_select" title="District *" value="${member.district}">
                   </p>
                   <p class="form-row form-row-wide address-field update_totals_on_change validate-required ecommerce-validated" id="billing_country_field">
                     <label for="billing_road">請選擇道路或街名
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" name="billing_road" id="billing_road" class="country_to_state country_select" title="Road *" value="${member.road}">
+                    <input type="text" name="recipientRoad" id="recipientRoad" class="country_to_state country_select" title="Road *" value="${member.road}">
                   </p>
                   <p class="form-row form-row-wide address-field validate-required ecommerce-invalid ecommerce-invalid-required-field" id="billing_address_1_field">
                     <label for="billing_address_1">地址
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" class="input-text" placeholder="Street address" value="${member.address}" name="billing_address_1" id="billing_address_1">
+                    <input type="text" class="input-text" placeholder="" value="${member.address}" name="recipientAddress" id="recipientAddress">
                   </p>
                   <p class="form-row form-row-last validate-required validate-phone" id="billing_phone_field">
                     <label for="billing_phone">連絡電話
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" class="input-text" placeholder="" value="${member.phoneNumber}" name="billing_phone" id="billing_phone">
+                    <input type="text" class="input-text" placeholder="" value="${member.phoneNumber}" name="recipientPhoneNumber" id="recipientPhoneNumber">
                   </p>
                 </div>
 
@@ -207,12 +206,12 @@
 
                     </ul>
                     <div class="form-row place-order">
-                      <input type="submit" name="ecommerce_checkout_place_order" class="btn btn-lg btn-color btn-button" id="place_order" value="送出">
+                      <input type="button" name="ecommerce_checkout_place_order" class="btn btn-lg btn-color btn-button" id="place_order" value="送出">
                     </div>
                   </div>
                 </div>
               </div> <!-- end order review -->
-            </form>
+            </div>
 
           </div> <!-- end ecommerce -->
 

@@ -1,4 +1,3 @@
-	
 //alert("456");
 var webApplicationPath="${webApplicationPath}";
 var productId=null;
@@ -48,12 +47,10 @@ checkCart=function(id){
 			"productId":productId,
 			"quantity":quantity
 		},
-		//dataType: "json",
-		//contentType: "application/x-www-form-urlencoded;charset=utf-8",
 		success: function(response) {
 			alert("進入結帳!");
 			console.log(response.msg);
-			window.location.assign("/life4fun/CartServlet?method=showCart");			
+			//window.location.assign("/life4fun/CartServlet?method=showCart");			
 		},
 		error: function() {
 			alert("失敗");
@@ -61,7 +58,3 @@ checkCart=function(id){
 		}
 	});
 }
-
-
-
-	

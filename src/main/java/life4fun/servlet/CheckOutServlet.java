@@ -114,6 +114,13 @@ public class CheckOutServlet extends HttpServlet {
 		request.getRequestDispatcher(JSP_SOURCE + "check_out.jsp").forward(request, response);
 	}
 	
+	
+	public void showOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		//request.getRequestDispatcher("/jsp/cart/cart.jsp").forward(request, response);
+		request.getRequestDispatcher(JSP_SOURCE+"order.jsp").forward(request, response);
+	}
+	
 	public void sendOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		List<String> errorsList = new ArrayList<>();
@@ -149,22 +156,8 @@ public class CheckOutServlet extends HttpServlet {
 		String recipientAddress = request.getParameter("recipientAddress");
 		Timestamp createTime = Timestamp.valueOf(request.getParameter("createTime"));
 		
-		PaymentType pType = null;
-		ShippingType shType = null;		
 		if (StringUtils.isNullOrEmpty(paymentType)||StringUtils.isNullOrEmpty(shippingType)) {
 			errorsList.add("必須選擇付款方式/貨運方式");
-		}else {
-			try {
-				pType = PaymentType.valueOf(paymentType);				
-			}catch(RuntimeException e) {
-				errorsList.add("付款方式不正確: " + paymentType);
-			}
-			
-			try {
-				shType = ShippingType.valueOf(shippingType);
-			}catch(RuntimeException e) {
-				errorsList.add("貨運方式不正確: " + shippingType);
-			}			
 		}
 		if (StringUtils.isNullOrEmpty(recipientName)) {
 			errorsList.add("必須輸入收件人姓名");
@@ -183,8 +176,8 @@ public class CheckOutServlet extends HttpServlet {
 			Order order = new Order();
 			order.setPhoneNumber(phoneNumber);
 			order.setCreatedTime(createTime);//todo
-			order.setPaymentType(pType);
-			order.setShippingType(shType);
+			order.setPaymentType(paymentType);
+			order.setShippingType(shippingType);
 			order.setRecipientName(recipientName);
 			order.setRecipientPhoneNumber(recipientPhoneNumber);
 			order.setRecipientPostalCode(recipientPostalCode);
