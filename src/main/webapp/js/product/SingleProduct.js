@@ -29,7 +29,7 @@ window.onload = function() {
 
               <div class="gallery-cell">
                 <a>
-                  <img src="/life4fun/img/life4fun/${product.photoUrl1}" alt="">
+                  <img src="/life4fun/img/life4fun/${product.photoUrl1}" alt="" id="photoUrl1">
                 </a>
               </div>
              
@@ -52,7 +52,7 @@ window.onload = function() {
           </div> <!-- end col img slider -->
 
           <div class="col-md-6 product-single">
-            <h1 class="product-single__title uppercase">${product.productName}</h1>
+            <h1 class="product-single__title uppercase" id="productName">${product.productName}</h1>
 
 
             <span class="product-single__price">
@@ -71,7 +71,7 @@ window.onload = function() {
               <div class="size">
                 <label>尺寸</label>
                 <select name="size" id="size__select" class="size__select">
-                  <option value="xs">${product.size}</option>
+                  <option value="F">${product.size}</option>
                   
                 </select>
               </div>
@@ -108,7 +108,7 @@ window.onload = function() {
             <div class="product_meta">
               <ul>
                 <li>
-                  <span class="product-code">庫存: <span>${product.stock}</span></span>
+                  <span class="product-code" id="stock">庫存: <span>${product.stock}</span></span>
                 </li>
               
               </ul>                              

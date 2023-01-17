@@ -1,16 +1,6 @@
-<%@page import="life4fun.service.impl.MemberServiceImpl"%>
-<%@page import="life4fun.service.MemberService"%>
-<%@page import="life4fun.service.impl.StreetNameServiceImpl"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="life4fun.entity.StreetName"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@page isELIgnored="false"%>
-<%@page import="life4fun.entity.Member"%>
-<%@page import="life4fun.entity.CartItem"%>
-<%@page import="life4fun.service.MemberService"%>
-<%@page import="life4fun.service.impl.MemberServiceImpl"%>
-<%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -44,9 +34,8 @@
 	<script type="text/javascript" src="${webApplicationPath}/static/js/flickity.pkgd.min.js"></script>
 	<script type="text/javascript" src="${webApplicationPath}/static/js/modernizr.min.js"></script>
 	<script type="text/javascript" src="${webApplicationPath}/static/js/scripts.js"></script>
-  	<script src="${webApplicationPath}/js/checkout/checkout.js"></script>
 	<script>
-		
+	var webApplicationPath = "${webApplicationPath}";
 	</script>
 
 </head>
@@ -91,43 +80,43 @@
                     <label for="billing_first_name">姓名
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" class="input-text" placeholder="${member.name}" value="" name="recipientName" id="recipientName">
+                    <input type="text" class="input-text inputData" placeholder="" value="${member.name}" name="recipientName" id="recipientName">
                   </p>
                   <p class="form-row form-row-wide address-field update_totals_on_change validate-required ecommerce-validated" id="billing_country_field">
                     <label for="billing_postalCode">請填寫郵遞區號
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" name="recipientPostalCode" id="recipientPostalCode" class="country_to_state country_select" title="PostalCode *" value="${member.postalCode}">
+                    <input type="text" name="recipientPostalCode" id="recipientPostalCode" class="country_to_state country_select inputData" title="PostalCode *" value="${member.postalCode}">
                   </p>
                   <p class="form-row form-row-wide address-field update_totals_on_change validate-required ecommerce-validated" id="billing_city_field">
                     <label for="billing_city">縣/市
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" name="recipientCity" id="recipientCity" class="country_to_state country_select" title="City *" value="${member.city}">
+                    <input type="text" name="recipientCity" id="recipientCity" class="country_to_state country_select inputData" title="City *" value="${member.city}">
                   </p>
                   <p class="form-row form-row-wide address-field update_totals_on_change validate-required ecommerce-validated" id="billing_district_field">
                     <label for="billing_district">鄉鎮/市區
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" name="recipientDistrict" id="recipientDistrict" class="country_to_state country_select" title="District *" value="${member.district}">
+                    <input type="text" name="recipientDistrict" id="recipientDistrict" class="country_to_state country_select inputData" title="District *" value="${member.district}">
                   </p>
                   <p class="form-row form-row-wide address-field update_totals_on_change validate-required ecommerce-validated" id="billing_country_field">
                     <label for="billing_road">請選擇道路或街名
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" name="recipientRoad" id="recipientRoad" class="country_to_state country_select" title="Road *" value="${member.road}">
+                    <input type="text" name="recipientRoad" id="recipientRoad" class="country_to_state country_select inputData" title="Road *" value="${member.road}">
                   </p>
                   <p class="form-row form-row-wide address-field validate-required ecommerce-invalid ecommerce-invalid-required-field" id="billing_address_1_field">
                     <label for="billing_address_1">地址
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" class="input-text" placeholder="" value="${member.address}" name="recipientAddress" id="recipientAddress">
+                    <input type="text" class="input-text inputData" placeholder="" value="${member.address}" name="recipientAddress" id="recipientAddress">
                   </p>
                   <p class="form-row form-row-last validate-required validate-phone" id="billing_phone_field">
                     <label for="billing_phone">連絡電話
                       <abbr class="required" title="required">*</abbr>
                     </label>
-                    <input type="text" class="input-text" placeholder="" value="${member.phoneNumber}" name="recipientPhoneNumber" id="recipientPhoneNumber">
+                    <input type="text" class="input-text inputData" placeholder="" value="${member.phoneNumber}" name="recipientPhoneNumber" id="recipientPhoneNumber">
                   </p>
                 </div>
 
@@ -143,25 +132,16 @@
                 <div class="order-review-wrap ecommerce-checkout-review-order" id="order_review">
                   <h2 class="uppercase">您的訂單</h2>
                   <table class="table shop_table ecommerce-checkout-review-order-table">
-                    <tbody>
-                    <% 
-		           		 List<CartItem> cartItemList = (List<CartItem>)session.getAttribute("cartItemList");
-                    		if(cartItemList==null){
-                    %>			
-                    <p>購物車是空的</p>
-                    <% 	}else{
-		            	    double sum = 0;
-                    		for(CartItem item:cartItemList){ 
-		                    	sum += item.getItemAmount(item);
-		            %>
+                    <tbody id="checkcart">
+                   	
+                   
                       <tr>
-                        <th><%= item.getProductName()%><span class="count"> x <%= item.getQuantity()%></span></th>
+                        <th><span class="count"> x </span></th>
                         <td>
-                          <span class="amount">$ <%=sum%></span>
+                          <span class="amount">$ </span>
                         </td>
                       </tr>
-                    <%}
-                    }%>
+               
 
                       <tr class="shipping">
                         <th>運費</th>
@@ -172,7 +152,7 @@
                       <tr class="order-total">
                         <th><strong>訂單總金額</strong></th>
                         <td>
-                          <strong><span class="amount">$</span></strong>
+                          <strong><span class="amount" id="total">$ </span></strong>
                         </td>
                       </tr>
                     </tbody>

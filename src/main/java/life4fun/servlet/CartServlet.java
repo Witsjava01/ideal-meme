@@ -12,19 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.aspose.cells.PptxSaveOptions;
 import com.mysql.cj.util.StringUtils;
 
-import life4fun.dto.RequestResult;
 import life4fun.entity.CartItem;
-import life4fun.entity.Member;
 import life4fun.entity.Product;
 import life4fun.service.MemberService;
-import life4fun.service.OrderService;
 import life4fun.service.ProductService;
 import life4fun.service.impl.MemberServiceImpl;
-import life4fun.service.impl.OrderServiceImpl;
 import life4fun.utils.ApplicationUtils;
-import life4fun.utils.ConstantUtils;
 import life4fun.utils.JsonUtils;
 
 /**
@@ -84,12 +80,11 @@ public class CartServlet extends HttpServlet {
 	
 	//??沒有登入
 	public void cart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//建立session
-		HttpSession session = request.getSession();
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+		HttpSession session = request.getSession();
 		//從session取出cartlist
 		List<CartItem> cartItemList = (List<CartItem>)session.getAttribute("cartItemList");				
-		
+		System.out.println("session:"+cartItemList);
 		double sum = 0;
 		//若裡面是空的
 		if(cartItemList==null || cartItemList.isEmpty()){
@@ -97,30 +92,17 @@ public class CartServlet extends HttpServlet {
 			String msg = "購物車是空的";
 		}else{ 
 			//若有東西則回傳list
-			request.setAttribute("sum",sum);
 			
-			for(CartItem item:cartItemList){ 
-//				cartItem.setProductName(p.getProductName());
-//				cartItem.setPhotoUrl1(p.getPhotoUrl1());
-//				cartItem.setPrice(p.getPrice());
-//				cartItem.setSize(p.getSize());
-//				cartItem.setColor(p.getColor());
-//				cartItem.setColor(p.getColor());
-//				
-//				request.setAttribute("quantity",item.getQuantity());
-//				request.setAttribute("itemAmount",item.getItemAmount(item));
-//				cartItemList.add(item);
-//				sum += item.getItemAmount(item);
-			}
+			request.setAttribute("cartItemList", cartItemList);
 			
-			session.setAttribute("cart", cartItemList);
-			session.setAttribute("memberId","933421481");
+			response.getWriter().append(JsonUtils.getGson().toJson(cartItemList));
+			System.out.println("response:"+response);
 		}	
+	
 
 	}
 	public void showCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-		//request.getRequestDispatcher("/jsp/cart/cart.jsp").forward(request, response);
 		request.getRequestDispatcher(JSP_SOURCE+"cart.jsp").forward(request, response);
 	}
 	
@@ -129,64 +111,72 @@ public class CartServlet extends HttpServlet {
 		
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		
-		//1.讀取request的Form Data: productId, quantity
-		String productId = request.getParameter("productId");
-		String quantity = request.getParameter("quantity");
-		System.out.println( "quantity: "+quantity);
-
-		//errorsList
-		List<String> errorsList = new ArrayList<>();
-		if (StringUtils.isNullOrEmpty(productId)) {
-			errorsList.add("沒有productId無法加入購物車");	
-		}
-		if (StringUtils.isNullOrEmpty(quantity)|| !quantity.matches("\\d+")) {
-			errorsList.add("quantity必須為整數樣式:" + quantity);	
-		}
-		
-		//2.若無誤執行商業邏輯
-		if(errorsList.isEmpty()) {
-			ProductService pService = new ProductService();	
-			
-			try {
-				Product p= pService.getProductById(productId);//查詢商品
-				
-				if(p!=null) {
-					
-					int qty = Integer.parseInt(quantity);//前端訂購的數量					
-				
-					if(qty>0) {//如果大於零
-						List<CartItem> cartItemList = (List<CartItem>)request.getAttribute("cartItemList");//從session取得cart
-						if(cartItemList==null || cartItemList.size()==0) {//如果沒有cart
-							cartItemList = new ArrayList<CartItem>();//就建立一個
-							request.setAttribute("cartItemList", cartItemList);//並放入session
-						}	
-						CartItem cartItem =new CartItem();
-						cartItem.setProductId(productId);
-						cartItem.setQuantity(qty);
-						cartItemList.add(cartItem);		
-						request.setAttribute("itemAmount", cartItem.getItemAmount());//小圖示用
-						request.setAttribute("totalAmount", cartItem.getTotalAmount(cartItemList));//小圖示用
-						request.setAttribute("cartItemCount", cartItemList.size());//小圖示用
-						request.setAttribute("cartItemList", cartItemList);//存入session
-					}else {
-						errorsList.add("加入購物車時qty必須>0: " + qty);	
-					}	
-				
-				}else {
-					errorsList.add("加入購物車時查無此產品:" + productId);					
-				}
-				
-			} catch (Exception e) {
-				this.log("發生非預期錯誤!", e);	
-				System.out.println("errorsList: "+errorsList);
-			}	
-		}
-		if(errorsList.size()>0) {
-			this.log("加入購物車發生錯誤:\n" + errorsList.toString());
-		}
-		
+//		//1.讀取request的Form Data: productId, quantity
+//		String productId = request.getParameter("productId");
+//		String quantity = request.getParameter("quantity");
+//
+//		System.out.println( "quantity: "+quantity);
+//
+//		//errorsList
+//		List<String> errorsList = new ArrayList<>();
+//		if (StringUtils.isNullOrEmpty(productId)) {
+//			errorsList.add("沒有productId無法加入購物車");	
+//		}
+//		if (StringUtils.isNullOrEmpty(quantity)|| !quantity.matches("\\d+")) {
+//			errorsList.add("quantity必須為整數樣式:" + quantity);	
+//		}
+//		
+//		//2.若無誤執行商業邏輯
+//		if(errorsList.isEmpty()) {
+//			ProductService pService = new ProductService();	
+//			
+//			try {
+//				Product p= pService.getProductById(productId);//查詢商品
+//				
+//				if(p!=null) {
+//					
+//					int qty = Integer.parseInt(quantity);//前端訂購的數量					
+//				
+//					if(qty>0) {//如果大於零
+//						List<CartItem> cartItemList = (List<CartItem>)request.getAttribute("cartItemList");//從session取得cart
+//						if(cartItemList==null || cartItemList.size()==0) {//如果沒有cart
+//							cartItemList = new ArrayList<CartItem>();//就建立一個
+//							request.setAttribute("cartItemList", cartItemList);//並放入session
+//						}	
+//						CartItem cartItem =new CartItem();
+//						cartItem.setProductId(productId);
+//						cartItem.setQuantity(qty);
+//						cartItem.setProductName(p.getProductName());
+//						cartItem.setPhotoUrl1(p.getPhotoUrl1());
+//						cartItem.setPrice(p.getPrice());
+//						cartItem.setSize(p.getSize());
+//						cartItem.setColor(p.getColor());
+//						cartItem.setStock(p.getStock());
+//						cartItemList.add(cartItem);		
+//						System.out.println("cartItem: "+cartItem);
+//						System.out.println("cartItemList: "+cartItemList);
+//						request.setAttribute("itemAmount", cartItem.getItemAmount());//小圖示用
+//						request.setAttribute("totalAmount", cartItem.getTotalAmount(cartItemList));//小圖示用
+//						request.setAttribute("cartItemCount", cartItemList.size());//小圖示用
+//						request.setAttribute("cartItemList", cartItemList);//存入session
+//					}else {
+//						errorsList.add("加入購物車時qty必須>0: " + qty);	
+//					}	
+//				
+//				}else {
+//					errorsList.add("加入購物車時查無此產品:" + productId);					
+//				}
+//				
+//			} catch (Exception e) {
+//				this.log("發生非預期錯誤!", e);	
+//				System.out.println("errorsList: "+errorsList);
+//			}	
+//		}
+//		if(errorsList.size()>0) {
+//			this.log("加入購物車發生錯誤:\n" + errorsList.toString());
+//		}
+//		request.setAttribute("us", "us");//存入session
 		request.getRequestDispatcher(JSP_SOURCE +"cart.jsp").forward(request, response);
-		System.out.println(JSP_SOURCE +"cart.jsp");
 	}
 
 	//??
@@ -220,8 +210,8 @@ public class CartServlet extends HttpServlet {
 					cartItemList.remove(item);
 				}
 			}
+			request.setAttribute("cartItemCount", cartItemList.size());
 		}
-		request.setAttribute("cartItemCount", cartItemList.size());
 		
 		//3.redirect 回/member/cart.jsp
 		String submit = request.getParameter("submit");
